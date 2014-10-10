@@ -217,16 +217,16 @@ public class NavigationDrawerFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @SuppressWarnings("static-access")
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item){
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
         if (item.getItemId() == R.id.action_reload) {
             Toast.makeText(getActivity(), "Reloading", Toast.LENGTH_SHORT).show();
-            //ecopy.inboxHandler.Inbox inbox = new ecopy.inboxHandler.Inbox();
-            //inbox.Reload();
+            Declarations.fragmentManager.beginTransaction().replace(R.id.container, PageHandler.newInstance(1)).commit();
             return true;
         }
 

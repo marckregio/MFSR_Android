@@ -1,6 +1,7 @@
 package ecopy.inboxHandler;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.webkit.ValueCallback;
@@ -16,5 +17,7 @@ public class Declarations extends Activity{
 	public String url = link + ""; //ECopy Support
 	public boolean loadingFinished = true, redirect = false;
 	public String welcome = "Welcome \n ECOPY CORPORATION  \n                                ITDEPT";
-	
+	public DownloadManager.Request request;
+	public DownloadManager dm;
+	public Uri linkSource;
 }

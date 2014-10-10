@@ -2,9 +2,14 @@ package ecopy.inboxHandler;
 
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -15,15 +20,38 @@ import ecopy.servicepoint_android.R;
 public class Inbox extends Declarations{
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
-	
-	@SuppressLint("SetJavaScriptEnabled")
+	public Context context;
+	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	public void Browser(View v){
 		wv = (WebView) v.findViewById(R.id.webview);
 		wv.getSettings().setJavaScriptEnabled(true);
     	wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
     	wv.getSettings().setLoadWithOverviewMode(true);
     	//wv.getSettings().setUseWideViewPort(true);
-    	wv.setWebViewClient(new WebEvents());
+    	//wv.setWebViewClient(new WebEvents());
+    	wv.setWebViewClient(new WebViewClient(){
+    		@Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                    Log.v("Makoy", "error code:" + errorCode + " - " + description);
+            }
+    		@Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    			if (url.endsWith(".xml")){
+    				linkSource = Uri.parse(url);
+    				request = new DownloadManager.Request(linkSource);
+    				request.setDescription("Processing Dispatched Service");
+    				request.setTitle("Service Point Mobile");
+    				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    					request.allowScanningByMediaScanner();
+    					request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+    				}
+    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "MFSR");
+    				dm = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
+    				dm.enqueue(request);
+    			}
+    			return false;
+    		}
+    	});
     	wv.setWebChromeClient(new WebChromeClient(){
     		@SuppressWarnings("unused")
     		public void openFileChooser(ValueCallback<Uri> uploads, String acceptType, String capture) {
@@ -50,9 +78,6 @@ public class Inbox extends Declarations{
 		}
 	}
 	
-	public void Reload(){
-		wv.reload();
-	}
 	public class WebEvents extends WebViewClient{
 		@Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
