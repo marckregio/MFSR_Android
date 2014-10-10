@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ecopy.inboxHandler.Inbox;
+import ecopy.processXML.ParseXML;
 
 public class PageHandler extends Fragment{
 	public static final String ARG_SECTION_NUMBER = "section_number";
@@ -27,7 +28,16 @@ public class PageHandler extends Fragment{
 			rootView = inflater.inflate(R.layout.rapidflows, container, false);
 			Inbox inbox = new Inbox();
 			inbox.Browser(rootView);
+		case 2:
+			rootView = inflater.inflate(R.layout.rapidflows, container, false);
+			Inbox inbox2 = new Inbox();
+			inbox2.Browser(rootView);
+		case 3:
+			rootView = inflater.inflate(R.layout.xmlprocessview, container, false);
+			ParseXML parse = new ParseXML();
+			parse.XMLProcessor(rootView);
 		}
+		
         return rootView;
     }
 	 @Override
