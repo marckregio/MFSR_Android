@@ -12,7 +12,7 @@ public class Declarations extends Activity{
 	public String filePath;
 	public WebView wv;
 	public ProgressDialog progressDialog;
-	public static String link = "http://122.55.83.215/zukami/login.aspx?AppID=8ae76b00-d529-46c0-8ded-57fa58367409";
+	public static String link = "http://172.16.85.100/zukami/taskinbox.aspx?a=0a5c5741-7f5f-4289-93a2-624cb99a0059";
 	public String url = link + ""; //ECopy Support
 	public boolean loadingFinished = true, redirect = false;
 	public String welcome = "Welcome \n ECOPY CORPORATION  \n                                ITDEPT";

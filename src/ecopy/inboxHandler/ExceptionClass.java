@@ -6,7 +6,6 @@ import java.net.SocketException;
 import java.util.Collections;
 import java.util.List;
 
-
 import org.apache.http.conn.util.InetAddressUtils;
 
 public class ExceptionClass extends Declarations{

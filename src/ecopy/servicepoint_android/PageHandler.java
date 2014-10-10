@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import ecopy.inboxHandler.Inbox;
 
 public class PageHandler extends Fragment{
 	public static final String ARG_SECTION_NUMBER = "section_number";
@@ -23,9 +24,9 @@ public class PageHandler extends Fragment{
 		int section = getArguments().getInt(ARG_SECTION_NUMBER);
 		switch (section){
 		case 1:
-			ecopy.inboxHandler.Inbox inbox = new ecopy.inboxHandler.Inbox();
-			rootView = inflater.inflate(R.layout.rapidflows, container, true);
-			inbox.Browser();
+			rootView = inflater.inflate(R.layout.rapidflows, container, false);
+			Inbox inbox = new Inbox();
+			inbox.Browser(rootView);
 		}
         return rootView;
     }

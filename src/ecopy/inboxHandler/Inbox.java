@@ -5,11 +5,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
@@ -17,13 +17,13 @@ public class Inbox extends Declarations{
 	public String noConnection = ExceptionClass.blankPage();
 	
 	@SuppressLint("SetJavaScriptEnabled")
-	public void Browser(){
-		wv = (WebView) findViewById(R.id.webview);
+	public void Browser(View v){
+		wv = (WebView) v.findViewById(R.id.webview);
 		wv.getSettings().setJavaScriptEnabled(true);
     	wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
     	wv.getSettings().setLoadWithOverviewMode(true);
     	//wv.getSettings().setUseWideViewPort(true);
-    	wv.setWebViewClient( new WebEvents());
+    	wv.setWebViewClient(new WebEvents());
     	wv.setWebChromeClient(new WebChromeClient(){
     		@SuppressWarnings("unused")
     		public void openFileChooser(ValueCallback<Uri> uploads, String acceptType, String capture) {
@@ -49,12 +49,16 @@ public class Inbox extends Declarations{
 			wv.loadUrl(url);
 		}
 	}
+	
+	public void Reload(){
+		wv.reload();
+	}
 	public class WebEvents extends WebViewClient{
 		@Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 //progressDialog = ProgressDialog.show(MainActivity.this, "", "Loading");
-                Toast.makeText(getApplicationContext(), "Loading" ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Loading" ,Toast.LENGTH_SHORT).show();
         }
 		@Override
 		public void onPageFinished(WebView view, String url){
