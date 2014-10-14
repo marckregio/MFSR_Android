@@ -14,8 +14,7 @@ public class Declarations extends Activity{
 	public WebView wv;
 	public ProgressDialog progressDialog;
 	public static String link = "http://172.16.85.100/zukami/taskinbox.aspx?a=0a5c5741-7f5f-4289-93a2-624cb99a0059";
-	//public static String link = "http://m.facebook.com";
-	public String url = link + ""; //ECopy Support
+	public String url = link + "";
 	public boolean loadingFinished = true, redirect = false;
 	public String welcome = "Welcome \n ECOPY CORPORATION  \n                                ITDEPT";
 	public DownloadManager.Request request;
@@ -23,4 +22,5 @@ public class Declarations extends Activity{
 	public Uri linkSource;
 	public String [] urlArray;
 	public String filename;
+	public String cookie;
 }

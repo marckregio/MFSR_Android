@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -35,6 +37,7 @@ public class Inbox extends Declarations{
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                     Log.v("Makoy", "error code:" + errorCode + " - " + description);
             }
+    		
     		@Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
     			if (url.endsWith(".xml")){
@@ -48,7 +51,9 @@ public class Inbox extends Declarations{
     					request.allowScanningByMediaScanner();
     					request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
     				}
-    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/MFSR", "MFSR-"+ filename +".xml");
+    				cookie = CookieManager.getInstance().getCookie(url);
+    				request.addRequestHeader("cookie", cookie);
+    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/MFSR", "MFSR-"+ filename);
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
