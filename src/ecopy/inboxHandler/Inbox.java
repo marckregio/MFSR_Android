@@ -15,6 +15,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
@@ -38,6 +39,8 @@ public class Inbox extends Declarations{
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
     			if (url.endsWith(".xml")){
     				linkSource = Uri.parse(url);
+    				urlArray = url.split("%3b");
+    				filename = urlArray[urlArray.length - 1];
     				request = new DownloadManager.Request(linkSource);
     				request.setDescription("Processing Dispatched Service");
     				request.setTitle("Service Point Mobile");
@@ -45,9 +48,10 @@ public class Inbox extends Declarations{
     					request.allowScanningByMediaScanner();
     					request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
     				}
-    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "MFSR");
+    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/MFSR", "MFSR-"+ filename +".xml");
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
+    				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
     			}
     			return false;
     		}

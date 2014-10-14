@@ -21,4 +21,6 @@ public class Declarations extends Activity{
 	public DownloadManager.Request request;
 	public DownloadManager dm;
 	public Uri linkSource;
+	public String [] urlArray;
+	public String filename;
 }
