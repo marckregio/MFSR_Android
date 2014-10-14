@@ -226,7 +226,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_reload) {
             Toast.makeText(getActivity(), "Reloading", Toast.LENGTH_SHORT).show();
-            Declarations.fragmentManager.beginTransaction().replace(R.id.container, PageHandler.newInstance(1)).commit();
+            Declarations.fragmentManager.beginTransaction().replace(R.id.container, PageHandler.newInstance(mCurrentSelectedPosition+ 1)).commit();
             return true;
         }
 
