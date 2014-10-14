@@ -46,7 +46,7 @@ public class Inbox extends Declarations{
     					request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
     				}
     				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "MFSR");
-    				dm = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
+    				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     			}
     			return false;
