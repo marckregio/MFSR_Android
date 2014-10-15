@@ -2,8 +2,8 @@ package ecopy.inboxHandler;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,21 +12,23 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
-	public Context context;
+	private View thisView;
 	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	public void Browser(View v){
-		wv = (WebView) v.findViewById(R.id.webview);
+		thisView = v;
+		wv = (WebView) thisView.findViewById(R.id.webview);
+		progress = (ProgressBar) thisView.findViewById(R.id.progressBar);
 		wv.getSettings().setJavaScriptEnabled(true);
     	wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
     	wv.getSettings().setLoadWithOverviewMode(true);
@@ -61,7 +63,14 @@ public class Inbox extends Declarations{
     			return false;
     		}
     	});
-    	wv.setWebChromeClient(new WebChromeClient(){
+    	wv.setWebChromeClient(new WebChromeClient() {
+    		
+    		@Override
+    		public void onProgressChanged(WebView view, int newProgress) {			
+    			Inbox.this.setValue(newProgress);
+    			super.onProgressChanged(view, newProgress);
+    		}
+    		
     		@SuppressWarnings("unused")
     		public void openFileChooser(ValueCallback<Uri> uploads, String acceptType, String capture) {
     			openFileChooser(uploads);
@@ -72,11 +81,12 @@ public class Inbox extends Declarations{
     			openFileChooser(uploads);
     		}
     		public void openFileChooser(ValueCallback<Uri> uploads) {
-    			Inbox.this.uploadMsg = uploads;
-    			Intent chooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+    			uploadMsg = uploads;
+    			chooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+    			chooserIntent.addCategory(Intent.CATEGORY_OPENABLE); 
     			chooserIntent.setType("image/*");
     			//captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-    			Inbox.this.startActivityForResult(Intent.createChooser(chooserIntent, "Choose Image"),  FILECHOOSER_RESULT); 
+    			((Activity) thisView.getContext()).startActivityForResult(Intent.createChooser(chooserIntent, "Choose XML"),  FILECHOOSER_RESULT); 
     		} 
     	});
     	
@@ -112,6 +122,7 @@ public class Inbox extends Declarations{
 
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		
     	if (requestCode == FILECHOOSER_RESULT) {
     		if(requestCode == FILECHOOSER_RESULT) {
     	        if (null == uploadMsg)
@@ -123,4 +134,8 @@ public class Inbox extends Declarations{
     		this.uploadMsg = null;
     	}
     }
+	
+	public void setValue(int progress) {
+		this.progress.setProgress(progress);		
+	}
 }

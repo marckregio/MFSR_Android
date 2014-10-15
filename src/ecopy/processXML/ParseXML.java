@@ -26,15 +26,17 @@ import android.widget.Toast;
 import ecopy.servicepoint_android.R;
 
 public class ParseXML extends Declarations implements OnItemSelectedListener{
+	private View thisView;
 	public void XMLProcessor(View v){
+		thisView = v;
 		selectXML = (Spinner) v.findViewById(R.id.selectXML);
 		xmlReader();
-		adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_dropdown_item, xmlFiles);
+		adapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, xmlFiles);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		company = (TextView) v.findViewById(R.id.company);
+		company = (TextView) thisView.findViewById(R.id.company);
 		selectXML.setAdapter(adapter);
 		selectXML.setOnItemSelectedListener(this);
-        Buttons(v);
+        Buttons(thisView);
 	}
 	
 	public void xmlReader(){
