@@ -1,12 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<RelativeLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+	android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
-    
+
 	<TextView
         android:id="@+id/selectFileLabel"
         android:layout_width="wrap_content"
@@ -18,46 +22,696 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
       android:layout_below="@+id/selectFileLabel"
+      android:layout_marginBottom="10dp"
   	/>
     
     <TextView
-        android:id="@+id/companyLabel"
+        android:id="@+id/clientInformationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/selectXML"
-        android:text="Company" />
-
-    <EditText
+        android:text="Service Call Information" 
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+    
+    <TextView
+        android:id="@+id/qrCodeLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/clientInformationLabel"
+        android:text="QR Code: " />  
+   	<TextView
+        android:id="@+id/qrCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/clientInformationLabel"
+        android:layout_toRightOf="@+id/qrCodeLabel"
+        android:text="QR2343325" />
+   	
+   	<TextView
+        android:id="@+id/seIDLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/qrCodeLabel"
+        android:text="Service Engineer ID: " />  
+   	<TextView
+        android:id="@+id/seID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/qrCode"
+        android:layout_toRightOf="@+id/seIDLabel"
+        android:text="1705-E" />
+   	
+   	<TextView
+        android:id="@+id/timeDispatchedLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/seIDLabel"
+        android:text="Time Dispatched: " />  
+   	<TextView
+        android:id="@+id/timeDispatched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/seID"
+        android:layout_toRightOf="@+id/timeDispatchedLabel"
+        android:text="10:00 AM" />
+   	
+   	<TextView
+        android:id="@+id/referenceNoLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/timeDispatchedLabel"
+        android:text="Reference No.: " />  
+   	<TextView
+        android:id="@+id/referenceNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/timeDispatched"
+        android:layout_toRightOf="@+id/referenceNoLabel"
+        android:text="CALAMBA-3423-4234-42344" />
+   	
+   	<TextView
+        android:id="@+id/workControllerLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/referenceNoLabel"
+        android:text="Work Controller: " />  
+   	<TextView
+        android:id="@+id/workController"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/referenceNo"
+        android:layout_toRightOf="@+id/workControllerLabel"
+        android:text="Juan Dela Cruz" />
+   	
+   	<TextView
+        android:id="@+id/companyLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/workControllerLabel"
+        android:text="Company Name: " />  
+   	<TextView
         android:id="@+id/company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/workController"
+        android:layout_toRightOf="@+id/companyLabel"
+        android:text="NOBENEFITS INC." />
+   	
+   	<TextView
+        android:id="@+id/customerNoLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/companyLabel"
+        android:text="Customer No.: " />  
+   	<TextView
+        android:id="@+id/customerNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/company"
+        android:layout_toRightOf="@+id/customerNoLabel"
+        android:text="C45235" />
+    
+   	<TextView
+        android:id="@+id/companyAddressLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/customerNoLabel"
+        android:text="Company Address: " />  
+   	<TextView
+        android:id="@+id/companyAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/customerNo"
+        android:layout_toRightOf="@+id/companyAddressLabel"
+        android:text="Sauyo, Novaliches QC" />
+   	
+   	<TextView
+        android:id="@+id/emailAddressLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:layout_below="@+id/companyAddressLabel"
+        android:text="Email Address: " />  
+   	<TextView
+        android:id="@+id/emailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/companyAddress"
+        android:layout_toRightOf="@+id/emailAddressLabel"
+        android:text="user@domain.com" />
+   	
+   	<TextView
+        android:id="@+id/mfpModelLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/emailAddressLabel"
+        android:gravity="right"
+        android:text="MFP Model: " />  
+   	<TextView
+        android:id="@+id/mfpModel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/companyLabel">
-        <!-- <requestFocus /> -->
+        android:textSize="20dp"
+        android:layout_below="@+id/emailAddressLabel"
+        android:layout_toRightOf="@+id/mfpModelLabel"
+        android:text="AX-457" />
+   	
+   	<TextView
+        android:id="@+id/contactPersonLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/mfpModelLabel"
+        android:gravity="right"
+        android:text="Contact Person: " />  
+   	<TextView
+        android:id="@+id/contactPerson"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/mfpModel"
+        android:layout_toRightOf="@+id/contactPersonLabel"
+        android:text="Marck Regio" />
+   	
+   	<TextView
+        android:id="@+id/contactNoLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/contactPersonLabel"
+        android:gravity="right"
+        android:text="Contact No.: " />  
+   	<TextView
+        android:id="@+id/contactNo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/contactPerson"
+        android:layout_toRightOf="@+id/contactNoLabel"
+        android:text="8-7000" />
+   	
+   	<TextView
+        android:id="@+id/contractLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/contactNoLabel"
+        android:gravity="right"
+        android:text="Contract: " />  
+   	<TextView
+        android:id="@+id/contract"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/contactNo"
+        android:layout_toRightOf="@+id/contractLabel"
+        android:text="Outright Purchase" />
+   	
+   	<TextView
+        android:id="@+id/natureLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/contractLabel"
+        android:gravity="right"
+        android:text="Nature of Call: " />  
+   	<TextView
+        android:id="@+id/nature"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/contract"
+        android:layout_toRightOf="@+id/natureLabel"
+        android:text="Post Installation" />
+   	
+   	<TextView
+        android:id="@+id/dateInstallLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/natureLabel"
+        android:gravity="right"
+        android:text="Date Installed: " />  
+   	<TextView
+        android:id="@+id/dateInstall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/nature"
+        android:layout_toRightOf="@+id/dateInstallLabel"
+        android:text="June 10 2014" />
+   	
+   	<TextView
+        android:id="@+id/backJobNoLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/dateInstallLabel"
+        android:gravity="right"
+        android:text="Back Job No.: " />  
+   	<TextView
+        android:id="@+id/backJobNo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/dateInstall"
+        android:layout_toRightOf="@+id/backJobNoLabel"
+        android:text="23552" />
+   	
+   	<TextView
+        android:id="@+id/prevRefNoLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/backJobNoLabel"
+        android:gravity="right"
+        android:text="Prev. Reference No.: " />  
+   	<TextView
+        android:id="@+id/prevRefNo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/backJobNo"
+        android:layout_toRightOf="@+id/prevRefNoLabel"
+        android:text="CALAMBA-1088-150087-101114" />
+   	
+   	<TextView
+        android:id="@+id/complaintLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/prevRefNoLabel"
+        android:gravity="right"
+        android:text="Customer Complaint: " />  
+   	<TextView
+        android:id="@+id/complaint"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@+id/prevRefNoLabel"
+        android:layout_toRightOf="@+id/complaintLabel"
+        android:text="Color White is not Visible" />
+   	
+   	<TextView
+        android:id="@+id/meterReadingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/complaint"
+        android:layout_marginTop="10dp"
+        android:text="Meter Reading (Before Service)" 
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+    <!-- FIELDS -->
+    <TextView
+        android:id="@+id/beforeCopyBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meterReadingLabel"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Copy B/W: " />
+    <EditText
+        android:id="@+id/beforeCopyBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeCopyBWLabel"
+        android:layout_below="@+id/meterReadingLabel">
+    </EditText>
+ 	
+    <TextView
+        android:id="@+id/beforePrintBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforeCopyBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Print B/W: " />
+    <EditText
+        android:id="@+id/beforePrintBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforePrintBWLabel"
+        android:layout_below="@+id/beforeCopyBW">
     </EditText>
     
     <TextView
-        android:id="@+id/resultsLabel"
-        android:layout_width="wrap_content"
+        android:id="@+id/beforeScanBWLabel"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/company"
-        android:text="Results" />
-    
+        android:layout_below="@+id/beforePrintBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Scan B/W: " />
     <EditText
-        android:id="@+id/results"
+        android:id="@+id/beforeScanBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/resultsLabel"
-        android:inputType="textMultiLine" >
-        <!-- <requestFocus /> -->
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeScanBWLabel"
+        android:layout_below="@+id/beforePrintBW">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/beforeFaxBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforeScanBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Fax B/W: " />
+    <EditText
+        android:id="@+id/beforeFaxBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeFaxBWLabel"
+        android:layout_below="@+id/beforeScanBW">
     </EditText>
 
-    <Button
-        android:id="@+id/saveButton"
+	<TextView
+        android:id="@+id/beforeCopyFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforeFaxBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Copy F/C: " />
+    <EditText
+        android:id="@+id/beforeCopyFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeCopyFCLabel"
+        android:layout_below="@+id/beforeFaxBW">
+    </EditText>
+ 	
+    <TextView
+        android:id="@+id/beforePrintFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforeCopyFCLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Print F/C: " />
+    <EditText
+        android:id="@+id/beforePrintFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforePrintFCLabel"
+        android:layout_below="@+id/beforeCopyFC">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/beforeScanFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforePrintFCLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Scan F/C: " />
+    <EditText
+        android:id="@+id/beforeScanFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeScanFCLabel"
+        android:layout_below="@+id/beforePrintFC">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/beforeBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforeScanFCLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Before B/W Total: " />
+    <EditText
+        android:id="@+id/beforeBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeBWLabel"
+        android:layout_below="@+id/beforeScanFC">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/beforeFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beforeBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Before F/C Total: " />
+    <EditText
+        android:id="@+id/beforeFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/beforeFCLabel"
+        android:layout_below="@+id/beforeBW">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/meterReadingAfterLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Save" />
+        android:layout_below="@+id/beforeFCLabel"
+        android:layout_marginTop="10dp"
+        android:text="Meter Reading (After Service)" 
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+    
+    <!-- AFTER -->
+    
+    <TextView
+        android:id="@+id/afterCopyBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meterReadingAfterLabel"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Copy B/W: " />
+    <EditText
+        android:id="@+id/afterCopyBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterCopyBWLabel"
+        android:layout_below="@+id/meterReadingAfterLabel">
+    </EditText>
+ 	
+    <TextView
+        android:id="@+id/afterPrintBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterCopyBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Print B/W: " />
+    <EditText
+        android:id="@+id/afterPrintBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterPrintBWLabel"
+        android:layout_below="@+id/afterCopyBW">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/afterScanBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterPrintBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Scan B/W: " />
+    <EditText
+        android:id="@+id/afterScanBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterScanBWLabel"
+        android:layout_below="@+id/afterPrintBW">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/afterFaxBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterScanBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Fax B/W: " />
+    <EditText
+        android:id="@+id/afterFaxBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterFaxBWLabel"
+        android:layout_below="@+id/afterScanBW">
+    </EditText>
 
+	<TextView
+        android:id="@+id/afterCopyFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterFaxBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Copy F/C: " />
+    <EditText
+        android:id="@+id/afterCopyFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterCopyFCLabel"
+        android:layout_below="@+id/afterFaxBW">
+    </EditText>
+ 	
+    <TextView
+        android:id="@+id/afterPrintFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterCopyFCLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Print F/C: " />
+    <EditText
+        android:id="@+id/afterPrintFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterPrintFCLabel"
+        android:layout_below="@+id/afterCopyFC">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/afterScanFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterPrintFCLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Scan F/C: " />
+    <EditText
+        android:id="@+id/afterScanFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterScanFCLabel"
+        android:layout_below="@+id/afterPrintFC">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/afterBWLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterScanFCLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="After B/W Total: " />
+    <EditText
+        android:id="@+id/afterBW"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterBWLabel"
+        android:layout_below="@+id/afterScanFC">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/afterFCLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/afterBWLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="After F/C Total: " />
+    <EditText
+        android:id="@+id/afterFC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+		android:inputType="number"
+        android:layout_toRightOf="@+id/afterFCLabel"
+        android:layout_below="@+id/afterBW">
+    </EditText>
+    
 </RelativeLayout>
+</ScrollView>
 

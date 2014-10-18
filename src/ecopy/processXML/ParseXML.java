@@ -33,7 +33,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		xmlReader();
 		adapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, xmlFiles);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		company = (TextView) thisView.findViewById(R.id.company);
+		//company = (TextView) thisView.findViewById(R.id.company);
 		selectXML.setAdapter(adapter);
 		selectXML.setOnItemSelectedListener(this);
         Buttons(thisView);
@@ -64,7 +64,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				NodeList fstNmElmntLst = fstElmnt.getElementsByTagName("CompanyName");
 			    Element fstNmElmnt = (Element) fstNmElmntLst.item(0);
 			    NodeList fstNm = fstNmElmnt.getChildNodes();
-			    company.setText(((Node) fstNm.item(0)).getNodeValue() +"");
+			    //company.setText(((Node) fstNm.item(0)).getNodeValue() +"");
 			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -80,15 +80,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		
 	}
 	public void Buttons(View v){
-		saveButton = (Button) v.findViewById(R.id.saveButton);
-		saveButton.setOnClickListener(new OnClickListener(){
+		//saveButton = (Button) v.findViewById(R.id.saveButton);
 
-			@Override
-			public void onClick(View v) {
-				Log.v("makoy","MAKOY!!");
-			}
-			
-		});
 	}
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,long id) {
