@@ -51,7 +51,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/clientInformationLabel"
         android:layout_toRightOf="@+id/qrCodeLabel"
-        android:text="QR2343325" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/seIDLabel"
@@ -68,7 +68,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/qrCode"
         android:layout_toRightOf="@+id/seIDLabel"
-        android:text="1705-E" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/timeDispatchedLabel"
@@ -85,7 +85,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/seID"
         android:layout_toRightOf="@+id/timeDispatchedLabel"
-        android:text="10:00 AM" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/referenceNoLabel"
@@ -102,7 +102,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/timeDispatched"
         android:layout_toRightOf="@+id/referenceNoLabel"
-        android:text="CALAMBA-3423-4234-42344" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/workControllerLabel"
@@ -119,7 +119,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/referenceNo"
         android:layout_toRightOf="@+id/workControllerLabel"
-        android:text="Juan Dela Cruz" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/companyLabel"
@@ -136,7 +136,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/workController"
         android:layout_toRightOf="@+id/companyLabel"
-        android:text="NOBENEFITS INC." />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/customerNoLabel"
@@ -153,7 +153,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/company"
         android:layout_toRightOf="@+id/customerNoLabel"
-        android:text="C45235" />
+        android:text="" />
     
    	<TextView
         android:id="@+id/companyAddressLabel"
@@ -170,7 +170,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/customerNo"
         android:layout_toRightOf="@+id/companyAddressLabel"
-        android:text="Sauyo, Novaliches QC" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/emailAddressLabel"
@@ -187,7 +187,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/companyAddress"
         android:layout_toRightOf="@+id/emailAddressLabel"
-        android:text="user@domain.com" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/mfpModelLabel"
@@ -204,7 +204,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/emailAddressLabel"
         android:layout_toRightOf="@+id/mfpModelLabel"
-        android:text="AX-457" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/contactPersonLabel"
@@ -221,7 +221,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/mfpModel"
         android:layout_toRightOf="@+id/contactPersonLabel"
-        android:text="Marck Regio" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/contactNoLabel"
@@ -238,7 +238,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/contactPerson"
         android:layout_toRightOf="@+id/contactNoLabel"
-        android:text="8-7000" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/contractLabel"
@@ -255,7 +255,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/contactNo"
         android:layout_toRightOf="@+id/contractLabel"
-        android:text="Outright Purchase" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/natureLabel"
@@ -272,7 +272,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/contract"
         android:layout_toRightOf="@+id/natureLabel"
-        android:text="Post Installation" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/dateInstallLabel"
@@ -289,7 +289,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/nature"
         android:layout_toRightOf="@+id/dateInstallLabel"
-        android:text="June 10 2014" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/backJobNoLabel"
@@ -306,7 +306,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/dateInstall"
         android:layout_toRightOf="@+id/backJobNoLabel"
-        android:text="23552" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/prevRefNoLabel"
@@ -323,7 +323,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/backJobNo"
         android:layout_toRightOf="@+id/prevRefNoLabel"
-        android:text="CALAMBA-1088-150087-101114" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/complaintLabel"
@@ -340,7 +340,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/prevRefNoLabel"
         android:layout_toRightOf="@+id/complaintLabel"
-        android:text="Color White is not Visible" />
+        android:text="" />
    	
    	<TextView
         android:id="@+id/meterReadingLabel"

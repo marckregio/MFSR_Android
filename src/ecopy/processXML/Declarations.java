@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import android.app.Activity;
 import android.os.Environment;
@@ -26,6 +27,13 @@ public class Declarations extends Activity{
 	public DocumentBuilder XMLBuilder;
 	public Document xml;
 	public String storage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR/";
-	
-	public TextView company;
+	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
+	//fields
+	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,
+		companyAddress, emailAddress, mfpModel, contactPerson, contactNo, contract, nature,
+		dateInstall, backJobNo, prevRefNo, complaint;
+	public TextView beforeCopyBW, beforePrintBW, beforeScanBW, beforeFaxBW, beforeCopyFC, 
+		beforePrintFC, beforeScanFC, beforeBWTotal, beforeFCTotal;
+	public TextView afterCopyBW, afterPrintBW, afterScanBW, afterFaxBW, afterCopyFC, 
+		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
 }
