@@ -2,27 +2,19 @@ package ecopy.processXML;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import ecopy.servicepoint_android.R;
 
 public class ParseXML extends Declarations implements OnItemSelectedListener{
@@ -89,35 +81,40 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void xmlLoader(View v, String filename){
-		//Toast.makeText(v.getContext(), storage + filename, Toast.LENGTH_SHORT).show();
-		xmlFile = new File(storage + filename);
-		XMLFactory = DocumentBuilderFactory.newInstance();
 		try {
-			XMLBuilder = XMLFactory.newDocumentBuilder();
-			xml =  XMLBuilder.parse(xmlFile);
-			xml.getDocumentElement().normalize();
-			//
-			TechnicalMonitoring = xml.getElementsByTagName("MFSR");
-			//Node qr = TechnicalMonitoring.item(0);
-			//NodeList ef = (NodeList) ((Element) ((NodeList)((Element) qr).getElementsByTagName("QRCode")).item(0)).getChildNodes();
-			qrCode.setText(((Node) ef.item(0)).getNodeValue() +"");
-			 
+			xmlFactory = xmlFactory.newInstance();
+			xmlParser = xmlFactory.newPullParser();
+			xmlFile = new FileInputStream(storage + filename);
+			xmlParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			xmlParser.setInput(xmlFile, null);
 			
-			
-			for (int x = 0; x < TechnicalMonitoring.getLength(); x++){
-				//Element fstElmnt = (Element) fstNode;
-				//NodeList fstNmElmntLst = fstElmnt.getElementsByTagName("CompanyName");
-			    //Element fstNmElmnt = (Element) fstNmElmntLst.item(0);
-			    //NodeList fstNm = fstNmElmnt.getChildNodes();
-				
-			    //company.setText(((Node) fstNm.item(0)).getNodeValue() +"");
-			}
-		} catch (ParserConfigurationException e) {
+			xmlParser(xmlParser);
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SAXException e) {
+		} catch (IOException e){
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		}
+	}
+	
+	public void xmlParser(XmlPullParser xmlParser) throws XmlPullParserException,IOException{
+		String name;
+		int eventType = xmlParser.getEventType();
+		while(eventType != XmlPullParser.END_DOCUMENT){
+			switch(eventType){
+			case XmlPullParser.START_TAG:
+				name = xmlParser.getName();
+				//Toast.makeText(thisView.getContext(), +"" ,Toast.LENGTH_SHORT).show();
+				if (name.equals("QRCode")){ qrCode.setText(xmlParser.nextText()); }
+				//if (name.equals("SEEmployeeID")){ seID.setText(xmlParser.nextText()); }
+				//if (name.equals("TimeDispatched")){ timeDispatched.setText(xmlParser.nextText()); }
+				//if (name.equals("ReferenceNo")){ referenceNo.setText(xmlParser.nextText()); }
+				//if (name.equals("WorkController")){ workController.setText(xmlParser.nextText()); }
+				//if (name.equals("CompanyName")){ company.setText(xmlParser.nextText()); }
+				//if (name.equals("CustomerNo")){ customerNo.setText(xmlParser.nextText()); }
+				break;
+			}	
+			eventType = xmlParser.next();
 		}
 	}
 	

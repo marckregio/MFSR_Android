@@ -1,13 +1,12 @@
 package ecopy.processXML;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
 import android.os.Environment;
@@ -21,11 +20,11 @@ public class Declarations extends Activity{
 	public List<String> xmlFiles;
 	public ArrayAdapter<String> adapter;
 	public Button saveButton;
-	public File downloadsFolder, xmlFile;
+	public File downloadsFolder;
+	public FileInputStream xmlFile;
 	public File [] mfsrXMLFiles;
-	public DocumentBuilderFactory XMLFactory;
-	public DocumentBuilder XMLBuilder;
-	public Document xml;
+	public XmlPullParser xmlParser;
+	public XmlPullParserFactory xmlFactory;
 	public String storage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR/";
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
 	//fields
