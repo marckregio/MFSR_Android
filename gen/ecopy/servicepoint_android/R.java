@@ -1357,8 +1357,8 @@ containing a value of this type.
         public static final int inbox=0x7f0a0012;
         public static final int navigation_drawer_close=0x7f0a000f;
         public static final int navigation_drawer_open=0x7f0a000e;
-        public static final int pendingXML=0x7f0a0013;
         public static final int processXML=0x7f0a0014;
+        public static final int timeTravel=0x7f0a0013;
     }
     public static final class style {
         /** 

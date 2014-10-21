@@ -80,7 +80,7 @@ public class NavigationDrawerFragment extends Fragment {
         		new ArrayAdapter<String>(getActionBar().getThemedContext(),android.R.layout.simple_list_item_1,android.R.id.text1,
                 new String[]{
                         getString(R.string.inbox),
-                        getString(R.string.pendingXML),
+                        getString(R.string.timeTravel),
                         getString(R.string.processXML),
                 }){
         			@Override
