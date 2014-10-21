@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.os.Environment;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,14 +26,15 @@ public class Declarations extends Activity{
 	public File [] mfsrXMLFiles;
 	public XmlPullParser xmlParser;
 	public XmlPullParserFactory xmlFactory;
-	public String storage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR/";
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
 	//fields
 	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,
 		companyAddress, emailAddress, mfpModel, contactPerson, contactNo, contract, nature,
 		dateInstall, backJobNo, prevRefNo, complaint;
-	public TextView beforeCopyBW, beforePrintBW, beforeScanBW, beforeFaxBW, beforeCopyFC, 
+	public EditText beforeCopyBW, beforePrintBW, beforeScanBW, beforeFaxBW, beforeCopyFC, 
 		beforePrintFC, beforeScanFC, beforeBWTotal, beforeFCTotal;
-	public TextView afterCopyBW, afterPrintBW, afterScanBW, afterFaxBW, afterCopyFC, 
+	public EditText afterCopyBW, afterPrintBW, afterScanBW, afterFaxBW, afterCopyFC, 
 		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
+	public EditText payment, timeIn, timeOut, eTicket, repair, remarks;
+	
 }

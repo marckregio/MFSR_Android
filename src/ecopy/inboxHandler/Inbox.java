@@ -24,6 +24,8 @@ public class Inbox extends Declarations{
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
 	private View thisView;
+	ecopy.servicepoint_android.Declarations storageDestination = new ecopy.servicepoint_android.Declarations();
+	private String storage = storageDestination.getStorageDestination();
 	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	public void Browser(View v){
 		thisView = v;

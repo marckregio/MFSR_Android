@@ -15,7 +15,8 @@
         android:id="@+id/selectFileLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select File" />
+        android:textSize="15dp"
+        android:text="Select Dispatch" />
 	
     <Spinner
       android:id="@+id/selectXML"
@@ -711,6 +712,132 @@
         android:layout_toRightOf="@+id/afterFCLabel"
         android:layout_below="@+id/afterBW">
     </EditText>
+    
+    <TextView
+        android:id="@+id/serviceInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/afterFCLabel"
+        android:layout_marginTop="10dp"
+        android:text="Service Information" 
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+    
+    <TextView
+        android:id="@+id/paymentLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/serviceInformation"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Payment Method: " />
+    <EditText
+        android:id="@+id/payment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:editable="false"
+        android:layout_toRightOf="@+id/paymentLabel"
+        android:layout_below="@+id/serviceInformation">
+    </EditText>
+    
+        
+  	<TextView
+        android:id="@+id/eTicketLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paymentLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="E-Ticket No.: " />
+    <EditText
+        android:id="@+id/eTicket"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/eTicketLabel"
+        android:layout_below="@+id/payment">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/repairLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eTicketLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Repair Details: " />
+    <EditText
+        android:id="@+id/repair"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/repairLabel"
+        android:layout_below="@+id/eTicket">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/remarksLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/repairLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Remarks: " />
+    <EditText
+        android:id="@+id/remarks"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/remarksLabel"
+        android:layout_below="@+id/repair">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/timeInLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/remarksLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Time-In: " />
+    <EditText
+        android:id="@+id/timeIn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:editable="false"
+        android:layout_toRightOf="@+id/timeInLabel"
+        android:layout_below="@+id/remarks">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/timeOutLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeInLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Time-Out: " />
+    <EditText
+        android:id="@+id/timeOut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:editable="false"
+        android:layout_toRightOf="@+id/timeOutLabel"
+        android:layout_below="@+id/timeIn">
+    </EditText>
+    
     
 </RelativeLayout>
 </ScrollView>

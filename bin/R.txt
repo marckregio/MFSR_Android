@@ -250,8 +250,8 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
-int id action_reload 0x7f050090
-int id action_settings 0x7f05008f
+int id action_reload 0x7f05009d
+int id action_settings 0x7f05009c
 int id activity_chooser_view_content 0x7f050025
 int id afterBW 0x7f05008c
 int id afterBWLabel 0x7f05008b
@@ -318,6 +318,8 @@ int id dialog 0x7f05000e
 int id disableHome 0x7f050008
 int id drawer_layout 0x7f05003c
 int id dropdown 0x7f05000f
+int id eTicket 0x7f050093
+int id eTicketLabel 0x7f050092
 int id edit_query 0x7f050030
 int id emailAddress 0x7f050056
 int id emailAddressLabel 0x7f050055
@@ -342,6 +344,8 @@ int id navigation_drawer 0x7f05003e
 int id never 0x7f050009
 int id none 0x7f050010
 int id normal 0x7f050000
+int id payment 0x7f050091
+int id paymentLabel 0x7f050090
 int id prevRefNo 0x7f050066
 int id prevRefNoLabel 0x7f050065
 int id progressBar 0x7f050040
@@ -352,6 +356,10 @@ int id qrCodeLabel 0x7f050045
 int id radio 0x7f05002f
 int id referenceNo 0x7f05004c
 int id referenceNoLabel 0x7f05004b
+int id remarks 0x7f050097
+int id remarksLabel 0x7f050096
+int id repair 0x7f050095
+int id repairLabel 0x7f050094
 int id seID 0x7f050048
 int id seIDLabel 0x7f050047
 int id search_badge 0x7f050032
@@ -367,6 +375,7 @@ int id search_voice_btn 0x7f05003b
 int id section_label 0x7f05003f
 int id selectFileLabel 0x7f050042
 int id selectXML 0x7f050043
+int id serviceInformation 0x7f05008f
 int id shortcut 0x7f05002e
 int id showCustom 0x7f050007
 int id showHome 0x7f050004
@@ -376,6 +385,10 @@ int id submit_area 0x7f050039
 int id tabMode 0x7f050002
 int id timeDispatched 0x7f05004a
 int id timeDispatchedLabel 0x7f050049
+int id timeIn 0x7f050099
+int id timeInLabel 0x7f050098
+int id timeOut 0x7f05009b
+int id timeOutLabel 0x7f05009a
 int id title 0x7f05002b
 int id top_action_bar 0x7f050020
 int id up 0x7f050021

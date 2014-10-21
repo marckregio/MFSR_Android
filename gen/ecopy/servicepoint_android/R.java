@@ -1100,8 +1100,8 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_reload=0x7f050090;
-        public static final int action_settings=0x7f05008f;
+        public static final int action_reload=0x7f05009d;
+        public static final int action_settings=0x7f05009c;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int afterBW=0x7f05008c;
         public static final int afterBWLabel=0x7f05008b;
@@ -1168,6 +1168,8 @@ containing a value of this type.
         public static final int disableHome=0x7f050008;
         public static final int drawer_layout=0x7f05003c;
         public static final int dropdown=0x7f05000f;
+        public static final int eTicket=0x7f050093;
+        public static final int eTicketLabel=0x7f050092;
         public static final int edit_query=0x7f050030;
         public static final int emailAddress=0x7f050056;
         public static final int emailAddressLabel=0x7f050055;
@@ -1192,6 +1194,8 @@ containing a value of this type.
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
+        public static final int payment=0x7f050091;
+        public static final int paymentLabel=0x7f050090;
         public static final int prevRefNo=0x7f050066;
         public static final int prevRefNoLabel=0x7f050065;
         public static final int progressBar=0x7f050040;
@@ -1202,6 +1206,10 @@ containing a value of this type.
         public static final int radio=0x7f05002f;
         public static final int referenceNo=0x7f05004c;
         public static final int referenceNoLabel=0x7f05004b;
+        public static final int remarks=0x7f050097;
+        public static final int remarksLabel=0x7f050096;
+        public static final int repair=0x7f050095;
+        public static final int repairLabel=0x7f050094;
         public static final int seID=0x7f050048;
         public static final int seIDLabel=0x7f050047;
         public static final int search_badge=0x7f050032;
@@ -1217,6 +1225,7 @@ containing a value of this type.
         public static final int section_label=0x7f05003f;
         public static final int selectFileLabel=0x7f050042;
         public static final int selectXML=0x7f050043;
+        public static final int serviceInformation=0x7f05008f;
         public static final int shortcut=0x7f05002e;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
@@ -1226,6 +1235,10 @@ containing a value of this type.
         public static final int tabMode=0x7f050002;
         public static final int timeDispatched=0x7f05004a;
         public static final int timeDispatchedLabel=0x7f050049;
+        public static final int timeIn=0x7f050099;
+        public static final int timeInLabel=0x7f050098;
+        public static final int timeOut=0x7f05009b;
+        public static final int timeOutLabel=0x7f05009a;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
