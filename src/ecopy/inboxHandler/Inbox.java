@@ -18,6 +18,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import ecopy.servicepoint_android.PageHandler;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
@@ -61,6 +62,7 @@ public class Inbox extends Declarations{
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
+    				//ecopy.servicepoint_android.Declarations.fragmentManager.beginTransaction().replace(R.id.container, PageHandler.newInstance(3)).commit();
     			}
     			return false;
     		}

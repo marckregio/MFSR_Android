@@ -16,7 +16,7 @@ public class Declarations extends Activity{
 	public WebView wv;
 	public ProgressBar progress;
 	public ProgressDialog progressDialog;
-	public static String link = "http://172.16.85.100/zukami/taskinbox.aspx?a=0a5c5741-7f5f-4289-93a2-624cb99a0059";
+	public static String link = "http://172.16.85.101/zukami/taskinbox.aspx?a=8ae76b00-d529-46c0-8ded-57fa58367409";
 	public String url = link + "";
 	public boolean loadingFinished = true, redirect = false;
 	public String welcome = "Welcome \n ECOPY CORPORATION  \n                                ITDEPT";

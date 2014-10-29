@@ -74,7 +74,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		afterBWTotal = (EditText) thisView.findViewById(R.id.afterBW);
 		afterFCTotal = (EditText) thisView.findViewById(R.id.afterFC);
 		//
-		payment = (EditText) thisView.findViewById(R.id.payment);
+		//payment = (EditText) thisView.findViewById(R.id.payment);
 		eTicket = (EditText) thisView.findViewById(R.id.eTicket);
 		repair = (EditText) thisView.findViewById(R.id.repair);
 		remarks = (EditText) thisView.findViewById(R.id.remarks);
@@ -198,7 +198,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				}
 				if (name.equals("ServiceInformation")){
 					xmlParser.nextTag();
-					payment.setText(xmlParser.nextText());
+					//payment.setText(xmlParser.nextText());
 					xmlParser.nextTag();
 					eTicket.setText(xmlParser.nextText());
 					xmlParser.nextTag();
