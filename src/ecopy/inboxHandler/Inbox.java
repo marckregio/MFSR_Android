@@ -58,7 +58,7 @@ public class Inbox extends Declarations{
     				}
     				cookie = CookieManager.getInstance().getCookie(url);
     				request.addRequestHeader("cookie", cookie);
-    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/MFSR", "MFSR-"+ filename);
+    				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/MFSR", filename);
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();

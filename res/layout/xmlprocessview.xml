@@ -730,7 +730,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/serviceInformation"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="15dp"
         android:textSize="20dp"
         android:gravity="right"
@@ -741,8 +741,6 @@
       android:layout_height="wrap_content" 
       android:layout_toRightOf="@+id/paymentLabel"
       android:layout_below="@+id/serviceInformation"
-      android:textSize="20dp"
-      android:layout_marginBottom="10dp"
   	/>
     
         
@@ -837,7 +835,15 @@
         android:layout_toRightOf="@+id/timeOutLabel"
         android:layout_below="@+id/timeIn">
     </EditText>
-    
+
+    <Button
+        android:id="@+id/saveXML"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeOut"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:text="Save and Submit to Rapidflows" />
     
 </RelativeLayout>
 </ScrollView>

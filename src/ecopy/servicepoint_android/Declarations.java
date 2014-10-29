@@ -9,9 +9,14 @@ import android.support.v7.app.ActionBarActivity;
 public class Declarations extends ActionBarActivity{
 	public static FragmentManager fragmentManager;
 	public String storage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR/";
-	public File storageDestination;
+	public String finishStorage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR/FINISH/";
+	public File storageDestination, finishDestination;
 	
 	public String getStorageDestination(){
 		return storage;
+	}
+	
+	public String getFinishedDestination(){
+		return finishStorage;
 	}
 }

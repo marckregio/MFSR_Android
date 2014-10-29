@@ -26,6 +26,8 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
     public void createDirectory(){
     	storageDestination = new File(storage);
     	storageDestination.mkdir();
+    	finishDestination = new File(finishStorage);
+    	finishDestination.mkdir();
     }
 
     @Override

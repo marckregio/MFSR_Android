@@ -1100,8 +1100,8 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_reload=0x7f05009d;
-        public static final int action_settings=0x7f05009c;
+        public static final int action_reload=0x7f05009e;
+        public static final int action_settings=0x7f05009d;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int afterBW=0x7f05008c;
         public static final int afterBWLabel=0x7f05008b;
@@ -1210,6 +1210,7 @@ containing a value of this type.
         public static final int remarksLabel=0x7f050096;
         public static final int repair=0x7f050095;
         public static final int repairLabel=0x7f050094;
+        public static final int saveXML=0x7f05009c;
         public static final int seID=0x7f050048;
         public static final int seIDLabel=0x7f050047;
         public static final int search_badge=0x7f050032;
