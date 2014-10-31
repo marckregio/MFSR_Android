@@ -3,6 +3,7 @@ package ecopy.processXML;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -39,7 +40,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void initFields(){
-		save = false;
 		qrCode = (TextView) thisView.findViewById(R.id.qrCode);
 		seID= (TextView) thisView.findViewById(R.id.seID);
 		timeDispatched = (TextView) thisView.findViewById(R.id.timeDispatched);
@@ -163,7 +163,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					complaint.setText(xmlParser.nextText());
 				}
 				/*
-				if (save == true){
 					if (name.equals("MeterReadingBefore")){
 						xmlParser.nextTag();
 						beforeCopyBW.setText(xmlParser.nextText());
@@ -218,7 +217,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						xmlParser.nextTag();
 						timeOut.setText(xmlParser.nextText());
 					}
-				}*/
+				*/
 				if (name.equals("PaymentMethodMaintenance")){
 					do{
 						xmlParser.nextTag();
@@ -235,7 +234,15 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void xmlWriter(){
-		
+		finishFolder = new File (finish,"finish.xml");
+		try {
+			xmlWriter = new FileWriter (finishFolder);
+			xmlWriter.append("Marck Regio");
+			xmlWriter.flush();
+			xmlWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void Buttons(){

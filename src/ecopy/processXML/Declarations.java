@@ -2,15 +2,12 @@ package ecopy.processXML;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
+import java.io.FileWriter;
 import java.util.List;
 
 import org.w3c.dom.NodeList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
 import android.widget.ArrayAdapter;
@@ -23,13 +20,13 @@ public class Declarations extends Activity{
 	public Spinner selectXML, payment;
 	public List<String> xmlFiles, paymentMethods;
 	public ArrayAdapter<String> adapter, paymentAdapter;
-	public File downloadsFolder;
+	public File downloadsFolder, finishFolder;
 	public FileInputStream xmlFile;
+	public FileWriter xmlWriter;
 	public File [] mfsrXMLFiles;
 	public XmlPullParser xmlParser;
 	public XmlPullParserFactory xmlFactory;
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
-	public Boolean save;
 	//fields
 	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,
 		companyAddress, emailAddress, mfpModel, contactPerson, contactNo, contract, nature,
