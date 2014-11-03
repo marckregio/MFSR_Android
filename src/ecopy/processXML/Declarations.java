@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 public class Declarations extends Activity{
 	public Spinner selectXML, payment;
+	public String selectedPayment;
 	public List<String> xmlFiles, paymentMethods;
 	public ArrayAdapter<String> adapter, paymentAdapter;
 	public File downloadsFolder, finishFolder;
@@ -26,6 +27,7 @@ public class Declarations extends Activity{
 	public File [] mfsrXMLFiles;
 	public XmlPullParser xmlParser;
 	public XmlPullParserFactory xmlFactory;
+	public String xml;
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
 	//fields
 	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,

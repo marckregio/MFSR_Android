@@ -19,14 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import ecopy.servicepoint_android.R;
 
 public class ParseXML extends Declarations implements OnItemSelectedListener{
 	private View thisView;
 	ecopy.servicepoint_android.Declarations storageDestination = new ecopy.servicepoint_android.Declarations();
 	private String storage = storageDestination.getStorageDestination();
-	ecopy.servicepoint_android.Declarations finishDestination = new ecopy.servicepoint_android.Declarations();
-	private String finish = finishDestination.getStorageDestination();
+	private String finish = storageDestination.getFinishedDestination();
 	public void XMLProcessor(View v){
 		thisView = v;
 		selectXML = (Spinner) v.findViewById(R.id.selectXML);
@@ -80,6 +80,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		afterFCTotal = (EditText) thisView.findViewById(R.id.afterFC);
 		//
 		payment = (Spinner) thisView.findViewById(R.id.payment);
+		payment.setOnItemSelectedListener(this);
 		paymentMethods = new ArrayList<String>();
 		eTicket = (EditText) thisView.findViewById(R.id.eTicket);
 		repair = (EditText) thisView.findViewById(R.id.repair);
@@ -233,11 +234,47 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		}
 	}
 	
-	public void xmlWriter(){
-		finishFolder = new File (finish,"finish.xml");
+	public void xmlBuilder(){
+		xml = 	"<MFSR>" +
+			    	"<MeterReadingBefore>" +
+			    		"<CopyBW>"+ beforeCopyBW.getText() +"</CopyBW>" +
+			    		"<PrintBW>" + beforePrintBW.getText() + "</PrintBW>" +
+			    		"<ScanBW>" + beforeScanBW.getText() + "</ScanBW>" +
+			    		"<FaxBW>" + beforeFaxBW.getText() + "</FaxBW>" +
+			    		"<CopyFC>" + beforeCopyFC.getText() + "</CopyFC>" +
+			    		"<PrintFC>" + beforePrintFC.getText() + "</PrintFC>" +
+			    		"<ScanFC>" + beforeScanFC.getText() + "</ScanFC>" +
+			    		"<BeforeBW>" + beforeBWTotal.getText() + "</BeforeBW>" +
+			    		"<BeforeFC>" + beforeFCTotal.getText() + "</BeforeFC>" +
+			    	"</MeterReadingBefore>" +
+			    	"<MeterReadingAfter>" +
+		    			"<CopyBW>"+ afterCopyBW.getText() +"</CopyBW>" +
+		    			"<PrintBW>" + afterPrintBW.getText() + "</PrintBW>" +
+		    			"<ScanBW>" + afterScanBW.getText() + "</ScanBW>" +
+		    			"<FaxBW>" + afterFaxBW.getText() + "</FaxBW>" +
+		    			"<CopyFC>" + afterCopyFC.getText() + "</CopyFC>" +
+		    			"<PrintFC>" + afterPrintFC.getText() + "</PrintFC>" +
+		    			"<ScanFC>" + afterScanFC.getText() + "</ScanFC>" +
+		    			"<AfterBW>" + afterBWTotal.getText() + "</AfterBW>" +
+		    			"<AfterFC>" + afterFCTotal.getText() + "</AfterFC>" +
+			    	"</MeterReadingAfter>" +
+			    	"<ServiceInformation>" +
+			    		"<PaymentMethod>" + selectedPayment + "</PaymentMethod>" +
+			    		"<EticketNo>" + eTicket.getText() + "</EticketNo>" +
+			    		"<RepairDetails>" + repair.getText() + "</RepairDetails>" +
+			    		"<Remarks>" + remarks.getText() + "</Remarks>" +
+			    		"<TimeIN>09:00</TimeIN>" +
+			    		"<TimeOUT>12:00</TimeOUT>" +
+			    	"</ServiceInformation>" +
+				"</MFSR>";
+		xmlWriter(xml);
+	}
+	
+	public void xmlWriter(String xml){
+		finishFolder = new File (finish, referenceNo.getText() + ".xml");
 		try {
 			xmlWriter = new FileWriter (finishFolder);
-			xmlWriter.append("Marck Regio");
+			xmlWriter.append(xml);
 			xmlWriter.flush();
 			xmlWriter.close();
 		} catch (IOException e) {
@@ -250,13 +287,19 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		saveXML.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				xmlWriter();
+				xmlBuilder();
 			}
 		});
 	}
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,long id) {
-		xmlLoader(view, parent.getItemAtPosition(position).toString()+".xml");
+		switch(parent.getId()){
+		case R.id.selectXML:
+			xmlLoader(view, parent.getItemAtPosition(position).toString()+".xml");
+			break;
+		case R.id.payment:
+			selectedPayment = parent.getItemAtPosition(position).toString();
+		}
 	}
 
 	@Override

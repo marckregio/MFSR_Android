@@ -840,7 +840,7 @@
         android:id="@+id/saveXML"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timeOut"
+        android:layout_below="@+id/timeOutLabel"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:text="Save and Submit to Rapidflows" />
