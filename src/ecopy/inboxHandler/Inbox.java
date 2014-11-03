@@ -18,6 +18,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import ecopy.servicepoint_android.MainActivity;
 import ecopy.servicepoint_android.PageHandler;
 import ecopy.servicepoint_android.R;
 
@@ -36,7 +37,7 @@ public class Inbox extends Declarations{
     	wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
     	wv.getSettings().setLoadWithOverviewMode(true);
     	//wv.getSettings().setUseWideViewPort(true);
-    	//wv.setWebViewClient(new WebEvents());
+    	wv.setWebViewClient(new WebEvents());
     	wv.setWebViewClient(new WebViewClient(){
     		@Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -90,7 +91,7 @@ public class Inbox extends Declarations{
     			chooserIntent.addCategory(Intent.CATEGORY_OPENABLE); 
     			chooserIntent.setType("image/*");
     			//captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-    			((Activity) thisView.getContext()).startActivityForResult(Intent.createChooser(chooserIntent, "Choose XML"),  FILECHOOSER_RESULT); 
+    			((MainActivity) thisView.getContext()).startActivityForResult(Intent.createChooser(chooserIntent, "Choose Finished Service File"),  FILECHOOSER_RESULT); 
     		} 
     	});
     	

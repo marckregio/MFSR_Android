@@ -41,9 +41,8 @@ public class ExceptionClass extends Declarations{
 				+ "</head>"
 				+ "<body><center><br><br><br>"
 				+ "<h1>No <br> Internet <br>Connection</h1>"
-				+ "<p>Please check Wireless Connection or 3g Connection"
+				+ "<p>Please check Wireless Connection or 3g Connection</p>"
 				+ "<br><br>"
-				+ "<a href='"+ link +"'><button>Reload</button></a>"
 				+ "<br><br><br><br><br>"
 				+ "<b>ECOPY CORPORATION - ITDEPT</b>"
 				+ "</center></body></html>";
