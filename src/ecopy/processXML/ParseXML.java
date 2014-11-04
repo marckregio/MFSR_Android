@@ -225,28 +225,24 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				}
 				*/
 				if (name.equals("Maintenances")){
-					
+					int x = 0;
 					do{
 						xmlParser.nextTag();
+						x++;
 						if (xmlParser.getName().equals("PaymentMethod")){
 							paymentMethods.add(xmlParser.nextText());
+						} 
+						else if  (xmlParser.getName().equals("OnsiteStatuses")){
+							onsiteStatuses.add(xmlParser.nextText());
 						}
-					}while (xmlParser.getName().equals("PaymentMethod"));
+					}while (x < 9);
 					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, paymentMethods);
 					paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					payment.setAdapter(paymentAdapter);
-					//Log.v("makoy",xmlParser.getAttributeCount()+"");
-					/*
-					do{
-						xmlParser.nextTag();
-						if (xmlParser.getName().equals("OnsiteStatuses")){
-							onsiteStatuses.add(xmlParser.nextText());
-						}
-					}while (xmlParser.getName().equals("OnsiteStatuses"));
 					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, onsiteStatuses);
 					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					onsite.setAdapter(onsiteAdapter);
-					*/
+
 				}
 				break;
 			}	
