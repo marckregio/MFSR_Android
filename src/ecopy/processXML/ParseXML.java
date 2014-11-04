@@ -88,6 +88,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		onsite = (Spinner) thisView.findViewById(R.id.onsite);
 		onsite.setOnItemSelectedListener(this);
 		onsiteStatuses = new ArrayList<String>();
+		pending = (Spinner) thisView.findViewById(R.id.pending);
+		pending.setOnItemSelectedListener(this);
+		pendingReasons = new ArrayList<String>();
+		approval = (Spinner) thisView.findViewById(R.id.approval);
+		approval.setOnItemSelectedListener(this);
+		approvalTypes = new ArrayList<String>();
 		remarks = (EditText) thisView.findViewById(R.id.remarks);
 		timeIn = (EditText) thisView.findViewById(R.id.timeIn);
 		timeOut = (EditText) thisView.findViewById(R.id.timeOut);
@@ -235,14 +241,26 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						else if  (xmlParser.getName().equals("OnsiteStatuses")){
 							onsiteStatuses.add(xmlParser.nextText());
 						}
-					}while (x < 9);
+						else if  (xmlParser.getName().equals("PendingReason")){
+							pendingReasons.add(xmlParser.nextText());
+						}
+						else if  (xmlParser.getName().equals("ApprovalType")){
+							approvalTypes.add(xmlParser.nextText());
+						}
+					}while (x < 16);
+					
 					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, paymentMethods);
 					paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					payment.setAdapter(paymentAdapter);
 					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, onsiteStatuses);
 					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					onsite.setAdapter(onsiteAdapter);
-
+					pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, pendingReasons);
+					pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					pending.setAdapter(pendingAdapter);
+					approvalAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, approvalTypes);
+					approvalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					approval.setAdapter(approvalAdapter);
 				}
 				break;
 			}	
@@ -278,6 +296,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			    		"<PaymentMethod>" + selectedPayment + "</PaymentMethod>" +
 			    		"<EticketNo>" + eTicket.getText() + "</EticketNo>" +
 			    		"<RepairDetails>" + repair.getText() + "</RepairDetails>" +
+			    		"<OnSiteDetails>" + selectedOnsite + "</OnSiteDetails>" +
+			    		"<PendingReason>" + selectedPending + "</PendingReason>" +
+			    		"<ApprovalType>" + selectedApproval + "</ApprovalType>" +
 			    		"<Remarks>" + remarks.getText() + "</Remarks>" +
 			    		"<TimeIN>09:00</TimeIN>" +
 			    		"<TimeOUT>12:00</TimeOUT>" +
@@ -315,8 +336,16 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			break;
 		case R.id.payment:
 			selectedPayment = parent.getItemAtPosition(position).toString();
+			break;
 		case R.id.onsite:
 			selectedOnsite = parent.getItemAtPosition(position).toString();
+			break;
+		case R.id.pending:
+			selectedPending = parent.getItemAtPosition(position).toString();
+			break;
+		case R.id.approval:
+			selectedApproval = parent.getItemAtPosition(position).toString();
+			break;
 		}
 	}
 
