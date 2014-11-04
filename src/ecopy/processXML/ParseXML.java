@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -84,6 +85,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		paymentMethods = new ArrayList<String>();
 		eTicket = (EditText) thisView.findViewById(R.id.eTicket);
 		repair = (EditText) thisView.findViewById(R.id.repair);
+		onsite = (Spinner) thisView.findViewById(R.id.onsite);
+		onsite.setOnItemSelectedListener(this);
+		onsiteStatuses = new ArrayList<String>();
 		remarks = (EditText) thisView.findViewById(R.id.remarks);
 		timeIn = (EditText) thisView.findViewById(R.id.timeIn);
 		timeOut = (EditText) thisView.findViewById(R.id.timeOut);
@@ -204,29 +208,45 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						xmlParser.nextTag();
 						afterFCTotal.setText(xmlParser.nextText());
 					}
-					if (name.equals("ServiceInformation")){
-						xmlParser.nextTag();
-						//payment.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						eTicket.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						repair.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						remarks.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						timeIn.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						timeOut.setText(xmlParser.nextText());
-					}
+					
+				if (name.equals("ServiceInformation")){
+					xmlParser.nextTag();
+					//payment.setText(xmlParser.nextText());
+					xmlParser.nextTag();
+					eTicket.setText(xmlParser.nextText());
+					//xmlParser.nextTag();
+					//repair.setText(xmlParser.nextText());
+					//xmlParser.nextTag();
+					//remarks.setText(xmlParser.nextText());
+					//xmlParser.nextTag();
+					//timeIn.setText(xmlParser.nextText());
+					//xmlParser.nextTag();
+					//timeOut.setText(xmlParser.nextText());
+				}
 				*/
-				if (name.equals("PaymentMethodMaintenance")){
+				if (name.equals("Maintenances")){
+					
 					do{
 						xmlParser.nextTag();
-						paymentMethods.add(xmlParser.nextText());
-						paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, paymentMethods);
-						paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-						payment.setAdapter(paymentAdapter);
-					}while (xmlParser.getName().equals("pm"));
+						if (xmlParser.getName().equals("PaymentMethod")){
+							paymentMethods.add(xmlParser.nextText());
+						}
+					}while (xmlParser.getName().equals("PaymentMethod"));
+					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, paymentMethods);
+					paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					payment.setAdapter(paymentAdapter);
+					//Log.v("makoy",xmlParser.getAttributeCount()+"");
+					/*
+					do{
+						xmlParser.nextTag();
+						if (xmlParser.getName().equals("OnsiteStatuses")){
+							onsiteStatuses.add(xmlParser.nextText());
+						}
+					}while (xmlParser.getName().equals("OnsiteStatuses"));
+					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, onsiteStatuses);
+					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					onsite.setAdapter(onsiteAdapter);
+					*/
 				}
 				break;
 			}	
@@ -299,6 +319,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			break;
 		case R.id.payment:
 			selectedPayment = parent.getItemAtPosition(position).toString();
+		case R.id.onsite:
+			selectedOnsite = parent.getItemAtPosition(position).toString();
 		}
 	}
 

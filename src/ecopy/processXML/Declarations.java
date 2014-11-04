@@ -17,10 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Declarations extends Activity{
-	public Spinner selectXML, payment;
-	public String selectedPayment;
-	public List<String> xmlFiles, paymentMethods;
-	public ArrayAdapter<String> adapter, paymentAdapter;
+	public Spinner selectXML, payment, onsite;
+	public String selectedPayment, selectedOnsite;
+	public List<String> xmlFiles, paymentMethods, onsiteStatuses;
+	public ArrayAdapter<String> adapter, paymentAdapter, onsiteAdapter;
 	public File downloadsFolder, finishFolder;
 	public FileInputStream xmlFile;
 	public FileWriter xmlWriter;

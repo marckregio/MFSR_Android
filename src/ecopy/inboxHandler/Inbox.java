@@ -127,7 +127,7 @@ public class Inbox extends Declarations{
 
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		
+		Toast.makeText(thisView.getContext(), "here", Toast.LENGTH_SHORT).show();
     	if (requestCode == FILECHOOSER_RESULT) {
     		if(requestCode == FILECHOOSER_RESULT) {
     	        if (null == uploadMsg)

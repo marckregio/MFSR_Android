@@ -62,6 +62,7 @@
         android:gravity="right"
         android:layout_below="@+id/qrCodeLabel"
         android:text="Service Engineer ID: " />  
+        
    	<TextView
         android:id="@+id/seID"
         android:layout_width="wrap_content"
@@ -504,6 +505,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:editable="false"
         android:layout_toRightOf="@+id/beforeBWLabel"
         android:layout_below="@+id/beforeScanFC">
     </EditText>
@@ -523,6 +525,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:editable="false"
         android:layout_toRightOf="@+id/beforeFCLabel"
         android:layout_below="@+id/beforeBW">
     </EditText>
@@ -689,6 +692,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:editable="false"
 		android:inputType="number"
         android:layout_toRightOf="@+id/afterBWLabel"
         android:layout_below="@+id/afterScanFC">
@@ -708,6 +712,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:editable="false"
 		android:inputType="number"
         android:layout_toRightOf="@+id/afterFCLabel"
         android:layout_below="@+id/afterBW">
@@ -781,21 +786,40 @@
     </EditText>
     
     <TextView
-        android:id="@+id/remarksLabel"
+        android:id="@+id/onsiteLabel"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/repairLabel"
         android:layout_marginBottom="15dp"
         android:textSize="20dp"
         android:gravity="right"
+        android:text="On-Site Status: " />
+    <Spinner
+      android:id="@+id/onsite"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:layout_marginTop="10dp"
+      android:layout_toRightOf="@+id/onsiteLabel"
+      android:layout_below="@+id/repair"
+  	/>
+    
+    <TextView
+        android:id="@+id/remarksLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/onsiteLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
         android:text="Remarks: " />
+    
     <EditText
         android:id="@+id/remarks"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_toRightOf="@+id/remarksLabel"
-        android:layout_below="@+id/repair">
+        android:layout_below="@+id/onsite">
     </EditText>
     
     <TextView
@@ -836,6 +860,8 @@
         android:layout_below="@+id/timeIn">
     </EditText>
 
+    
+    
     <Button
         android:id="@+id/saveXML"
         android:layout_width="fill_parent"
