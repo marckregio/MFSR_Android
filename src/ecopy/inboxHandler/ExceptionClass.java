@@ -36,7 +36,7 @@ public class ExceptionClass extends Declarations{
 	public static String blankPage(){
 		String html = "<html><head>"
 				+ "<style>"
-				+ "body{background-color:#C4CFFF;}"
+				+ "body{background-color:#4A9EBE;}"
 				+ "</style>"
 				+ "</head>"
 				+ "<body><center><br><br><br>"

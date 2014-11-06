@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,14 +32,24 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	private String finish = storageDestination.getFinishedDestination();
 	public void XMLProcessor(View v){
 		thisView = v;
-		selectXML = (Spinner) v.findViewById(R.id.selectXML);
+		selectXML = (Spinner) thisView.findViewById(R.id.selectXML);
 		xmlReader();
 		adapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, xmlFiles);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		selectXML.setAdapter(adapter);
 		selectXML.setOnItemSelectedListener(this);
+		initPop();
 		initFields();
         Buttons();
+	}
+	
+	public void initPop(){
+		inflater = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+		popup = inflater.inflate(R.layout.timepopup, null);
+		window = new PopupWindow(popup, 300,220);
+		window.setFocusable(false);
+		window.setAnimationStyle(R.style.PopupAnimation);
+		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 	}
 	
 	public void initFields(){
@@ -118,7 +130,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			xmlParser.setInput(xmlFile, null);
 			xmlParser(xmlParser);
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e){
 			e.printStackTrace();
@@ -314,6 +325,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			xmlWriter.append(xml);
 			xmlWriter.flush();
 			xmlWriter.close();
+			Toast.makeText(thisView.getContext(), referenceNo.getText() + ".xml Generated",Toast.LENGTH_SHORT).show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

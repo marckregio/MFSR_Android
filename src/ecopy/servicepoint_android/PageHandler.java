@@ -30,14 +30,14 @@ public class PageHandler extends Fragment{
 			inbox.Browser(rootView);
 			break;
 		case 2:
-			rootView = inflater.inflate(R.layout.rapidflows, container, false);
-			Inbox inbox2 = new Inbox();
-			inbox2.Browser(rootView);
-			break;
-		case 3:
 			rootView = inflater.inflate(R.layout.xmlprocessview, container, false);
 			ParseXML parse = new ParseXML();
 			parse.XMLProcessor(rootView);
+			break;
+		case 3:
+			//rootView = inflater.inflate(R.layout.xmlprocessview, container, false);
+			//ParseXML parse = new ParseXML();
+			//parse.XMLProcessor(rootView);
 			break;
 		}
 		

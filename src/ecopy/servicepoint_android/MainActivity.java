@@ -42,10 +42,10 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
                 mTitle = getString(R.string.inbox);
                 break;
             case 2:
-                mTitle = getString(R.string.timeTravel);
+                mTitle = getString(R.string.processXML);
                 break;
             case 3:
-                mTitle = getString(R.string.processXML);
+                mTitle = getString(R.string.about);
                 break;
         }
     }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#90AD87"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/timeinLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Time-in Record" 
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+    
+    <TextView
+        android:id="@+id/timein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:editable="false"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/timeinLabel"
+        android:text="HH:MM pm" 
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+    
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/timein"
+        android:text="*This is the Current time of the device" 
+        android:layout_marginBottom="20dp"/>
+    
+    <Button
+        android:id="@+id/getTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/note"
+        android:gravity="center"
+        android:text="Get Current Time" />
+    
+    <Button
+        android:id="@+id/closePopup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getTime"
+        android:gravity="center"
+        android:text="Proceed"/>
+</RelativeLayout>

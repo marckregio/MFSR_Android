@@ -38,7 +38,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 2;
+    private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
@@ -80,14 +80,15 @@ public class NavigationDrawerFragment extends Fragment {
         		new ArrayAdapter<String>(getActionBar().getThemedContext(),android.R.layout.simple_list_item_1,android.R.id.text1,
                 new String[]{
                         getString(R.string.inbox),
-                        getString(R.string.timeTravel),
                         getString(R.string.processXML),
+                        getString(R.string.about),
                 }){
         			@Override
         			public View getView(int position, View convertView, ViewGroup parent) {
         			    View view = super.getView(position, convertView, parent);
         			    TextView text = (TextView) view.findViewById(android.R.id.text1);
-        			      text.setTextColor(Color.BLACK); 
+        			      text.setTextColor(Color.WHITE); 
+        			      text.setTextSize(20);
         			    return view;
         			}
         		});

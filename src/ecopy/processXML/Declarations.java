@@ -10,9 +10,12 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,4 +43,9 @@ public class Declarations extends Activity{
 	public EditText timeIn, timeOut, eTicket, repair, remarks;
 	//Buttons
 	public Button saveXML;
+	//Popup
+	public View popup;
+	public LayoutInflater inflater;
+	public PopupWindow window;
+	
 }
