@@ -24,7 +24,7 @@ import ecopy.databaseHelper.DatabaseHelper;
 
 public class Declarations extends Activity{
 	public Spinner selectXML, payment, onsite, approval, pending;
-	public String selectedPayment, selectedOnsite, selectedApproval, selectedPending;
+	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending;
 	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, pendingReasons;
 	public ArrayAdapter<String> adapter, paymentAdapter, onsiteAdapter, approvalAdapter, pendingAdapter;
 	public File downloadsFolder, finishFolder;

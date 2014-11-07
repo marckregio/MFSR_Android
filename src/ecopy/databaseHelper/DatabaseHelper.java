@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	public SQLiteDatabase db;
@@ -32,11 +33,22 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		query.put(TIME_IN, timeIn);
 		query.put(TIME_OUT, timeOut);
 		getWritableDatabase().insert(TABLE_NAME, KEY_NAME, query);
+		Log.v("Marck Regio","Successful");
 	}
 
-	public Cursor getContent(){
-		selector =  getReadableDatabase().query(TABLE_NAME, new String[] {KEY_ID, KEY_NAME, TIME_IN, TIME_OUT}, null, null, null, null, null);
-		return selector;
+	public void getData(){
+		selector = db.rawQuery("Select * from "+ TABLE_NAME, null);
+		String [] data = null;
+		int i = 0;
+		if (selector.moveToFirst()){
+			do {
+				//data [selector.getColumnIndex(TABLE_NAME)] = selector.getString(0);
+				Log.v("Makoy", i+"");
+				i++;
+			} while (selector.moveToNext());
+		}
+		db.close();
+		//return data;
 	}
 	
 	public void deleteAll(){

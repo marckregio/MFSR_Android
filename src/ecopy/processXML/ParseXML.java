@@ -123,6 +123,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		approvalTypes = new ArrayList<String>();
 		db = new DatabaseHelper(thisView.getContext());
 	}
+	
 	public void xmlReader(){
 		xmlFiles = new ArrayList<String>();
 		downloadsFolder = new File(storage);
@@ -357,7 +358,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			public void onClick(View v) {
 				currentDate = new Date();
 				currentTime = timeFormat.format(currentDate);
-				//timein.setText(currentTime);
+				timein.setText(currentTime);
 				insertQuery();
 			}
 		});
@@ -366,7 +367,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			@Override
 			public void onClick(View v) {
 				window.dismiss();
-				timeIn.setText(currentTime);
+				//timeIn.setText(currentTime);
+				getTimeRecord();
 			}
 		});
 	}
@@ -376,7 +378,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	public void onItemSelected(AdapterView<?> parent, View view, int position,long id) {
 		switch(parent.getId()){
 		case R.id.selectXML:
-			xmlLoader(view, parent.getItemAtPosition(position).toString()+".xml");
+			selectedXML = parent.getItemAtPosition(position).toString();
+			xmlLoader(view, selectedXML+".xml");
 			break;
 		case R.id.payment:
 			selectedPayment = parent.getItemAtPosition(position).toString();
@@ -400,7 +403,14 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void insertQuery(){
-		
+		db.timeRecord(selectedXML, timein.getText() +"", "");
+		db.close();
+	}
+	
+	public void getTimeRecord(){
+		db.getData();
+		db.close();
+		//Toast.makeText(thisView.getContext(), data[0] +"",Toast.LENGTH_SHORT).show();
 	}
 }
 
