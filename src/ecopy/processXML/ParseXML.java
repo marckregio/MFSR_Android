@@ -409,7 +409,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	
 	public void getTimeRecord(){
 		db.getData();
-		db.close();
+		//db.close();
 		//Toast.makeText(thisView.getContext(), data[0] +"",Toast.LENGTH_SHORT).show();
 	}
 }

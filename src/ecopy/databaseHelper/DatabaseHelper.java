@@ -32,12 +32,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		query.put(KEY_NAME, referenceNo);
 		query.put(TIME_IN, timeIn);
 		query.put(TIME_OUT, timeOut);
-		getWritableDatabase().insert(TABLE_NAME, KEY_NAME, query);
+		this.getWritableDatabase().insert(TABLE_NAME, KEY_NAME, query);
 		Log.v("Marck Regio","Successful");
 	}
 
 	public void getData(){
 		selector = db.rawQuery("Select * from "+ TABLE_NAME, null);
+		db = this.getReadableDatabase();
 		String [] data = null;
 		int i = 0;
 		if (selector.moveToFirst()){
