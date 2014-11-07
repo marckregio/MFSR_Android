@@ -3,6 +3,7 @@ package ecopy.servicepoint_android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import ecopy.processXML.ParseXML;
 
 public class PageHandler extends Fragment{
 	public static final String ARG_SECTION_NUMBER = "section_number";
+	public Inbox inbox = new Inbox();
+	public ParseXML parse = new ParseXML();
 	public static PageHandler newInstance(int sectionNumber) {
 		PageHandler fragment = new PageHandler();
         Bundle args = new Bundle();
@@ -26,12 +29,10 @@ public class PageHandler extends Fragment{
 		switch (section){
 		case 1:
 			rootView = inflater.inflate(R.layout.rapidflows, container, false);
-			Inbox inbox = new Inbox();
 			inbox.Browser(rootView);
 			break;
 		case 2:
 			rootView = inflater.inflate(R.layout.xmlprocessview, container, false);
-			ParseXML parse = new ParseXML();
 			parse.XMLProcessor(rootView);
 			break;
 		case 3:

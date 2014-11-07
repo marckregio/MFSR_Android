@@ -5,11 +5,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import ecopy.databaseHelper.DatabaseHelper;
 import ecopy.servicepoint_android.R;
 
 public class ParseXML extends Declarations implements OnItemSelectedListener{
@@ -40,6 +44,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		selectXML.setOnItemSelectedListener(this);
 		initPop();
 		initFields();
+		initJava();
         Buttons();
 	}
 	
@@ -47,9 +52,13 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		inflater = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		popup = inflater.inflate(R.layout.timepopup, null);
 		window = new PopupWindow(popup, 300,220);
-		window.setFocusable(false);
 		window.setAnimationStyle(R.style.PopupAnimation);
+		window.setBackgroundDrawable(new ColorDrawable());
+		window.setOutsideTouchable(true);
+		window.setFocusable(true);
 		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
+		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
+		timein = (TextView) popup.findViewById(R.id.timein);
 	}
 	
 	public void initFields(){
@@ -94,23 +103,26 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		//
 		payment = (Spinner) thisView.findViewById(R.id.payment);
 		payment.setOnItemSelectedListener(this);
-		paymentMethods = new ArrayList<String>();
 		eTicket = (EditText) thisView.findViewById(R.id.eTicket);
 		repair = (EditText) thisView.findViewById(R.id.repair);
 		onsite = (Spinner) thisView.findViewById(R.id.onsite);
 		onsite.setOnItemSelectedListener(this);
-		onsiteStatuses = new ArrayList<String>();
 		pending = (Spinner) thisView.findViewById(R.id.pending);
 		pending.setOnItemSelectedListener(this);
-		pendingReasons = new ArrayList<String>();
 		approval = (Spinner) thisView.findViewById(R.id.approval);
 		approval.setOnItemSelectedListener(this);
-		approvalTypes = new ArrayList<String>();
 		remarks = (EditText) thisView.findViewById(R.id.remarks);
 		timeIn = (EditText) thisView.findViewById(R.id.timeIn);
 		timeOut = (EditText) thisView.findViewById(R.id.timeOut);
 	}
-
+	
+	public void initJava(){
+		paymentMethods = new ArrayList<String>();
+		onsiteStatuses = new ArrayList<String>();
+		pendingReasons = new ArrayList<String>();
+		approvalTypes = new ArrayList<String>();
+		db = new DatabaseHelper(thisView.getContext());
+	}
 	public void xmlReader(){
 		xmlFiles = new ArrayList<String>();
 		downloadsFolder = new File(storage);
@@ -339,7 +351,27 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				xmlBuilder();
 			}
 		});
+		getTime = (Button) popup.findViewById(R.id.getTime);
+		getTime.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				currentDate = new Date();
+				currentTime = timeFormat.format(currentDate);
+				//timein.setText(currentTime);
+				insertQuery();
+			}
+		});
+		proceed = (Button) popup.findViewById(R.id.closePopup);
+		proceed.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				window.dismiss();
+				timeIn.setText(currentTime);
+			}
+		});
 	}
+
+	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,long id) {
 		switch(parent.getId()){
@@ -366,4 +398,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void insertQuery(){
+		
+	}
 }
+

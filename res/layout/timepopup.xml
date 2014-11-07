@@ -24,7 +24,7 @@
         android:editable="false"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/timeinLabel"
-        android:text="HH:MM pm" 
+        android:text="HH:MM:SS pm" 
         android:textStyle="bold"
         android:layout_marginBottom="5dp"/>
     

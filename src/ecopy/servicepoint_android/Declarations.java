@@ -19,4 +19,6 @@ public class Declarations extends ActionBarActivity{
 	public String getFinishedDestination(){
 		return finishStorage;
 	}
+	
+	
 }

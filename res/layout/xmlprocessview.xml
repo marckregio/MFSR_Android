@@ -900,6 +900,7 @@
         android:textSize="20dp"
         android:editable="false"
         android:layout_toRightOf="@+id/timeOutLabel"
+        android:text="Time-out is generated after save and submit"
         android:layout_below="@+id/timeIn">
     </EditText>
     

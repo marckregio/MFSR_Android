@@ -3,6 +3,8 @@ package ecopy.processXML;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.w3c.dom.NodeList;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
+import ecopy.databaseHelper.DatabaseHelper;
 
 public class Declarations extends Activity{
 	public Spinner selectXML, payment, onsite, approval, pending;
@@ -42,10 +45,15 @@ public class Declarations extends Activity{
 		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
 	public EditText timeIn, timeOut, eTicket, repair, remarks;
 	//Buttons
-	public Button saveXML;
+	public Button saveXML, getTime, proceed;
 	//Popup
 	public View popup;
 	public LayoutInflater inflater;
 	public PopupWindow window;
-	
+	public SimpleDateFormat timeFormat;
+	public Date currentDate;
+	public String currentTime, clock;
+	public TextView timein;
+	//Database
+	public DatabaseHelper db;
 }
