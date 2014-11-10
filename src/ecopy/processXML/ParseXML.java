@@ -42,10 +42,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		selectXML.setAdapter(adapter);
 		selectXML.setOnItemSelectedListener(this);
-		initPop();
 		initFields();
 		initJava();
         Buttons();
+        getTimeRecord();
+        
+        //db.deleteAll();
 	}
 	
 	public void initPop(){
@@ -56,9 +58,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		window.setBackgroundDrawable(new ColorDrawable());
 		window.setOutsideTouchable(true);
 		window.setFocusable(true);
-		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
-		timein = (TextView) popup.findViewById(R.id.timein);
+		timeinPopup = (TextView) popup.findViewById(R.id.timein);
+		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 	}
 	
 	public void initFields(){
@@ -352,13 +354,15 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				xmlBuilder();
 			}
 		});
+	}
+	public void popupButtons(){
 		getTime = (Button) popup.findViewById(R.id.getTime);
 		getTime.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				currentDate = new Date();
 				currentTime = timeFormat.format(currentDate);
-				timein.setText(currentTime);
+				timeinPopup.setText(currentTime);
 				insertQuery();
 			}
 		});
@@ -367,8 +371,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			@Override
 			public void onClick(View v) {
 				window.dismiss();
-				//timeIn.setText(currentTime);
-				getTimeRecord();
 			}
 		});
 	}
@@ -403,14 +405,22 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void insertQuery(){
-		db.timeRecord(selectedXML, timein.getText() +"", "");
+		db.timeRecord(selectedXML, timeinPopup.getText() +"", "");
 		db.close();
+		getTimeRecord();
 	}
 	
 	public void getTimeRecord(){
-		db.getData();
-		//db.close();
-		//Toast.makeText(thisView.getContext(), data[0] +"",Toast.LENGTH_SHORT).show();
+		timeData = db.getTimeData(selectedXML);
+		if (timeData.equals("")){
+			Toast.makeText(thisView.getContext(), "No Time-in",Toast.LENGTH_SHORT).show();
+			timeIn.setText("No Time-in");
+			initPop();
+			popupButtons();
+		} else {
+			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
+			timeIn.setText(timeData);
+		}
 	}
 }
 

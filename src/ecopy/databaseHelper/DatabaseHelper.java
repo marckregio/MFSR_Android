@@ -36,20 +36,18 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		Log.v("Marck Regio","Successful");
 	}
 
-	public void getData(){
-		selector = db.rawQuery("Select * from "+ TABLE_NAME, null);
+	public String getTimeData(String filter){
 		db = this.getReadableDatabase();
-		String [] data = null;
-		int i = 0;
-		if (selector.moveToFirst()){
-			do {
-				//data [selector.getColumnIndex(TABLE_NAME)] = selector.getString(0);
-				Log.v("Makoy", i+"");
-				i++;
-			} while (selector.moveToNext());
+		selector = db.rawQuery("Select timeIn from "+ TABLE_NAME, null);
+		String data = "";
+		if(selector.moveToFirst()) {
+			do{
+				Log.v("makoy", selector.getString(0));
+				data = selector.getString(0) +"";
+			}while(selector.moveToNext());
 		}
 		db.close();
-		//return data;
+		return data;
 	}
 	
 	public void deleteAll(){

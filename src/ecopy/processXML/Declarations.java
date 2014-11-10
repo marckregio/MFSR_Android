@@ -52,8 +52,8 @@ public class Declarations extends Activity{
 	public PopupWindow window;
 	public SimpleDateFormat timeFormat;
 	public Date currentDate;
-	public String currentTime, clock;
-	public TextView timein;
+	public String currentTime, timeData;
+	public TextView timeinPopup;
 	//Database
 	public DatabaseHelper db;
 }
