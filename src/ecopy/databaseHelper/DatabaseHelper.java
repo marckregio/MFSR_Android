@@ -27,9 +27,10 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		onCreate(db);
 	}
 
-	public void timeRecord (String referenceNo, String timeIn, String timeOut){
+	public void timeRecord (String referenceNo,String password, String timeIn, String timeOut){
 		query = new ContentValues(3);
 		query.put(KEY_NAME, referenceNo);
+		query.put(KEY_PASSWORD, password);
 		query.put(TIME_IN, timeIn);
 		query.put(TIME_OUT, timeOut);
 		this.getWritableDatabase().insert(TABLE_NAME, KEY_NAME, query);

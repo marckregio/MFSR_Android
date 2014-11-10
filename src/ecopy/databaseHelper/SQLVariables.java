@@ -9,6 +9,7 @@ public interface SQLVariables {
 	public static final String KEY_NAME = "referenceNo";
 	public static final String TIME_IN = "timein";
 	public static final String TIME_OUT = "timeout";
+	public static final String KEY_PASSWORD = "password";
 	
 	public static final String TABLE_CREATE = 
 			"create table " + TABLE_NAME + "("

@@ -405,7 +405,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void insertQuery(){
-		db.timeRecord(selectedXML, timeinPopup.getText() +"", "");
+		db.timeRecord(selectedXML,"", timeinPopup.getText() +"", "");
 		db.close();
 		getTimeRecord();
 	}
