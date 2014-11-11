@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	}
 
 	public void timeRecord (String referenceNo,String password, String timeIn, String timeOut){
-		query = new ContentValues(3);
+		query = new ContentValues(4);
 		query.put(KEY_NAME, referenceNo);
 		query.put(KEY_PASSWORD, password);
 		query.put(TIME_IN, timeIn);
@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 
 	public String getTimeData(String filter){
 		db = this.getReadableDatabase();
-		selector = db.rawQuery("Select timeIn from "+ TABLE_NAME, null);
+		selector = db.rawQuery("Select timeIn from "+ TABLE_NAME + " Where referenceNo = '" + filter +"'", null);
 		String data = "";
 		if(selector.moveToFirst()) {
 			do{

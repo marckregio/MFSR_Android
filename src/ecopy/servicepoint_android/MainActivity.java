@@ -5,6 +5,7 @@ import java.io.File;
 import ecopy.processXML.ParseXML;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
@@ -48,6 +49,9 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
                 mTitle = getString(R.string.processXML);
                 break;
             case 3:
+                mTitle = getString(R.string.submit);
+                break;
+            case 4:
                 mTitle = getString(R.string.about);
                 break;
         }
@@ -78,6 +82,7 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }

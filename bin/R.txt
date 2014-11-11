@@ -460,7 +460,7 @@ int string abc_searchview_description_submit 0x7f0a0007
 int string abc_searchview_description_voice 0x7f0a0008
 int string abc_shareactionprovider_share_with 0x7f0a000c
 int string abc_shareactionprovider_share_with_application 0x7f0a000b
-int string about 0x7f0a0014
+int string about 0x7f0a0015
 int string action_reload 0x7f0a0010
 int string action_settings 0x7f0a0011
 int string app_name 0x7f0a000d
@@ -468,6 +468,7 @@ int string inbox 0x7f0a0012
 int string navigation_drawer_close 0x7f0a000f
 int string navigation_drawer_open 0x7f0a000e
 int string processXML 0x7f0a0013
+int string submit 0x7f0a0014
 int style Actionbar 0x7f0b008c
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008d

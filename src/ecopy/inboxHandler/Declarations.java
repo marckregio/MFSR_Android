@@ -16,8 +16,10 @@ public class Declarations extends Activity{
 	public WebView wv;
 	public ProgressBar progress;
 	public ProgressDialog progressDialog;
-	public static String link = "http://172.16.85.101/zukami/CompositeView.aspx?a=8ae76b00-d529-46c0-8ded-57fa58367409&ID=da20fd54-be00-44f4-a2a1-d22f25202041";
-	public String url = link + "";
+	public static String linkInbox = "http://172.16.85.22/zukami/CompositeView.aspx?a=8ae76b00-d529-46c0-8ded-57fa58367409&ID=782fac88-c09f-4be2-8d51-e502e44ebc11";
+	public String inbox = linkInbox + "";
+	public static String linkUpload = "http://172.16.85.22/zukami/fillform.aspx?FT=1&ListID=d481302c-d384-456d-90f5-1d86c5201e40&a=8ae76b00-d529-46c0-8ded-57fa58367409";
+	public String upload = linkUpload + "";
 	public boolean loadingFinished = true, redirect = false;
 	public String welcome = "Welcome \n ECOPY CORPORATION  \n                                ITDEPT";
 	public DownloadManager.Request request;

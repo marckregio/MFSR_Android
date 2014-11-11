@@ -3,7 +3,6 @@ package ecopy.servicepoint_android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +28,15 @@ public class PageHandler extends Fragment{
 		switch (section){
 		case 1:
 			rootView = inflater.inflate(R.layout.rapidflows, container, false);
-			inbox.Browser(rootView);
+			inbox.Browser(rootView, "inbox");
 			break;
 		case 2:
 			rootView = inflater.inflate(R.layout.xmlprocessview, container, false);
 			parse.XMLProcessor(rootView);
 			break;
 		case 3:
-			//rootView = inflater.inflate(R.layout.xmlprocessview, container, false);
-			//ParseXML parse = new ParseXML();
-			//parse.XMLProcessor(rootView);
+			rootView = inflater.inflate(R.layout.rapidflows, container, false);
+			inbox.Browser(rootView, "upload");
 			break;
 		}
 		

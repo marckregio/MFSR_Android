@@ -2,6 +2,8 @@ package ecopy.servicepoint_android;
 
 import java.io.File;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +13,7 @@ public class Declarations extends ActionBarActivity{
 	public String storage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR/";
 	public String finishStorage = Environment.getExternalStorageDirectory().getPath() +"/"+ Environment.DIRECTORY_DOWNLOADS +"/MFSR_FINISH/";
 	public File storageDestination, finishDestination;
+	
 	
 	public String getStorageDestination(){
 		return storage;

@@ -15,9 +15,9 @@ public interface SQLVariables {
 			"create table " + TABLE_NAME + "("
 			+ KEY_ID + " integer primary key autoincrement,"
 			+ KEY_NAME + " text not null,"
+			+ KEY_PASSWORD + " text,"
 			+ TIME_IN + " text,"
 			+ TIME_OUT + " text"
 			+ ");" ;
-	
-	
+	//.Hey Dont forget to add spaces between static String and Data type
 }

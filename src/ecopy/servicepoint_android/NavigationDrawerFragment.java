@@ -81,6 +81,7 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[]{
                         getString(R.string.inbox),
                         getString(R.string.processXML),
+                        getString(R.string.submit),
                         getString(R.string.about),
                 }){
         			@Override

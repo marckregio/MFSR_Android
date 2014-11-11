@@ -2,9 +2,9 @@ package ecopy.inboxHandler;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -19,17 +19,14 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import ecopy.servicepoint_android.MainActivity;
-import ecopy.servicepoint_android.PageHandler;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
 	private View thisView;
-	ecopy.servicepoint_android.Declarations storageDestination = new ecopy.servicepoint_android.Declarations();
-	private String storage = storageDestination.getStorageDestination();
 	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
-	public void Browser(View v){
+	public void Browser(View v, String page){
 		thisView = v;
 		wv = (WebView) thisView.findViewById(R.id.webview);
 		progress = (ProgressBar) thisView.findViewById(R.id.progressBar);
@@ -37,6 +34,7 @@ public class Inbox extends Declarations{
     	wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
     	wv.getSettings().setLoadWithOverviewMode(true);
     	//wv.getSettings().setUseWideViewPort(true);
+    	wv.getSettings().setBuiltInZoomControls(true);
     	wv.setWebViewClient(new WebEvents());
     	wv.setWebViewClient(new WebViewClient(){
     		@Override
@@ -48,7 +46,7 @@ public class Inbox extends Declarations{
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
     			if (url.endsWith(".xml")){
     				linkSource = Uri.parse(url);
-    				urlArray = url.split("%3b");
+    				urlArray = url.split(";");
     				filename = urlArray[urlArray.length - 1];
     				request = new DownloadManager.Request(linkSource);
     				request.setDescription("Processing Dispatched Service");
@@ -63,7 +61,6 @@ public class Inbox extends Declarations{
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
-    				//ecopy.servicepoint_android.Declarations.fragmentManager.beginTransaction().replace(R.id.container, PageHandler.newInstance(3)).commit();
     			}
     			return false;
     		}
@@ -78,27 +75,48 @@ public class Inbox extends Declarations{
     		
     		@SuppressWarnings("unused")
     		public void openFileChooser(ValueCallback<Uri> uploads, String acceptType, String capture) {
-    			openFileChooser(uploads);
+    			showIntent(uploads);
     		}
 
     		@SuppressWarnings("unused")
     		public void openFileChooser(ValueCallback<Uri> uploads, String acceptType) {
-    			openFileChooser(uploads);
+    			showIntent(uploads);
     		}
-    		public void openFileChooser(ValueCallback<Uri> uploads) {
-    			uploadMsg = uploads;
-    			chooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
-    			chooserIntent.addCategory(Intent.CATEGORY_OPENABLE); 
-    			chooserIntent.setType("image/*");
-    			//captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-    			((MainActivity) thisView.getContext()).startActivityForResult(Intent.createChooser(chooserIntent, "Choose Finished Service File"),  FILECHOOSER_RESULT); 
+    		@SuppressWarnings("unused")
+			public void openFileChooser(ValueCallback<Uri> uploads) {
+    			showIntent(uploads);
     		} 
     	});
     	
+
     	if(connection.equals("No Network Connection")){
 			wv.loadData(noConnection, "text/html", "UTF-8");
 		} else {
-			wv.loadUrl(url);
+			if (page.equals("inbox")){
+				wv.loadUrl(inbox);
+			}
+			else if (page.equals("upload"))
+				wv.loadUrl(upload);
+				//runUploader();
+		}
+	}
+	
+	public void showIntent(ValueCallback<Uri> uploads){
+		uploadMsg = uploads;
+		chooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+		chooserIntent.addCategory(Intent.CATEGORY_OPENABLE); 
+		chooserIntent.setType("image/*");
+		//captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+		((MainActivity) thisView.getContext()).startActivityForResult(Intent.createChooser(chooserIntent, "Choose Finished Service File"),  FILECHOOSER_RESULT); 
+	}
+	
+	
+	public void runUploader(){
+		PackageManager pm = thisView.getContext().getPackageManager();
+		Intent appStartIntent = pm.getLaunchIntentForPackage("marckregio.servicepoint");
+		if (null != appStartIntent)
+		{
+		    thisView.getContext().startActivity(appStartIntent);
 		}
 	}
 	
@@ -127,7 +145,6 @@ public class Inbox extends Declarations{
 
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		Toast.makeText(thisView.getContext(), "here", Toast.LENGTH_SHORT).show();
     	if (requestCode == FILECHOOSER_RESULT) {
     		if(requestCode == FILECHOOSER_RESULT) {
     	        if (null == uploadMsg)

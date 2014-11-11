@@ -9,5 +9,6 @@
 	
     <string name="inbox">Inbox</string>
     <string name="processXML">Process Files</string>
+    <string name="submit">Submit Service Files</string>
     <string name="about">About</string>
 </resources>

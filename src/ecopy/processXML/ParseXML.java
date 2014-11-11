@@ -45,8 +45,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		initFields();
 		initJava();
         Buttons();
-        getTimeRecord();
-        
         //db.deleteAll();
 	}
 	
@@ -61,6 +59,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
 		timeinPopup = (TextView) popup.findViewById(R.id.timein);
 		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
+		popupButtons();
 	}
 	
 	public void initFields(){
@@ -382,6 +381,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		case R.id.selectXML:
 			selectedXML = parent.getItemAtPosition(position).toString();
 			xmlLoader(view, selectedXML+".xml");
+			getTimeRecord();
 			break;
 		case R.id.payment:
 			selectedPayment = parent.getItemAtPosition(position).toString();
@@ -407,7 +407,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	public void insertQuery(){
 		db.timeRecord(selectedXML,"", timeinPopup.getText() +"", "");
 		db.close();
-		getTimeRecord();
 	}
 	
 	public void getTimeRecord(){
@@ -416,7 +415,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			Toast.makeText(thisView.getContext(), "No Time-in",Toast.LENGTH_SHORT).show();
 			timeIn.setText("No Time-in");
 			initPop();
-			popupButtons();
 		} else {
 			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
 			timeIn.setText(timeData);
