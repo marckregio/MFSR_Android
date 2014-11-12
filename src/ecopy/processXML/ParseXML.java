@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -160,6 +161,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				//Toast.makeText(thisView.getContext(), +"" ,Toast.LENGTH_SHORT).show();
 				if (name.equals("TechnicalMonitoring")){ 
 					xmlParser.nextTag();
+					submissionNo = xmlParser.nextText();
+					xmlParser.nextTag();
 					qrCode.setText(xmlParser.nextText());
 					xmlParser.nextTag();
 					seID.setText(xmlParser.nextText());
@@ -257,6 +260,10 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				*/
 				if (name.equals("Maintenances")){
 					int x = 0;
+					paymentMethods.clear();
+					onsiteStatuses.clear();
+					pendingReasons.clear();
+					approvalTypes.clear();
 					do{
 						xmlParser.nextTag();
 						x++;
@@ -266,23 +273,32 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						else if  (xmlParser.getName().equals("OnsiteStatuses")){
 							onsiteStatuses.add(xmlParser.nextText());
 						}
-						else if  (xmlParser.getName().equals("PendingReason")){
-							pendingReasons.add(xmlParser.nextText());
-						}
 						else if  (xmlParser.getName().equals("ApprovalType")){
 							approvalTypes.add(xmlParser.nextText());
 						}
-					}while (x < 16);
+						else if  (xmlParser.getName().equals("Parts-Supplies-Requisition")){
+							pendingReasons.add(xmlParser.nextText());
+						}
+						else if  (xmlParser.getName().equals("Unfinished")){
+							pendingReasons.add(xmlParser.nextText());
+						}
+						else if  (xmlParser.getName().equals("Carry-Over")){
+							pendingReasons.add(xmlParser.nextText());
+						}
+						else{
+							break;
+						}
+					}while (x < 20);
 					
 					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, paymentMethods);
 					paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					payment.setAdapter(paymentAdapter);
-					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, onsiteStatuses);
-					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-					onsite.setAdapter(onsiteAdapter);
 					pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, pendingReasons);
 					pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					pending.setAdapter(pendingAdapter);
+					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, onsiteStatuses);
+					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					onsite.setAdapter(onsiteAdapter);
 					approvalAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, approvalTypes);
 					approvalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					approval.setAdapter(approvalAdapter);
@@ -295,6 +311,10 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	
 	public void xmlBuilder(){
 		xml = 	"<MFSR>" +
+					"<ReferenceNo>" + referenceNo.getText() + "</ReferenceNo>" +
+					"<QRCode>" + qrCode.getText() + "</QRCode>" +
+					"<TimeinRadio>Time-In</TimeinRadio>" +
+					"<SubmissionNo>" + submissionNo + "</SubmissionNo>" +
 			    	"<MeterReadingBefore>" +
 			    		"<CopyBW>"+ beforeCopyBW.getText() +"</CopyBW>" +
 			    		"<PrintBW>" + beforePrintBW.getText() + "</PrintBW>" +

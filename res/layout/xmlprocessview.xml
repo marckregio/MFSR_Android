@@ -817,7 +817,7 @@
         android:layout_marginBottom="15dp"
         android:textSize="20dp"
         android:gravity="right"
-        android:text="Pending Reason: " />
+        android:text="Sub-Status: " />
     <Spinner
       android:id="@+id/pending"
       android:layout_width="fill_parent"
