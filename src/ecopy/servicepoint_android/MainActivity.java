@@ -52,6 +52,9 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
                 mTitle = getString(R.string.submit);
                 break;
             case 4:
+                mTitle = getString(R.string.travel);
+                break;
+            case 5:
                 mTitle = getString(R.string.about);
                 break;
         }

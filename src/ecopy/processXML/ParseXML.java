@@ -163,6 +163,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					xmlParser.nextTag();
 					submissionNo = xmlParser.nextText();
 					xmlParser.nextTag();
+					instanceID = xmlParser.nextText();
+					xmlParser.nextTag();
 					qrCode.setText(xmlParser.nextText());
 					xmlParser.nextTag();
 					seID.setText(xmlParser.nextText());
@@ -315,6 +317,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					"<QRCode>" + qrCode.getText() + "</QRCode>" +
 					"<TimeinRadio>Time-In</TimeinRadio>" +
 					"<SubmissionNo>" + submissionNo + "</SubmissionNo>" +
+					"<InstanceID>" + instanceID + "</InstanceID>" +
 			    	"<MeterReadingBefore>" +
 			    		"<CopyBW>"+ beforeCopyBW.getText() +"</CopyBW>" +
 			    		"<PrintBW>" + beforePrintBW.getText() + "</PrintBW>" +

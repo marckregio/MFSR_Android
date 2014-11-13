@@ -87,7 +87,7 @@ public class Inbox extends Declarations{
     			showIntent(uploads);
     		} 
     	});
-    	
+   	
 
     	if(connection.equals("No Network Connection")){
 			wv.loadData(noConnection, "text/html", "UTF-8");

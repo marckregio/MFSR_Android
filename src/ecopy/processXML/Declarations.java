@@ -33,7 +33,7 @@ public class Declarations extends Activity{
 	public File [] mfsrXMLFiles;
 	public XmlPullParser xmlParser;
 	public XmlPullParserFactory xmlFactory;
-	public String xml, submissionNo;
+	public String xml, submissionNo, instanceID;
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
 	//fields
 	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,

@@ -18,28 +18,41 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(TABLE_CREATE);
+		db.execSQL(SERVICE_CREATE);
+		db.execSQL(TRAVEL_CREATE);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS" + SERVICE_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS" + TRAVEL_TABLE);
 		onCreate(db);
 	}
 
 	public void timeRecord (String referenceNo,String password, String timeIn, String timeOut){
 		query = new ContentValues(4);
-		query.put(KEY_NAME, referenceNo);
-		query.put(KEY_PASSWORD, password);
+		query.put(REFERENCENO, referenceNo);
+		query.put(PASSWORD, password);
 		query.put(TIME_IN, timeIn);
 		query.put(TIME_OUT, timeOut);
-		this.getWritableDatabase().insert(TABLE_NAME, KEY_NAME, query);
-		Log.v("Marck Regio","Successful");
+		this.getWritableDatabase().insert(SERVICE_TABLE, REFERENCENO, query);
+		Log.v("Marck Regio","Time Record Successful");
+	}
+	
+	public void travelRecord (String startTime, String endTime, String referenceNo, String type, String fare){
+		query = new ContentValues(5);
+		query.put(START, startTime);
+		query.put(END, endTime);
+		query.put(REF, referenceNo);
+		query.put(TYPE, type);
+		query.put(FARE, fare);
+		this.getWritableDatabase().insert(TRAVEL_TABLE, START, query);
+		Log.v("Marck Regio","Travel Record Successful");
 	}
 
 	public String getTimeData(String filter){
 		db = this.getReadableDatabase();
-		selector = db.rawQuery("Select timeIn from "+ TABLE_NAME + " Where referenceNo = '" + filter +"'", null);
+		selector = db.rawQuery("Select timeIn from "+ SERVICE_TABLE + " Where referenceNo = '" + filter +"'", null);
 		String data = "";
 		if(selector.moveToFirst()) {
 			do{
@@ -52,6 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	}
 	
 	public void deleteAll(){
-		this.getWritableDatabase().delete(TABLE_NAME, null, null);
+		this.getWritableDatabase().delete(SERVICE_TABLE, null, null);
+		this.getWritableDatabase().delete(TRAVEL_TABLE, null, null);
 	}
 }
