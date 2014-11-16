@@ -8,13 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import ecopy.inboxHandler.Inbox;
 import ecopy.processXML.ParseXML;
-import ecopy.travelProcessor.Travel;
 
 public class PageHandler extends Fragment{
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	public Inbox inbox = new Inbox();
 	public ParseXML parse = new ParseXML();
-	public Travel travel = new Travel();
 	public static PageHandler newInstance(int sectionNumber) {
 		PageHandler fragment = new PageHandler();
         Bundle args = new Bundle();
@@ -39,10 +37,7 @@ public class PageHandler extends Fragment{
 		case 3:
 			rootView = inflater.inflate(R.layout.rapidflows, container, false);
 			inbox.Browser(rootView, "upload");
-			break;
-		case 4:
-			rootView = inflater.inflate(R.layout.travel, container, false);
-			travel.TravelProcessor(rootView);
+			//inbox.runUploader();
 			break;
 		}
 		

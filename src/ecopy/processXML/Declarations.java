@@ -23,10 +23,10 @@ import android.widget.TextView;
 import ecopy.databaseHelper.DatabaseHelper;
 
 public class Declarations extends Activity{
-	public Spinner selectXML, payment, onsite, approval, pending;
-	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending;
-	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, pendingReasons;
-	public ArrayAdapter<String> adapter, paymentAdapter, onsiteAdapter, approvalAdapter, pendingAdapter;
+	public Spinner selectXML, payment, onsite, approval, pending, travelType;
+	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending, selectedTravel;
+	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, pendingReasons, travelTypes;
+	public ArrayAdapter<String> adapter, paymentAdapter, onsiteAdapter, approvalAdapter, pendingAdapter, travelAdapter;
 	public File downloadsFolder, finishFolder;
 	public FileInputStream xmlFile;
 	public FileWriter xmlWriter;
@@ -45,11 +45,11 @@ public class Declarations extends Activity{
 		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
 	public EditText timeIn, timeOut, eTicket, repair, remarks;
 	//Buttons
-	public Button saveXML, getTime, proceed;
+	public Button saveXML, getTime, proceed, addTravel;
 	//Popup
-	public View popup;
-	public LayoutInflater inflater;
-	public PopupWindow window;
+	public View popup, travelPopup;
+	public LayoutInflater inflater, inflater2;
+	public PopupWindow window, travel;
 	public SimpleDateFormat timeFormat;
 	public Date currentDate;
 	public String currentTime, timeData;

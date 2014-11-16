@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +48,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
         //db.deleteAll();
 	}
 	
-	public void initPop(){
+	public void initTimeInPop(){
 		inflater = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		popup = inflater.inflate(R.layout.timepopup, null);
 		window = new PopupWindow(popup, 300,220);
@@ -60,7 +59,59 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
 		timeinPopup = (TextView) popup.findViewById(R.id.timein);
 		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
-		popupButtons();
+		getTime = (Button) popup.findViewById(R.id.getTime);
+		getTime.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				currentDate = new Date();
+				currentTime = timeFormat.format(currentDate);
+				timeinPopup.setText(currentTime);
+				insertQuery();
+			}
+		});
+		proceed = (Button) popup.findViewById(R.id.closePopup);
+		proceed.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				getTimeRecord();
+				window.dismiss();
+			}
+		});
+	}
+	
+	public void initTravelPop(){
+		inflater2 = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+		travelPopup = inflater2.inflate(R.layout.travelpopup, null);
+		travel = new PopupWindow(travelPopup, 300,490);
+		travel.setAnimationStyle(R.style.PopupAnimation);
+		travel.setBackgroundDrawable(new ColorDrawable());
+		travel.setOutsideTouchable(true);
+		travel.setFocusable(true);
+		//
+		travelType = (Spinner) travelPopup.findViewById(R.id.type);
+		travelTypes = new ArrayList<String>();
+		travelTypes.add("Tricycle");
+		travelTypes.add("Jeepney");
+		travelTypes.add("Taxi");
+		travelTypes.add("Bus");
+		travelTypes.add("Train");
+		travelTypes.add("Pedicab");
+		travelAdapter = new ArrayAdapter<String>(travelPopup.getContext(), android.R.layout.simple_spinner_dropdown_item, travelTypes);
+		travelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		travelType.setAdapter(travelAdapter);
+		travelType.setOnItemSelectedListener(new OnItemSelectedListener(){
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				switch(parent.getId()){
+				case R.id.type:
+					selectedTravel = parent.getItemAtPosition(position).toString();
+					break;
+				}
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}});
+		travel.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 	}
 	
 	public void initFields(){
@@ -124,6 +175,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		pendingReasons = new ArrayList<String>();
 		approvalTypes = new ArrayList<String>();
 		db = new DatabaseHelper(thisView.getContext());
+		
 	}
 	
 	public void xmlReader(){
@@ -376,23 +428,11 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				xmlBuilder();
 			}
 		});
-	}
-	public void popupButtons(){
-		getTime = (Button) popup.findViewById(R.id.getTime);
-		getTime.setOnClickListener(new OnClickListener(){
+		addTravel = (Button) thisView.findViewById(R.id.addTravel);
+		addTravel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				currentDate = new Date();
-				currentTime = timeFormat.format(currentDate);
-				timeinPopup.setText(currentTime);
-				insertQuery();
-			}
-		});
-		proceed = (Button) popup.findViewById(R.id.closePopup);
-		proceed.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				window.dismiss();
+				initTravelPop();
 			}
 		});
 	}
@@ -404,7 +444,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		case R.id.selectXML:
 			selectedXML = parent.getItemAtPosition(position).toString();
 			xmlLoader(view, selectedXML+".xml");
-			getTimeRecord();
+			//getTimeRecord();
 			break;
 		case R.id.payment:
 			selectedPayment = parent.getItemAtPosition(position).toString();
@@ -437,7 +477,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		if (timeData.equals("")){
 			Toast.makeText(thisView.getContext(), "No Time-in",Toast.LENGTH_SHORT).show();
 			timeIn.setText("No Time-in");
-			initPop();
+			initTimeInPop();
 		} else {
 			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
 			timeIn.setText(timeData);

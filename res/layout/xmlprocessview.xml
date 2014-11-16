@@ -767,6 +767,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:singleLine="true"
         android:layout_toRightOf="@+id/eTicketLabel"
         android:layout_below="@+id/payment">
     </EditText>
@@ -785,6 +786,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:singleLine="true"
         android:layout_toRightOf="@+id/repairLabel"
         android:layout_below="@+id/eTicket">
     </EditText>
@@ -861,6 +863,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:singleLine="true"
         android:layout_toRightOf="@+id/remarksLabel"
         android:layout_below="@+id/approval">
     </EditText>
@@ -900,15 +903,43 @@
         android:textSize="20dp"
         android:editable="false"
         android:layout_toRightOf="@+id/timeOutLabel"
-        android:text="Time-out is generated after save and submit"
+        android:text="Time-out will automatically generated"
         android:layout_below="@+id/timeIn">
     </EditText>
+    
+    <TextView
+        android:id="@+id/travelRecordsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/timeOut"
+        android:layout_marginTop="10dp"
+        android:text="Travel Record" 
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+    
+    <Button
+        android:id="@+id/addTravel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/travelRecordsLabel"
+        android:gravity="center"
+        android:text="Add Travel Record" />
+    
+    <ListView
+     		android:id="@+id/travelRecordsList"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/addTravel"
+        	android:layout_marginBottom="10dp">
+    </ListView>
     
     <Button
         android:id="@+id/saveXML"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timeOutLabel"
+        android:layout_below="@+id/travelRecordsList"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:text="Save and Submit to Rapidflows" />

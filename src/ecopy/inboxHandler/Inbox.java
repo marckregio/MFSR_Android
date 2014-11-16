@@ -97,7 +97,6 @@ public class Inbox extends Declarations{
 			}
 			else if (page.equals("upload"))
 				wv.loadUrl(upload);
-				//runUploader();
 		}
 	}
 	

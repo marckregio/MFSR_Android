@@ -12,6 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	public ContentValues query;
 	public Cursor selector;
 	
+	
 	public DatabaseHelper(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}

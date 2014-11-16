@@ -38,7 +38,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 3;
+    private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
@@ -82,8 +82,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.inbox),
                         getString(R.string.processXML),
                         getString(R.string.submit),
-                        getString(R.string.travel),
-                        getString(R.string.about),
+                        getString(R.string.about)
                 }){
         			@Override
         			public View getView(int position, View convertView, ViewGroup parent) {

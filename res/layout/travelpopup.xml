@@ -12,38 +12,31 @@
         android:layout_height="wrap_content"
         android:textSize="25dp"
         android:layout_centerHorizontal="true"
-        android:text="Start New Travel" 
+        android:text="Create Travel Record" 
         android:textStyle="bold"
         android:layout_marginBottom="20dp"/>
     
     <TextView
-        android:id="@+id/startTime"
+        android:id="@+id/startTimeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:editable="false"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/startLabel"
-        android:text="HH:MM:SS pm" 
-        android:textStyle="bold"
-        android:layout_marginBottom="5dp"/>
-    
-    <Button
-        android:id="@+id/getTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/startTime"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="Get Current Time" />
-    
+        android:layout_marginTop="85dp"
+        android:textSize="20dp"
+        android:text="Start Time: " />
+    <TimePicker
+        android:id="@+id/timeStartPicker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/startLabel"
+        android:layout_toRightOf="@+id/startTimeLabel"/>
     
     <TextView
         android:id="@+id/typeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/getTime"
-        android:layout_marginTop="15dp"
+        android:layout_below="@+id/timeStartPicker"
+        android:layout_marginTop="40dp"
         android:textSize="20dp"
         android:text="Type: " />
     <Spinner
@@ -52,18 +45,20 @@
       android:layout_height="wrap_content" 
       android:layout_marginTop="10dp"
       android:layout_toRightOf="@+id/typeLabel"
-      android:layout_below="@+id/getTime"
+      android:spinnerMode="dialog"
+      android:layout_below="@+id/timeStartPicker"
   	/>
     
     <TextView
         android:id="@+id/fareLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/typeLabel"
+        android:layout_below="@+id/type"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:textSize="20dp"
         android:text="Fare: " />
+    
     <EditText
         android:id="@+id/fare"
         android:layout_width="fill_parent"
@@ -74,11 +69,26 @@
         android:layout_below="@+id/type">
     </EditText>
     
+    <TextView
+        android:id="@+id/endTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fareLabel"
+        android:layout_marginTop="73dp"
+        android:textSize="20dp"
+        android:text="End Time: " />
+    <TimePicker
+        android:id="@+id/timeEndPicker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/fare"
+        android:layout_toRightOf="@+id/endTimeLabel"/>
+    
     <Button
         android:id="@+id/closePopup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fare"
+        android:layout_below="@+id/timeEndPicker"
         android:gravity="center"
         android:text="Proceed"/>
 </RelativeLayout>
