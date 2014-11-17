@@ -49,7 +49,7 @@ public class Declarations extends Activity{
 		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
 	public EditText timeIn, timeOut, eTicket, repair, remarks;
 	//Buttons
-	public Button saveXML, getTime, proceed, addTravel;
+	public Button saveXML, getTime, proceed, addTravel, saveOnly;
 	//Popup
 	public View popup, travelPopup;
 	public LayoutInflater inflater, inflater2;

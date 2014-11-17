@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	}
 
 	public void timeRecord (String referenceNo,String password, String timeIn, String timeOut){
-		query = new ContentValues(4);
+		query = new ContentValues();
 		query.put(REFERENCENO, referenceNo);
 		query.put(PASSWORD, password);
 		query.put(TIME_IN, timeIn);
@@ -39,8 +39,51 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		Log.v("Marck Regio","Time Record Successful");
 	}
 	
+	public void updateServiceRecord(String referenceNo, String beforeCopyBW, String beforePrintBW,
+			String beforeScanBW, String beforeFaxBW, String beforeCopyFC, 
+			String beforePrintFC, String beforeScanFC, String beforeBWTotal, 
+			String beforeFCTotal, String afterCopyBW, String afterPrintBW,
+			String afterScanBW, String afterFaxBW, String afterCopyFC, 
+			String afterPrintFC, String afterScanFC, String afterBWTotal, 
+			String afterFCTotal, String eTicket, String repair, String remarks,
+			String selectedPayment, String selectedOnsite,
+			String selectedApproval, String selectedPending){
+		query = new ContentValues();
+		query.put("beforeCopyBW", beforeCopyBW);
+		query.put("beforePrintBW", beforePrintBW);
+		query.put("beforeScanBW", beforeScanBW);
+		query.put("beforeFaxBW", beforeFaxBW);
+		query.put("beforeCopyFC", beforeCopyFC);
+		query.put("beforePrintFC", beforePrintFC);
+		query.put("beforeScanFC", beforeScanFC);
+		query.put("beforeBWTotal", beforeBWTotal);
+		query.put("beforeFCTotal", beforeFCTotal);
+		query.put("afterCopyBW", afterCopyBW);
+		query.put("afterPrintBW", afterPrintBW);
+		query.put("afterScanBW", afterScanBW);
+		query.put("afterFaxBW", afterFaxBW);
+		query.put("afterCopyFC", afterCopyFC);
+		query.put("afterPrintFC", afterPrintFC);
+		query.put("afterScanFC", afterScanFC);
+		query.put("afterBWTotal", afterBWTotal);
+		query.put("afterFCTotal", afterFCTotal);
+		query.put("eTicket",eTicket);
+		query.put("repair", repair);
+		query.put("remarks", remarks);
+		query.put("selectedPayment", selectedPayment);
+		query.put("selectedOnsite", selectedOnsite);
+		query.put("selectedApproval", selectedApproval);
+		query.put("selectedPending", selectedPending);
+		this.getWritableDatabase().update(SERVICE_TABLE, 
+				query, 
+				REFERENCENO +"=?", 
+				new String [] {referenceNo});
+		db.close();
+		Log.v("Marck Regio","Update Successful");
+	}
+	
 	public void travelRecord (String startTime, String endTime, String referenceNo, String type, String fare){
-		query = new ContentValues(5);
+		query = new ContentValues();
 		query.put(START, startTime);
 		query.put(END, endTime);
 		query.put(REF, referenceNo);
@@ -64,10 +107,60 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		return data;
 	}
 	
-	public Cursor getTravelRecord(){
+	
+	public String [] getDetails(String filter){
+		db = this.getReadableDatabase();
+		String [] data = new String [25];
+		
+		selector = db.rawQuery("Select beforeCopyBW, beforePrintBW, " +
+			" beforeScanBW, beforeFaxBW, beforeCopyFC, " +
+			" beforePrintFC, beforeScanFC, beforeBWTotal, " +
+			" beforeFCTotal, afterCopyBW, afterPrintBW, " +
+			" afterScanBW, afterFaxBW, afterCopyFC, " +
+			" afterPrintFC, afterScanFC, afterBWTotal, " + 
+			" afterFCTotal, eTicket, repair, remarks, " +
+			" selectedPayment, selectedOnsite, " +
+			" selectedApproval, selectedPending from " + 
+			SERVICE_TABLE + " Where referenceNo ='" + filter + "'", null);
+
+		if (selector.moveToFirst()){
+			data[0] = selector.getString(selector.getColumnIndex("beforeCopyBW"));
+			data[1] = selector.getString(selector.getColumnIndex("beforePrintBW"));
+			data[2] = selector.getString(selector.getColumnIndex("beforeScanBW"));
+			data[3] = selector.getString(selector.getColumnIndex("beforeFaxBW"));
+			data[4] = selector.getString(selector.getColumnIndex("beforeCopyFC"));
+			data[5] = selector.getString(selector.getColumnIndex("beforePrintFC"));
+			data[6] = selector.getString(selector.getColumnIndex("beforeScanFC"));
+			data[7] = selector.getString(selector.getColumnIndex("beforeBWTotal"));
+			data[8] = selector.getString(selector.getColumnIndex("beforeFCTotal"));
+			data[9] = selector.getString(selector.getColumnIndex("afterCopyBW"));
+			data[10] = selector.getString(selector.getColumnIndex("afterPrintBW"));
+			data[11] = selector.getString(selector.getColumnIndex("afterScanBW"));
+			data[12] = selector.getString(selector.getColumnIndex("afterFaxBW"));
+			data[13] = selector.getString(selector.getColumnIndex("afterCopyFC"));
+			data[14] = selector.getString(selector.getColumnIndex("afterPrintFC"));
+			data[15] = selector.getString(selector.getColumnIndex("afterScanFC"));
+			data[16] = selector.getString(selector.getColumnIndex("afterBWTotal"));
+			data[17] = selector.getString(selector.getColumnIndex("afterFCTotal"));
+			data[18] = selector.getString(selector.getColumnIndex("eTicket"));
+			data[19] = selector.getString(selector.getColumnIndex("repair"));
+			data[20] = selector.getString(selector.getColumnIndex("remarks"));
+			data[21] = selector.getString(selector.getColumnIndex("selectedPayment"));
+			data[22] = selector.getString(selector.getColumnIndex("selectedOnsite"));
+			data[23] = selector.getString(selector.getColumnIndex("selectedApproval"));
+			data[24] = selector.getString(selector.getColumnIndex("selectedPending"));
+		}
+		db.close();
+		return data;
+	}
+	
+	public Cursor getTravelRecord(String referenceNo){
 		selector = getReadableDatabase().query(TRAVEL_TABLE, 
 				new String[] {"_id",START,END,REF,TYPE,FARE},
-				null,null,null,null,null);
+				REF +" = ?",
+				new String[] {referenceNo},
+				null,null,START+" DESC");
+		db.close();
 		return selector;
 	}
 	

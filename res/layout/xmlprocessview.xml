@@ -508,7 +508,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-		android:inputType="number"
 		android:editable="false"
         android:layout_toRightOf="@+id/beforeBWLabel"
         android:layout_below="@+id/beforeScanFC">
@@ -528,7 +527,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-		android:inputType="number"
 		android:editable="false"
         android:layout_toRightOf="@+id/beforeFCLabel"
         android:layout_below="@+id/beforeBW">
@@ -697,7 +695,6 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:editable="false"
-		android:inputType="number"
         android:layout_toRightOf="@+id/afterBWLabel"
         android:layout_below="@+id/afterScanFC">
     </EditText>
@@ -717,7 +714,6 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:editable="false"
-		android:inputType="number"
         android:layout_toRightOf="@+id/afterFCLabel"
         android:layout_below="@+id/afterBW">
     </EditText>
@@ -978,18 +974,25 @@
     <ListView
      		android:id="@+id/travelRecordsList"
         	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
+        	android:layout_height="300dp"
         	android:layout_below="@+id/endTime">
         	
     </ListView>
     
     <Button
-        android:id="@+id/saveXML"
+        android:id="@+id/saveOnly"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/travelRecordsList"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
+        android:text="Save and Proceed to Actual Service" />
+    
+    <Button
+        android:id="@+id/saveXML"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/saveOnly"
+        android:gravity="center"
         android:text="Save and Submit to Rapidflows" />
     
 	</RelativeLayout>

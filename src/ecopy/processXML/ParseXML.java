@@ -326,7 +326,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					onsiteStatuses.clear();
 					pendingReasons.clear();
 					approvalTypes.clear();
+					paymentMethods.add("Select an item");
+					onsiteStatuses.add("Select an item");
+					pendingReasons.add("Select an item");
+					approvalTypes.add("Select an item");
 					do{
+						
 						xmlParser.nextTag();
 						x++;
 						if (xmlParser.getName().equals("PaymentMethod")){
@@ -433,7 +438,11 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		saveXML.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				xmlBuilder();
+				if (fieldCheck()){
+					xmlBuilder();
+				} else {
+					Toast.makeText(thisView.getContext(), "Please Complete The Form",Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		addTravel = (Button) thisView.findViewById(R.id.addTravel);
@@ -441,6 +450,14 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			@Override
 			public void onClick(View v) {
 				initTravelPop();
+			}
+		});
+		saveOnly = (Button) thisView.findViewById(R.id.saveOnly);
+		saveOnly.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				updateServiceQuery();
+				Toast.makeText(thisView.getContext(), "Successful! Please Proceed to your Actual Service",Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -453,6 +470,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			selectedXML = parent.getItemAtPosition(position).toString();
 			xmlLoader(view, selectedXML+".xml");
 			getTimeRecord();
+			getDetails();
 			getTravelRecord();
 			break;
 		case R.id.payment:
@@ -481,14 +499,27 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	
 	public void insertTimeQuery(){
 		db.timeRecord(selectedXML,"", timeinPopup.getText() +"", "");
-		db.close();
+	}
+	
+	public void updateServiceQuery(){
+		db.updateServiceRecord(selectedXML, beforeCopyBW.getText() + "", 
+				beforePrintBW.getText() + "", beforeScanBW.getText() + "", 
+				beforeFaxBW.getText() + "", beforeCopyFC.getText() + "", 
+				beforePrintFC.getText() + "", beforeScanFC.getText() + "", 
+				beforeBWTotal.getText() + "", beforeFCTotal.getText() + "", 
+				afterCopyBW.getText() + "", afterPrintBW.getText() + "", 
+				afterScanBW.getText() + "", afterFaxBW.getText() + "", 
+				afterCopyFC.getText() + "", afterPrintFC.getText() + "", 
+				afterScanFC.getText() + "", afterBWTotal.getText() + "", 
+				afterFCTotal.getText() + "", eTicket.getText() + "" ,
+				repair.getText() + "", remarks.getText() + "",
+				selectedPayment , selectedOnsite, selectedApproval, selectedPending);
 	}
 	
 	public void insertTravelQuery(){
 		String startTime = start.getCurrentHour() + ":" + start.getCurrentMinute();
 		String endTime = end.getCurrentHour() + ":" + end.getCurrentMinute();
 		db.travelRecord(startTime, endTime, selectedXML, selectedTravel, fare.getText()+"Php");
-		db.close();
 	}
 	
 	public void getTimeRecord(){
@@ -497,21 +528,97 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			Toast.makeText(thisView.getContext(), "No Time-in",Toast.LENGTH_SHORT).show();
 			timeIn.setText("No Time-in");
 			initTimeInPop();
+			saveOnly.setEnabled(false);
+			saveXML.setEnabled(false);
 		} else {
 			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
 			timeIn.setText(timeData);
+			saveOnly.setEnabled(true);
+			saveXML.setEnabled(true);
 		}
+	}
+	
+	public void getDetails(){
+		String [] data = db.getDetails(selectedXML);
+		beforeCopyBW.setText(data[0]+"");
+		beforePrintBW.setText(data[1]+"");
+		beforeScanBW.setText(data[2]+"");
+		beforeFaxBW.setText(data[3]+"");
+		beforeCopyFC.setText(data[4]+"");
+		beforePrintFC.setText(data[5]+"");
+		beforeScanFC.setText(data[6]+"");
+		beforeBWTotal.setText(data[7]+"");
+		beforeFCTotal.setText(data[8]+"");
+		afterCopyBW.setText(data[9]+"");
+		afterPrintBW.setText(data[10]+"");
+		afterScanBW.setText(data[11]+"");
+		afterFaxBW.setText(data[12]+"");
+		afterCopyFC.setText(data[13]+"");
+		afterPrintFC.setText(data[14]+"");
+		afterScanFC.setText(data[15]+"");
+		afterBWTotal.setText(data[16]+"");
+		afterFCTotal.setText(data[17]+"");
+		eTicket.setText(data[18]+"");
+		repair.setText(data[19]+"");
+		remarks.setText(data[20]+"");
+		payment.setSelection(setSpinnerIndex(payment, data[21]+""));
+		onsite.setSelection(setSpinnerIndex(onsite, data[22]+""));
+		approval.setSelection(setSpinnerIndex(approval, data[23]+""));
+		pending.setSelection(setSpinnerIndex(pending, data[24]+""));
+	}
+	
+	public int setSpinnerIndex(Spinner spin, String val){
+		int index = 0;
+
+		for (int i=0;i<spin.getCount();i++){
+			if (spin.getItemAtPosition(i).equals(val)){
+				index = i;
+			}
+		}
+		return index;
 	}
 	
 	@SuppressWarnings("deprecation")
 	public void getTravelRecord(){
-		selector = db.getTravelRecord();
+		selector = db.getTravelRecord(selectedXML);
 		String [] tableHeader = {SQLVariables.START,SQLVariables.TYPE,SQLVariables.FARE,SQLVariables.END};
 		int [] tableRow = {R.id.startTimeLabel, R.id.travelTypeLabel, R.id.fareLabel, R.id.endTimeLabel};
 		travelList = new SimpleCursorAdapter(thisView.getContext(), R.layout.travellist, 
 				selector, tableHeader, tableRow, 0);
 		travelData = (ListView) thisView.findViewById(R.id.travelRecordsList);
 		travelData.setAdapter(travelList);
+	}
+	
+	public Boolean fieldCheck(){
+		Boolean proceed = false;
+		if (beforeCopyBW.getText().equals("")
+				|| beforeCopyBW.getText().equals("")
+				|| beforePrintBW.getText().equals("")
+				|| beforeScanBW.getText().equals("")
+				|| beforeFaxBW.getText().equals("")
+				|| beforeCopyFC.getText().equals("")
+				|| beforePrintFC.getText().equals("")
+				|| beforeScanFC.getText().equals("")
+				|| afterCopyBW.getText().equals("")
+				|| afterPrintBW.getText().equals("")
+				|| afterScanBW.getText().equals("")
+				|| afterFaxBW.getText().equals("")
+				|| afterCopyFC.getText().equals("")
+				|| afterPrintFC.getText().equals("")
+				|| afterScanFC.getText().equals("")
+				|| selectedPayment.equals("Select an item")
+				|| selectedOnsite.equals("Select an item")
+				|| selectedApproval.equals("Select an item")
+				|| selectedPending.equals("Select an item")
+				|| eTicket.getText().equals("")
+				|| repair.getText().equals("")
+				|| remarks.getText().equals("")
+				){
+			proceed = false;
+		}else{
+			proceed = true;
+		}
+		return proceed;
 	}
 }
 
