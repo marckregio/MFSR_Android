@@ -234,6 +234,10 @@ public class NavigationDrawerFragment extends Fragment {
 
         return super.onOptionsItemSelected(item);
     }
+    
+    public void explicitReload(int page){
+    	Declarations.fragmentManager.beginTransaction().replace(R.id.container, PageHandler.newInstance(page+ 1)).commit();
+    }
 
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();

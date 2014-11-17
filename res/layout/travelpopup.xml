@@ -90,5 +90,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/timeEndPicker"
         android:gravity="center"
-        android:text="Proceed"/>
+        android:text="Save"/>
 </RelativeLayout>

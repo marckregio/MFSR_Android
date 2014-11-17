@@ -11,7 +11,7 @@ public interface SQLVariables {
 	public static final String PASSWORD = "password";
 	
 	public static final String SERVICE_CREATE = 
-			"create table " + SERVICE_TABLE + "(id integer primary key autoincrement,"
+			"create table " + SERVICE_TABLE + "(_id integer primary key autoincrement,"
 			+ REFERENCENO + " text not null,"
 			+ PASSWORD + " text,"
 			+ TIME_IN + " text,"
@@ -26,7 +26,7 @@ public interface SQLVariables {
 	public static final String FARE = "fare";
 	
 	public static final String TRAVEL_CREATE =
-			"create table " + TRAVEL_TABLE + "(id integer primary key increment,"
+			"create table " + TRAVEL_TABLE + "(_id integer primary key autoincrement,"
 			+ START +" text not null,"
 			+ END +" text not null,"
 			+ REF +" text not null,"

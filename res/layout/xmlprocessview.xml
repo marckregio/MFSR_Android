@@ -927,12 +927,60 @@
         android:gravity="center"
         android:text="Add Travel Record" />
     
+    <TextView
+        	android:id="@+id/startTime"
+        	android:layout_width="150dp"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/addTravel"
+        	android:padding="10dp"
+        	android:textSize="20dp"
+        	android:gravity="center"
+        	android:textStyle="bold"
+        	android:text="Start Time"/>	
+ 	
+         <TextView
+        	android:id="@+id/travelType"
+        	android:layout_width="150dp"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/addTravel"
+        	android:layout_toRightOf="@+id/startTime"
+        	android:padding="10dp"
+        	android:textSize="20dp"
+        	android:gravity="center"
+        	android:textStyle="bold"
+        	android:text="Type"/>
+         
+         <TextView
+        	android:id="@+id/fare"
+        	android:layout_width="150dp"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/addTravel"
+        	android:layout_toRightOf="@+id/travelType"
+        	android:padding="10dp"
+        	android:textSize="20dp"
+        	android:gravity="center"
+        	android:textStyle="bold"
+        	android:text="Fare"/>
+         
+          <TextView
+        	android:id="@+id/endTime"
+        	android:layout_width="150dp"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/addTravel"
+        	android:layout_toRightOf="@+id/fare"
+        	android:padding="10dp"
+        	android:textSize="20dp"
+        	android:gravity="center"
+        	android:textStyle="bold"
+        	android:text="End Time"/>
+    
+    
     <ListView
      		android:id="@+id/travelRecordsList"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:layout_below="@+id/addTravel"
-        	android:layout_marginBottom="10dp">
+        	android:layout_below="@+id/endTime">
+        	
     </ListView>
     
     <Button

@@ -12,7 +12,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	public ContentValues query;
 	public Cursor selector;
 	
-	
 	public DatabaseHelper(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -63,6 +62,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		}
 		db.close();
 		return data;
+	}
+	
+	public Cursor getTravelRecord(){
+		selector = getReadableDatabase().query(TRAVEL_TABLE, 
+				new String[] {"_id",START,END,REF,TYPE,FARE},
+				null,null,null,null,null);
+		return selector;
 	}
 	
 	public void deleteAll(){

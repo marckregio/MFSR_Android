@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,16 +23,21 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import ecopy.databaseHelper.DatabaseHelper;
+import ecopy.databaseHelper.SQLVariables;
 import ecopy.servicepoint_android.R;
 
 public class ParseXML extends Declarations implements OnItemSelectedListener{
 	private View thisView;
 	ecopy.servicepoint_android.Declarations storageDestination = new ecopy.servicepoint_android.Declarations();
+	ecopy.servicepoint_android.NavigationDrawerFragment nav = new ecopy.servicepoint_android.NavigationDrawerFragment();
 	private String storage = storageDestination.getStorageDestination();
 	private String finish = storageDestination.getFinishedDestination();
 	public void XMLProcessor(View v){
@@ -66,7 +72,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				currentDate = new Date();
 				currentTime = timeFormat.format(currentDate);
 				timeinPopup.setText(currentTime);
-				insertQuery();
+				insertTimeQuery();
 			}
 		});
 		proceed = (Button) popup.findViewById(R.id.closePopup);
@@ -99,19 +105,21 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		travelAdapter = new ArrayAdapter<String>(travelPopup.getContext(), android.R.layout.simple_spinner_dropdown_item, travelTypes);
 		travelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		travelType.setAdapter(travelAdapter);
-		travelType.setOnItemSelectedListener(new OnItemSelectedListener(){
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				switch(parent.getId()){
-				case R.id.type:
-					selectedTravel = parent.getItemAtPosition(position).toString();
-					break;
-				}
-			}
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}});
+		travelType.setOnItemSelectedListener(this);
 		travel.showAtLocation(thisView, Gravity.CENTER, 0, 0);
+		fare = (EditText) travelPopup.findViewById(R.id.fare);
+		saveTravel = (Button) travelPopup.findViewById(R.id.closePopup);
+		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
+		start = (TimePicker) travelPopup.findViewById(R.id.timeStartPicker);
+		end = (TimePicker) travelPopup.findViewById(R.id.timeEndPicker);
+		saveTravel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				insertTravelQuery();
+				travel.dismiss();
+				nav.explicitReload(1);
+			}
+		});
 	}
 	
 	public void initFields(){
@@ -444,7 +452,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		case R.id.selectXML:
 			selectedXML = parent.getItemAtPosition(position).toString();
 			xmlLoader(view, selectedXML+".xml");
-			//getTimeRecord();
+			getTimeRecord();
+			getTravelRecord();
 			break;
 		case R.id.payment:
 			selectedPayment = parent.getItemAtPosition(position).toString();
@@ -458,6 +467,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		case R.id.approval:
 			selectedApproval = parent.getItemAtPosition(position).toString();
 			break;
+		case R.id.type:
+			selectedTravel = parent.getItemAtPosition(position).toString();
+			break;
 		}
 	}
 
@@ -467,8 +479,15 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		
 	}
 	
-	public void insertQuery(){
+	public void insertTimeQuery(){
 		db.timeRecord(selectedXML,"", timeinPopup.getText() +"", "");
+		db.close();
+	}
+	
+	public void insertTravelQuery(){
+		String startTime = start.getCurrentHour() + ":" + start.getCurrentMinute();
+		String endTime = end.getCurrentHour() + ":" + end.getCurrentMinute();
+		db.travelRecord(startTime, endTime, selectedXML, selectedTravel, fare.getText()+"Php");
 		db.close();
 	}
 	
@@ -482,6 +501,17 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
 			timeIn.setText(timeData);
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void getTravelRecord(){
+		selector = db.getTravelRecord();
+		String [] tableHeader = {SQLVariables.START,SQLVariables.TYPE,SQLVariables.FARE,SQLVariables.END};
+		int [] tableRow = {R.id.startTimeLabel, R.id.travelTypeLabel, R.id.fareLabel, R.id.endTimeLabel};
+		travelList = new SimpleCursorAdapter(thisView.getContext(), R.layout.travellist, 
+				selector, tableHeader, tableRow, 0);
+		travelData = (ListView) thisView.findViewById(R.id.travelRecordsList);
+		travelData.setAdapter(travelList);
 	}
 }
 

@@ -12,14 +12,18 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import ecopy.databaseHelper.DatabaseHelper;
 
 public class Declarations extends Activity{
@@ -54,6 +58,12 @@ public class Declarations extends Activity{
 	public Date currentDate;
 	public String currentTime, timeData;
 	public TextView timeinPopup;
+	public EditText fare;
+	public TimePicker start, end;
+	public Button saveTravel;
 	//Database
 	public DatabaseHelper db;
+	public Cursor selector;
+	public SimpleCursorAdapter travelList;
+	public ListView travelData;
 }
