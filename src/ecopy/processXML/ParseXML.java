@@ -12,8 +12,9 @@ import java.util.Date;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -150,6 +151,16 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		beforePrintFC = (EditText) thisView.findViewById(R.id.beforePrintFC);
 		beforeScanFC = (EditText) thisView.findViewById(R.id.beforeScanFC);
 		beforeBWTotal = (EditText) thisView.findViewById(R.id.beforeBW);
+		/*
+		int BeforeTotalBW = Integer.parseInt(beforeCopyBW.getText().toString()) + 
+				Integer.parseInt(beforePrintBW.getText().toString()) +
+				Integer.parseInt(beforeScanBW.getText().toString()) +
+				Integer.parseInt(beforeFaxBW.getText().toString());
+		int BeforeTotalFC = Integer.parseInt(beforeCopyFC.getText().toString()) +
+				Integer.parseInt(beforePrintFC.getText().toString()) + 
+				Integer.parseInt(beforeScanFC.getText().toString());
+		//beforeBWTotal.setText(BeforeTotalBW + "");
+		 */
 		beforeFCTotal = (EditText) thisView.findViewById(R.id.beforeFC);
 		//
 		afterCopyBW = (EditText) thisView.findViewById(R.id.afterCopyBW);
@@ -172,6 +183,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		pending.setOnItemSelectedListener(this);
 		approval = (Spinner) thisView.findViewById(R.id.approval);
 		approval.setOnItemSelectedListener(this);
+		password = (EditText) thisView.findViewById(R.id.password);
 		remarks = (EditText) thisView.findViewById(R.id.remarks);
 		timeIn = (EditText) thisView.findViewById(R.id.timeIn);
 		timeOut = (EditText) thisView.findViewById(R.id.timeOut);
@@ -412,6 +424,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			    		"<OnSiteDetails>" + selectedOnsite + "</OnSiteDetails>" +
 			    		"<PendingReason>" + selectedPending + "</PendingReason>" +
 			    		"<ApprovalType>" + selectedApproval + "</ApprovalType>" +
+			    		"<Password>" + password.getText() + "</Password>" +
 			    		"<Remarks>" + remarks.getText() + "</Remarks>" +
 			    		"<TimeIN>09:00</TimeIN>" +
 			    		"<TimeOUT>12:00</TimeOUT>" +
@@ -460,6 +473,20 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				Toast.makeText(thisView.getContext(), "Successful! Please Proceed to your Actual Service",Toast.LENGTH_SHORT).show();
 			}
 		});
+		sketchmate = (Button) thisView.findViewById(R.id.sketchmate);
+		sketchmate.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				runApp("com.xiledsystems.sketchmateads");
+			}
+		});
+		draw = (Button) thisView.findViewById(R.id.draw);
+		draw.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				runApp("com.xiledsystems.sketchmateads");
+			}
+		});
 	}
 
 	
@@ -484,6 +511,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			break;
 		case R.id.approval:
 			selectedApproval = parent.getItemAtPosition(position).toString();
+			setAuthentication(selectedApproval);
 			break;
 		case R.id.type:
 			selectedTravel = parent.getItemAtPosition(position).toString();
@@ -491,6 +519,20 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		}
 	}
 
+	public void setAuthentication(String approval){
+		if (approval.equals("Actual Signature")){
+			password.setText("Disabled");
+			password.setEnabled(false);
+			sketchmate.setEnabled(true);
+			draw.setEnabled(true);
+		} else if (approval.equals("Password Protection System")){
+			sketchmate.setEnabled(false);
+			draw.setEnabled(false);
+			password.setText("");
+			password.setEnabled(true);
+			password.requestFocus();
+		}
+	}
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
@@ -619,6 +661,15 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			proceed = true;
 		}
 		return proceed;
+	}
+
+	public void runApp(String appName){
+		PackageManager pm = thisView.getContext().getPackageManager();
+		Intent appStartIntent = pm.getLaunchIntentForPackage(appName);
+		if (null != appStartIntent)
+		{
+		    thisView.getContext().startActivity(appStartIntent);
+		}
 	}
 }
 

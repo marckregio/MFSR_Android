@@ -845,10 +845,57 @@
   	/>
     
     <TextView
-        android:id="@+id/remarksLabel"
+        android:id="@+id/signLabel"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/approvalLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Signature App: " />
+    <Button
+        android:id="@+id/sketchmate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/signLabel"
+        android:layout_below="@+id/approval"
+        android:gravity="center"
+        android:text="Sketchmate" />
+    <Button
+        android:id="@+id/draw"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/sketchmate"
+        android:layout_below="@+id/approval"
+        android:gravity="center"
+        android:text="Draw" />
+    
+    <TextView
+        android:id="@+id/passwordLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signLabel"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:gravity="right"
+        android:text="Password: " />
+    
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:singleLine="true"
+        android:layout_toRightOf="@+id/passwordLabel"
+        android:password="true"
+        android:layout_below="@+id/draw">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/remarksLabel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordLabel"
         android:layout_marginBottom="15dp"
         android:textSize="20dp"
         android:gravity="right"
@@ -861,7 +908,7 @@
         android:textSize="20dp"
         android:singleLine="true"
         android:layout_toRightOf="@+id/remarksLabel"
-        android:layout_below="@+id/approval">
+        android:layout_below="@+id/password">
     </EditText>
     
     <TextView
