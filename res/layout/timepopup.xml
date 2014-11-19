@@ -38,19 +38,28 @@
         android:text="*This is the Current time of the device" 
         android:layout_marginBottom="20dp"/>
     
-    <Button
+    <EditText
         android:id="@+id/getTime"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/note"
         android:gravity="center"
-        android:text="Get Current Time" />
+        android:singleLine="true"
+        android:hint="Scan QR Code" />
+    <Button
+        android:id="@+id/getTimeButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getTime"
+        android:gravity="center"
+        android:text="Done" />
+    
     
     <Button
         android:id="@+id/closePopup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/getTime"
+        android:layout_below="@+id/getTimeButton"
         android:gravity="center"
         android:text="Proceed"/>
 </RelativeLayout>

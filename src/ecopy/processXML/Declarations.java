@@ -47,9 +47,9 @@ public class Declarations extends Activity{
 		beforePrintFC, beforeScanFC, beforeBWTotal, beforeFCTotal;
 	public EditText afterCopyBW, afterPrintBW, afterScanBW, afterFaxBW, afterCopyFC, 
 		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
-	public EditText timeIn, timeOut, eTicket, repair, remarks, password;
+	public EditText timeIn, timeOut, eTicket, repair, remarks, password, getTime;
 	//Buttons
-	public Button saveXML, getTime, proceed, addTravel, saveOnly, sketchmate, draw;
+	public Button saveXML,getTimeButton, proceed, addTravel, saveOnly, sketchmate, draw;
 	//Popup
 	public View popup, travelPopup;
 	public LayoutInflater inflater, inflater2;

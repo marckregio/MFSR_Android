@@ -58,7 +58,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	public void initTimeInPop(){
 		inflater = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		popup = inflater.inflate(R.layout.timepopup, null);
-		window = new PopupWindow(popup, 300,220);
+		window = new PopupWindow(popup, 300,250);
 		window.setAnimationStyle(R.style.PopupAnimation);
 		window.setBackgroundDrawable(new ColorDrawable());
 		window.setOutsideTouchable(true);
@@ -66,17 +66,25 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
 		timeinPopup = (TextView) popup.findViewById(R.id.timein);
 		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
-		getTime = (Button) popup.findViewById(R.id.getTime);
-		getTime.setOnClickListener(new OnClickListener(){
+		getTime = (EditText) popup.findViewById(R.id.getTime);
+		getTimeButton = (Button) popup.findViewById(R.id.getTimeButton);
+		getTimeButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				currentDate = new Date();
-				currentTime = timeFormat.format(currentDate);
-				timeinPopup.setText(currentTime);
-				insertTimeQuery();
+				if (getTime.getText().toString().equals(qrCode.getText().toString())){
+					currentDate = new Date();
+					currentTime = timeFormat.format(currentDate);
+					timeinPopup.setText(currentTime);
+					insertTimeQuery();
+					proceed.setEnabled(true);
+					getTimeButton.setEnabled(false);
+				} else {
+					Toast.makeText(thisView.getContext(), "QR Code Didn't Matched, Try Again",Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		proceed = (Button) popup.findViewById(R.id.closePopup);
+		proceed.setEnabled(false);
 		proceed.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -85,7 +93,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			}
 		});
 	}
-	
+	//4501R65061034
 	public void initTravelPop(){
 		inflater2 = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		travelPopup = inflater2.inflate(R.layout.travelpopup, null);
@@ -151,16 +159,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		beforePrintFC = (EditText) thisView.findViewById(R.id.beforePrintFC);
 		beforeScanFC = (EditText) thisView.findViewById(R.id.beforeScanFC);
 		beforeBWTotal = (EditText) thisView.findViewById(R.id.beforeBW);
-		/*
-		int BeforeTotalBW = Integer.parseInt(beforeCopyBW.getText().toString()) + 
-				Integer.parseInt(beforePrintBW.getText().toString()) +
-				Integer.parseInt(beforeScanBW.getText().toString()) +
-				Integer.parseInt(beforeFaxBW.getText().toString());
-		int BeforeTotalFC = Integer.parseInt(beforeCopyFC.getText().toString()) +
-				Integer.parseInt(beforePrintFC.getText().toString()) + 
-				Integer.parseInt(beforeScanFC.getText().toString());
-		//beforeBWTotal.setText(BeforeTotalBW + "");
-		 */
 		beforeFCTotal = (EditText) thisView.findViewById(R.id.beforeFC);
 		//
 		afterCopyBW = (EditText) thisView.findViewById(R.id.afterCopyBW);
@@ -470,6 +468,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			@Override
 			public void onClick(View v) {
 				updateServiceQuery();
+				nav.explicitReload(1);
 				Toast.makeText(thisView.getContext(), "Successful! Please Proceed to your Actual Service",Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -484,7 +483,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		draw.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				runApp("com.xiledsystems.sketchmateads");
+				runApp("com.android.thewongandonly.QuickDraw");
 			}
 		});
 	}
@@ -497,7 +496,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			selectedXML = parent.getItemAtPosition(position).toString();
 			xmlLoader(view, selectedXML+".xml");
 			getTimeRecord();
-			getDetails();
 			getTravelRecord();
 			break;
 		case R.id.payment:
@@ -531,6 +529,11 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			password.setText("");
 			password.setEnabled(true);
 			password.requestFocus();
+		} else {
+			sketchmate.setEnabled(false);
+			draw.setEnabled(false);
+			password.setText("");
+			password.setEnabled(false);
 		}
 	}
 	@Override
@@ -541,6 +544,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	
 	public void insertTimeQuery(){
 		db.timeRecord(selectedXML,"", timeinPopup.getText() +"", "");
+		updateServiceQuery();
 	}
 	
 	public void updateServiceQuery(){
@@ -575,6 +579,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		} else {
 			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
 			timeIn.setText(timeData);
+			getDetails();
 			saveOnly.setEnabled(true);
 			saveXML.setEnabled(true);
 		}
@@ -589,8 +594,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		beforeCopyFC.setText(data[4]+"");
 		beforePrintFC.setText(data[5]+"");
 		beforeScanFC.setText(data[6]+"");
-		beforeBWTotal.setText(data[7]+"");
-		beforeFCTotal.setText(data[8]+"");
+		int beforeBW = Integer.parseInt(beforeCopyBW.getText().toString()) + Integer.parseInt(beforePrintBW.getText().toString()) + 
+				Integer.parseInt(beforeScanBW.getText().toString()) + Integer.parseInt(beforeFaxBW.getText().toString());
+		beforeBWTotal.setText(beforeBW+"");
+		int beforeFC = Integer.parseInt(beforeCopyFC.getText().toString()) + Integer.parseInt(beforePrintFC.getText().toString()) + 
+				Integer.parseInt(beforeScanFC.getText().toString());
+		beforeFCTotal.setText(beforeFC+"");
 		afterCopyBW.setText(data[9]+"");
 		afterPrintBW.setText(data[10]+"");
 		afterScanBW.setText(data[11]+"");
@@ -598,15 +607,19 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		afterCopyFC.setText(data[13]+"");
 		afterPrintFC.setText(data[14]+"");
 		afterScanFC.setText(data[15]+"");
-		afterBWTotal.setText(data[16]+"");
-		afterFCTotal.setText(data[17]+"");
+		int afterBW = Integer.parseInt(afterCopyBW.getText().toString()) + Integer.parseInt(afterPrintBW.getText().toString()) + 
+				Integer.parseInt(afterScanBW.getText().toString()) + Integer.parseInt(afterFaxBW.getText().toString());
+		afterBWTotal.setText(afterBW+"");
+		int afterFC = Integer.parseInt(afterCopyFC.getText().toString()) + Integer.parseInt(afterPrintFC.getText().toString()) + 
+				Integer.parseInt(afterScanFC.getText().toString());
+		afterFCTotal.setText(afterFC+"");
 		eTicket.setText(data[18]+"");
 		repair.setText(data[19]+"");
 		remarks.setText(data[20]+"");
 		payment.setSelection(setSpinnerIndex(payment, data[21]+""));
 		onsite.setSelection(setSpinnerIndex(onsite, data[22]+""));
 		approval.setSelection(setSpinnerIndex(approval, data[23]+""));
-		pending.setSelection(setSpinnerIndex(pending, data[24]+""));
+		pending.setSelection(setSpinnerIndex(pending, data[24]+""));	
 	}
 	
 	public int setSpinnerIndex(Spinner spin, String val){

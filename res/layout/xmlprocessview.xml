@@ -376,6 +376,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforeCopyBWLabel"
         android:layout_below="@+id/meterReadingLabel">
     </EditText>
@@ -395,6 +396,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforePrintBWLabel"
         android:layout_below="@+id/beforeCopyBW">
     </EditText>
@@ -414,6 +416,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforeScanBWLabel"
         android:layout_below="@+id/beforePrintBW">
     </EditText>
@@ -433,6 +436,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforeFaxBWLabel"
         android:layout_below="@+id/beforeScanBW">
     </EditText>
@@ -452,6 +456,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforeCopyFCLabel"
         android:layout_below="@+id/beforeFaxBW">
     </EditText>
@@ -471,6 +476,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforePrintFCLabel"
         android:layout_below="@+id/beforeCopyFC">
     </EditText>
@@ -490,6 +496,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/beforeScanFCLabel"
         android:layout_below="@+id/beforePrintFC">
     </EditText>
@@ -562,6 +569,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterCopyBWLabel"
         android:layout_below="@+id/meterReadingAfterLabel">
     </EditText>
@@ -581,6 +589,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterPrintBWLabel"
         android:layout_below="@+id/afterCopyBW">
     </EditText>
@@ -600,6 +609,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterScanBWLabel"
         android:layout_below="@+id/afterPrintBW">
     </EditText>
@@ -619,6 +629,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterFaxBWLabel"
         android:layout_below="@+id/afterScanBW">
     </EditText>
@@ -638,6 +649,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterCopyFCLabel"
         android:layout_below="@+id/afterFaxBW">
     </EditText>
@@ -657,6 +669,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterPrintFCLabel"
         android:layout_below="@+id/afterCopyFC">
     </EditText>
@@ -676,6 +689,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
 		android:inputType="number"
+		android:text="0"
         android:layout_toRightOf="@+id/afterScanFCLabel"
         android:layout_below="@+id/afterPrintFC">
     </EditText>
