@@ -37,7 +37,7 @@ public class Declarations extends Activity{
 	public File [] mfsrXMLFiles;
 	public XmlPullParser xmlParser;
 	public XmlPullParserFactory xmlFactory;
-	public String xml, submissionNo, instanceID;
+	public String xml, submissionNo, instanceID, formID, qrCodeString, transpo;
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
 	//fields
 	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,
@@ -57,6 +57,7 @@ public class Declarations extends Activity{
 	public SimpleDateFormat timeFormat;
 	public Date currentDate;
 	public String currentTime, timeData;
+
 	public TextView timeinPopup;
 	public EditText fare;
 	public TimePicker start, end;

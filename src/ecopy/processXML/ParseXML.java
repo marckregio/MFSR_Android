@@ -71,7 +71,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		getTimeButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				if (getTime.getText().toString().equals(qrCode.getText().toString())){
+				if (getTime.getText().toString().equals(qrCodeString)){
 					currentDate = new Date();
 					currentTime = timeFormat.format(currentDate);
 					timeinPopup.setText(currentTime);
@@ -93,7 +93,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			}
 		});
 	}
-	//4501R65061034
+
 	public void initTravelPop(){
 		inflater2 = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		travelPopup = inflater2.inflate(R.layout.travelpopup, null);
@@ -235,7 +235,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					xmlParser.nextTag();
 					instanceID = xmlParser.nextText();
 					xmlParser.nextTag();
-					qrCode.setText(xmlParser.nextText());
+					formID= xmlParser.nextText();
+					xmlParser.nextTag();
+					qrCodeString = xmlParser.nextText();
 					xmlParser.nextTag();
 					seID.setText(xmlParser.nextText());
 					xmlParser.nextTag();
@@ -393,6 +395,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					"<TimeinRadio>Time-In</TimeinRadio>" +
 					"<SubmissionNo>" + submissionNo + "</SubmissionNo>" +
 					"<InstanceID>" + instanceID + "</InstanceID>" +
+					"<FormID>" + instanceID + "</FormID>" +
 			    	"<MeterReadingBefore>" +
 			    		"<CopyBW>"+ beforeCopyBW.getText() +"</CopyBW>" +
 			    		"<PrintBW>" + beforePrintBW.getText() + "</PrintBW>" +
@@ -427,6 +430,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			    		"<TimeIN>09:00</TimeIN>" +
 			    		"<TimeOUT>12:00</TimeOUT>" +
 			    	"</ServiceInformation>" +
+			    	transpo +
 				"</MFSR>";
 		xmlWriter(xml);
 	}
@@ -563,9 +567,35 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void insertTravelQuery(){
-		String startTime = start.getCurrentHour() + ":" + start.getCurrentMinute();
-		String endTime = end.getCurrentHour() + ":" + end.getCurrentMinute();
-		db.travelRecord(startTime, endTime, selectedXML, selectedTravel, fare.getText()+"Php");
+		String startTime = timeConverter(start.getCurrentHour(), start.getCurrentMinute());
+		String endTime = timeConverter(end.getCurrentHour(), end.getCurrentMinute());
+		db.travelRecord(startTime, endTime, selectedXML, selectedTravel, fare.getText().toString());
+	}
+	
+	public String timeConverter(int hour, int mins){
+		String timeHour = "";
+		String timeMins = "";
+		String state = "";
+		if (hour >= 12 && hour != 0){
+			int thisHour = hour - 12;
+			timeHour = thisHour + "";
+			state = " PM";
+		} else if (hour == 0){
+			timeHour = "12";
+			state = " AM";
+		} else if (hour < 10){
+			timeHour = "0"+hour;
+			state = " AM";
+		} else {
+			timeHour = hour+ "";
+			state = " AM";
+		}
+		if (mins < 10){
+			timeMins = "0"+mins;
+		} else {
+			timeMins = mins + "";
+		}
+		return timeHour + ":" + mins + state;
 	}
 	
 	public void getTimeRecord(){
@@ -573,12 +603,14 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		if (timeData.equals("")){
 			Toast.makeText(thisView.getContext(), "No Time-in",Toast.LENGTH_SHORT).show();
 			timeIn.setText("No Time-in");
+			qrCode.setText("No Time-in");
 			initTimeInPop();
 			saveOnly.setEnabled(false);
 			saveXML.setEnabled(false);
 		} else {
 			Toast.makeText(thisView.getContext(), timeData +"",Toast.LENGTH_SHORT).show();
 			timeIn.setText(timeData);
+			qrCode.setText(qrCodeString);
 			getDetails();
 			saveOnly.setEnabled(true);
 			saveXML.setEnabled(true);
@@ -642,8 +674,9 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				selector, tableHeader, tableRow, 0);
 		travelData = (ListView) thisView.findViewById(R.id.travelRecordsList);
 		travelData.setAdapter(travelList);
+		transpo = db.getTranspoDetails(selectedXML);
 	}
-	
+
 	public Boolean fieldCheck(){
 		Boolean proceed = false;
 		if (beforeCopyBW.getText().equals("")

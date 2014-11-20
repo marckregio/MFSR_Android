@@ -22,6 +22,7 @@ import ecopy.servicepoint_android.MainActivity;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
+	ecopy.servicepoint_android.NavigationDrawerFragment nav = new ecopy.servicepoint_android.NavigationDrawerFragment();
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
 	private View thisView;
@@ -61,6 +62,13 @@ public class Inbox extends Declarations{
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
+    				Toast.makeText(view.getContext(), "PLEASE WAIT", Toast.LENGTH_SHORT).show();
+    				try{
+    					Thread.sleep(2000);
+    					nav.explicitReload(2);
+    				} catch (InterruptedException e) {
+    					Thread.currentThread().interrupt();
+    				}
     			}
     			return false;
     		}

@@ -164,6 +164,27 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		return selector;
 	}
 	
+	public String getTranspoDetails(String filter){
+		db = this.getReadableDatabase();
+		StringBuilder sb = new StringBuilder();
+		String data = "";
+		selector = db.rawQuery("Select startTime, endTime, referenceNo, type, fare from "+ TRAVEL_TABLE + " Where referenceNo = '" + filter + "'", null);
+		if (selector.moveToFirst()){
+			do{
+				//Log.v("Transpo",selector.getString(0));
+				String xml = "<Transportation>" +
+						"<Start>" + selector.getString(selector.getColumnIndex("startTime")) + "</Start>" +
+						"<End>" + selector.getString(selector.getColumnIndex("endTime")) + "</End>" +
+						"<Fare>" + selector.getString(selector.getColumnIndex("fare")) + "</Fare>" +
+						"<Type>" + selector.getString(selector.getColumnIndex("type")) + "</Type>" +
+						"</Transportation>";
+				sb.append(xml);
+			}while(selector.moveToNext());
+		}
+		data = sb.toString();
+		return data;
+	}
+	
 	public void deleteAll(){
 		this.getWritableDatabase().delete(SERVICE_TABLE, null, null);
 		this.getWritableDatabase().delete(TRAVEL_TABLE, null, null);
