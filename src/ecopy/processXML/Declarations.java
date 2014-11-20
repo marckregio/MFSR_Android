@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import android.widget.TimePicker;
 import ecopy.databaseHelper.DatabaseHelper;
 
 public class Declarations extends Activity{
+	public WindowManager windowManager;
 	public Spinner selectXML, payment, onsite, approval, pending, travelType;
 	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending, selectedTravel;
 	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, pendingReasons, travelTypes;
@@ -57,9 +59,8 @@ public class Declarations extends Activity{
 	public SimpleDateFormat timeFormat;
 	public Date currentDate;
 	public String currentTime, timeData;
-
-	public TextView timeinPopup;
-	public EditText fare;
+	public TextView timeinPopup, fareLabel;
+	public EditText fare, onsiteFee, from, to;
 	public TimePicker start, end;
 	public Button saveTravel;
 	//Database

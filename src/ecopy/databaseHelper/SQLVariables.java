@@ -49,6 +49,9 @@ public interface SQLVariables {
 	public static final String REF = "referenceNo";
 	public static final String TYPE = "type";
 	public static final String FARE = "fare";
+	public static final String FROM = "fromLocation";
+	public static final String TO = "toLocation";
+	public static final String OTHERS = "otherfee";
 	
 	public static final String TRAVEL_CREATE =
 			"create table " + TRAVEL_TABLE + "(_id integer primary key autoincrement,"
@@ -56,7 +59,10 @@ public interface SQLVariables {
 			+ END +" text not null,"
 			+ REF +" text not null,"
 			+ TYPE +" text not null,"
-			+ FARE +" text not null"
+			+ FARE +" text not null,"
+			+ FROM +" text not null,"
+			+ TO +" text not null,"
+			+ OTHERS +" text not null"
 			+ ");";
 	//.Hey Dont forget to add spaces between static String and Data type
 }

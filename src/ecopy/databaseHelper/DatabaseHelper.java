@@ -29,17 +29,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		onCreate(db);
 	}
 
-	public void timeRecord (String referenceNo,String password, String timeIn, String timeOut){
+	public void timeRecord (String referenceNo, String timeIn){
 		query = new ContentValues();
 		query.put(REFERENCENO, referenceNo);
-		query.put(PASSWORD, password);
 		query.put(TIME_IN, timeIn);
-		query.put(TIME_OUT, timeOut);
 		this.getWritableDatabase().insert(SERVICE_TABLE, REFERENCENO, query);
 		Log.v("Marck Regio","Time Record Successful");
 	}
 	
-	public void updateServiceRecord(String referenceNo, String beforeCopyBW, String beforePrintBW,
+	public void updateServiceRecord(String password, String referenceNo, String beforeCopyBW, String beforePrintBW,
 			String beforeScanBW, String beforeFaxBW, String beforeCopyFC, 
 			String beforePrintFC, String beforeScanFC, String beforeBWTotal, 
 			String beforeFCTotal, String afterCopyBW, String afterPrintBW,
@@ -47,8 +45,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 			String afterPrintFC, String afterScanFC, String afterBWTotal, 
 			String afterFCTotal, String eTicket, String repair, String remarks,
 			String selectedPayment, String selectedOnsite,
-			String selectedApproval, String selectedPending){
+			String selectedApproval, String selectedPending, String timeOut){
 		query = new ContentValues();
+		query.put("password", password);
 		query.put("beforeCopyBW", beforeCopyBW);
 		query.put("beforePrintBW", beforePrintBW);
 		query.put("beforeScanBW", beforeScanBW);
@@ -74,6 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		query.put("selectedOnsite", selectedOnsite);
 		query.put("selectedApproval", selectedApproval);
 		query.put("selectedPending", selectedPending);
+		query.put("timeout", timeOut);
 		this.getWritableDatabase().update(SERVICE_TABLE, 
 				query, 
 				REFERENCENO +"=?", 
@@ -82,13 +82,16 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		Log.v("Marck Regio","Update Successful");
 	}
 	
-	public void travelRecord (String startTime, String endTime, String referenceNo, String type, String fare){
+	public void travelRecord (String startTime, String endTime, String referenceNo, String type, String fare, String from, String to, String other){
 		query = new ContentValues();
 		query.put(START, startTime);
 		query.put(END, endTime);
 		query.put(REF, referenceNo);
 		query.put(TYPE, type);
 		query.put(FARE, fare);
+		query.put(FROM, from);
+		query.put(TO, to);
+		query.put(OTHERS, other);
 		this.getWritableDatabase().insert(TRAVEL_TABLE, START, query);
 		Log.v("Marck Regio","Travel Record Successful");
 	}
@@ -110,7 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	
 	public String [] getDetails(String filter){
 		db = this.getReadableDatabase();
-		String [] data = new String [25];
+		String [] data = new String [27];
 		
 		selector = db.rawQuery("Select beforeCopyBW, beforePrintBW, " +
 			" beforeScanBW, beforeFaxBW, beforeCopyFC, " +
@@ -120,7 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 			" afterPrintFC, afterScanFC, afterBWTotal, " + 
 			" afterFCTotal, eTicket, repair, remarks, " +
 			" selectedPayment, selectedOnsite, " +
-			" selectedApproval, selectedPending from " + 
+			" selectedApproval, selectedPending, password, timeout from " + 
 			SERVICE_TABLE + " Where referenceNo ='" + filter + "'", null);
 
 		if (selector.moveToFirst()){
@@ -149,6 +152,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 			data[22] = selector.getString(selector.getColumnIndex("selectedOnsite"));
 			data[23] = selector.getString(selector.getColumnIndex("selectedApproval"));
 			data[24] = selector.getString(selector.getColumnIndex("selectedPending"));
+			data[25] = selector.getString(selector.getColumnIndex("password"));
+			data[26] = selector.getString(selector.getColumnIndex("timeout"));
 		}
 		db.close();
 		return data;
@@ -156,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	
 	public Cursor getTravelRecord(String referenceNo){
 		selector = getReadableDatabase().query(TRAVEL_TABLE, 
-				new String[] {"_id",START,END,REF,TYPE,FARE},
+				new String[] {"_id",START,END,REF,TYPE,FARE,FROM,TO,OTHERS},
 				REF +" = ?",
 				new String[] {referenceNo},
 				null,null,START+" DESC");
@@ -168,7 +173,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		db = this.getReadableDatabase();
 		StringBuilder sb = new StringBuilder();
 		String data = "";
-		selector = db.rawQuery("Select startTime, endTime, referenceNo, type, fare from "+ TRAVEL_TABLE + " Where referenceNo = '" + filter + "'", null);
+		selector = db.rawQuery("Select startTime, endTime, referenceNo, type, fare, fromLocation, toLocation, otherfee from "+ TRAVEL_TABLE + " Where referenceNo = '" + filter + "'", null);
 		if (selector.moveToFirst()){
 			do{
 				//Log.v("Transpo",selector.getString(0));
@@ -177,6 +182,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 						"<End>" + selector.getString(selector.getColumnIndex("endTime")) + "</End>" +
 						"<Fare>" + selector.getString(selector.getColumnIndex("fare")) + "</Fare>" +
 						"<Type>" + selector.getString(selector.getColumnIndex("type")) + "</Type>" +
+						"<From>" + selector.getString(selector.getColumnIndex("fromLocation")) + "</From>" +
+						"<To>" + selector.getString(selector.getColumnIndex("toLocation")) + "</To>" +
+						"<Other>" + selector.getString(selector.getColumnIndex("otherfee")) + "</Other>" +
 						"</Transportation>";
 				sb.append(xml);
 			}while(selector.moveToNext());

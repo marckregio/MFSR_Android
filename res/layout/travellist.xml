@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
     
-    <TextView
+    	<TextView
         	android:id="@+id/startTimeLabel"
         	android:layout_width="150dp"
         	android:layout_height="wrap_content"

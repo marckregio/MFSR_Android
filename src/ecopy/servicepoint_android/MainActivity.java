@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 
 public class MainActivity extends Declarations implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -24,8 +25,12 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
     
+	
+
+	
     
     public void createDirectory(){
     	storageDestination = new File(storage);
