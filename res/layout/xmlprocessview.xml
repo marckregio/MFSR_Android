@@ -778,6 +778,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:singleLine="true"
+        android:editable="false"
         android:layout_toRightOf="@+id/eTicketLabel"
         android:layout_below="@+id/payment">
     </EditText>

@@ -12,15 +12,18 @@ import java.util.Date;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -55,6 +58,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		initJava();
         Buttons();
         //db.deleteAll();
+        timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
         windowManager = (WindowManager) thisView.getContext().getSystemService(WINDOW_SERVICE);
 	}
 	
@@ -66,7 +70,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		window.setBackgroundDrawable(new ColorDrawable());
 		window.setOutsideTouchable(true);
 		window.setFocusable(true);
-		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
 		timeinPopup = (TextView) popup.findViewById(R.id.timein);
 		window.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 		getTime = (EditText) popup.findViewById(R.id.getTime);
@@ -128,7 +131,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		to = (EditText) travelPopup.findViewById(R.id.toLocation);
 		onsiteFee = (EditText) travelPopup.findViewById(R.id.onsiteFee);
 		saveTravel = (Button) travelPopup.findViewById(R.id.closePopup);
-		timeFormat = new SimpleDateFormat("hh:mm:ss  aa");
 		start = (TimePicker) travelPopup.findViewById(R.id.timeStartPicker);
 		end = (TimePicker) travelPopup.findViewById(R.id.timeEndPicker);
 		saveTravel.setOnClickListener(new OnClickListener(){
@@ -326,10 +328,10 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						xmlParser.nextTag();
 						afterFCTotal.setText(xmlParser.nextText());
 					}
-					
+					*/
 				if (name.equals("ServiceInformation")){
 					xmlParser.nextTag();
-					//payment.setText(xmlParser.nextText());
+					payment.setSelection(setSpinnerIndex(payment, xmlParser.nextText()));
 					xmlParser.nextTag();
 					eTicket.setText(xmlParser.nextText());
 					//xmlParser.nextTag();
@@ -341,7 +343,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					//xmlParser.nextTag();
 					//timeOut.setText(xmlParser.nextText());
 				}
-				*/
 				if (name.equals("Maintenances")){
 					int x = 0;
 					paymentMethods.clear();
@@ -464,10 +465,10 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			@Override
 			public void onClick(View v) {
 				if (fieldCheck()){
+					currentDate = new Date();
+					String timeout = timeFormat.format(currentDate);
+					timeOut.setText(timeout);
 					updateServiceQuery();
-					//Date d = new Date();
-					//String timeout = timeFormat.format(d);
-					timeOut.setText("05:00 PM");
 					getDetails();
 					xmlBuilder();
 				} else {
@@ -692,6 +693,27 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				selector, tableHeader, tableRow, 0);
 		travelData = (ListView) thisView.findViewById(R.id.travelRecordsList);
 		travelData.setAdapter(travelList);
+		travelData.setOnItemLongClickListener(new OnItemLongClickListener(){
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				selectedPosition = position;
+				alertdialog = new AlertDialog.Builder(thisView.getContext());
+				alertdialog.setTitle("Delete entry");
+			    alertdialog.setMessage("Are you sure you want to delete this entry?");
+			    alertdialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) { 
+			        	db.deleteTravelData(travelList.getItemId(selectedPosition), selectedXML);
+			        	nav.explicitReload(1);
+			        }
+			     });
+			    alertdialog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) { }
+			     });
+			    alertdialog.setIcon(android.R.drawable.ic_dialog_alert);
+			    alertdialog.show();
+				return false;
+			}
+		});
 		transpo = db.getTranspoDetails(selectedXML);
 	}
 

@@ -193,6 +193,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		return data;
 	}
 	
+	public void deleteTravelData(long id, String referenceNo){
+		db = this.getReadableDatabase();
+		selector = db.rawQuery("Delete from "+ TRAVEL_TABLE + " Where _id =" + id + " AND " + REF + " = '" + referenceNo +"'", null);
+		while (selector.moveToNext()) {
+
+	    }
+		db.close();
+	}
+	
 	public void deleteAll(){
 		this.getWritableDatabase().delete(SERVICE_TABLE, null, null);
 		this.getWritableDatabase().delete(TRAVEL_TABLE, null, null);

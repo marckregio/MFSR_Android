@@ -12,6 +12,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ public class Declarations extends Activity{
 	public File [] mfsrXMLFiles;
 	public XmlPullParser xmlParser;
 	public XmlPullParserFactory xmlFactory;
-	public String xml, submissionNo, instanceID, formID, qrCodeString, transpo;
+	public String xml, submissionNo, instanceID, formID, qrCodeString, transpo, paymentMethod;
 	public NodeList TechnicalMonitoring, ClientInformation, MeterReadingBefore, MeterReadingAfter;
 	//fields
 	public TextView qrCode, seID, timeDispatched, referenceNo, workController, company, customerNo,
@@ -63,6 +64,9 @@ public class Declarations extends Activity{
 	public EditText fare, onsiteFee, from, to;
 	public TimePicker start, end;
 	public Button saveTravel;
+	//AlertDialog
+	public AlertDialog.Builder alertdialog;
+	public int selectedPosition;
 	//Database
 	public DatabaseHelper db;
 	public Cursor selector;
