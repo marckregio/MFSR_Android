@@ -331,7 +331,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					*/
 				if (name.equals("ServiceInformation")){
 					xmlParser.nextTag();
-					payment.setSelection(setSpinnerIndex(payment, xmlParser.nextText()));
+					paymentMethod = xmlParser.nextText();
 					xmlParser.nextTag();
 					eTicket.setText(xmlParser.nextText());
 					//xmlParser.nextTag();
@@ -374,8 +374,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						}
 						else if  (xmlParser.getName().equals("Carry-Over")){
 							pendingReasons.add(xmlParser.nextText());
-						}
-						else{
+						} else {
 							break;
 						}
 					}while (x < 20);
@@ -398,6 +397,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			eventType = xmlParser.next();
 		}
 	}
+	
 	
 	public void xmlBuilder(){
 		xml = 	"<MFSR>" +
@@ -548,12 +548,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		} else if (approval.equals("Password Protection System")){
 			sketchmate.setEnabled(false);
 			draw.setEnabled(false);
-			password.setEnabled(true);
+			///password.setEnabled(true);
 		} else {
 			sketchmate.setEnabled(false);
 			draw.setEnabled(false);
 			password.setText("");
-			password.setEnabled(false);
+			//password.setEnabled(false);
 		}
 	}
 	@Override
@@ -621,6 +621,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			Toast.makeText(thisView.getContext(), "No Time-in",Toast.LENGTH_SHORT).show();
 			timeIn.setText("No Time-in");
 			qrCode.setText("No Time-in");
+			payment.setSelection(setSpinnerIndex(payment, paymentMethod));
 			initTimeInPop();
 			saveOnly.setEnabled(false);
 			saveXML.setEnabled(false);

@@ -903,7 +903,9 @@
         android:singleLine="true"
         android:layout_toRightOf="@+id/passwordLabel"
         android:password="true"
-        android:layout_below="@+id/draw">
+        android:layout_below="@+id/draw"
+        android:editable="false"
+        android:hint="Not Working">
     </EditText>
     
     <TextView
