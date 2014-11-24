@@ -37,7 +37,6 @@ public class PageHandler extends Fragment{
 		case 3:
 			rootView = inflater.inflate(R.layout.rapidflows, container, false);
 			inbox.Browser(rootView, "upload");
-			//inbox.runUploader();
 			break;
 		}
 		

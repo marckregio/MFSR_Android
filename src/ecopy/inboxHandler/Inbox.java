@@ -25,6 +25,7 @@ public class Inbox extends Declarations{
 	ecopy.servicepoint_android.NavigationDrawerFragment nav = new ecopy.servicepoint_android.NavigationDrawerFragment();
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
+	public String reloadPage = ExceptionClass.reloadPage();
 	private View thisView;
 	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	public void Browser(View v, String page){
@@ -63,14 +64,14 @@ public class Inbox extends Declarations{
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
     				Toast.makeText(view.getContext(), "PLEASE WAIT", Toast.LENGTH_SHORT).show();
-    				/*
+    				
     				try{
     					Thread.sleep(2000);
-    					nav.explicitReload(2);
+    					nav.explicitReload(1);
     				} catch (InterruptedException e) {
     					Thread.currentThread().interrupt();
     				}
-    				*/
+    				
     			}
     			return false;
     		}
@@ -105,8 +106,10 @@ public class Inbox extends Declarations{
 			if (page.equals("inbox")){
 				wv.loadUrl(inbox);
 			}
-			else if (page.equals("upload"))
-				wv.loadUrl(upload);
+			else if (page.equals("upload")){
+				wv.loadData(reloadPage, "text/html", "UTF-8");
+				runUploader();
+			}
 		}
 	}
 	
@@ -122,7 +125,7 @@ public class Inbox extends Declarations{
 	
 	public void runUploader(){
 		PackageManager pm = thisView.getContext().getPackageManager();
-		Intent appStartIntent = pm.getLaunchIntentForPackage("marckregio.servicepoint");
+		Intent appStartIntent = pm.getLaunchIntentForPackage("ecopy.serviceuploader");
 		if (null != appStartIntent)
 		{
 		    thisView.getContext().startActivity(appStartIntent);

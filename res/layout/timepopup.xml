@@ -45,6 +45,7 @@
         android:layout_below="@+id/note"
         android:gravity="center"
         android:singleLine="true"
+        android:password="true"
         android:hint="Scan QR Code" />
     <Button
         android:id="@+id/getTimeButton"

@@ -49,4 +49,20 @@ public class ExceptionClass extends Declarations{
 		return html;
 	}
 	
+	public static String reloadPage(){
+		String html = "<html><head>"
+				+ "<style>"
+				+ "body{background-color:#4A9EBE;}"
+				+ "</style>"
+				+ "</head>"
+				+ "<body><center><br><br><br>"
+				+ "<h1>Service Uploader Is In <br> separate Application</h1>"
+				+ "<p>Please press RELOAD button</p>"
+				+ "<br><br>"
+				+ "<br><br><br><br><br>"
+				+ "<b>ECOPY CORPORATION - ITDEPT</b>"
+				+ "</center></body></html>";
+		return html;
+	}
+	
 }

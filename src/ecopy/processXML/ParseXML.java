@@ -471,6 +471,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					updateServiceQuery();
 					getDetails();
 					xmlBuilder();
+					deleteXml();
+					nav.explicitReload(2);
 				} else {
 					Toast.makeText(thisView.getContext(), "Please Complete The Form",Toast.LENGTH_SHORT).show();
 				}
@@ -496,14 +498,14 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		sketchmate.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				runApp("com.xiledsystems.sketchmateads");
+				runApp("com.xiledsystems.sketchmateads", thisView);
 			}
 		});
 		draw = (Button) thisView.findViewById(R.id.draw);
 		draw.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				runApp("com.android.thewongandonly.QuickDraw");
+				runApp("com.android.thewongandonly.QuickDraw", thisView);
 			}
 		});
 	}	
@@ -750,13 +752,18 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		return proceed;
 	}
 
-	public void runApp(String appName){
-		PackageManager pm = thisView.getContext().getPackageManager();
+	public void runApp(String appName, View v){
+		PackageManager pm = v.getContext().getPackageManager();
 		Intent appStartIntent = pm.getLaunchIntentForPackage(appName);
 		if (null != appStartIntent)
 		{
 		    thisView.getContext().startActivity(appStartIntent);
 		}
+	}
+
+	public void deleteXml(){
+		downloadsFolder = new File(storage + selectedXML+".xml");
+		downloadsFolder.delete();
 	}
 }
 
