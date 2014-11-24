@@ -10,7 +10,7 @@
         android:id="@+id/timeinLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:text="Time-in Record" 
         android:textStyle="bold"
@@ -20,7 +20,7 @@
         android:id="@+id/timein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
+        android:textSize="30dp"
         android:editable="false"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/timeinLabel"
@@ -32,17 +32,18 @@
         android:id="@+id/note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="10dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/timein"
         android:text="*This is the Current time of the device" 
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="10dp"/>
     
     <EditText
         android:id="@+id/getTime"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/note"
+        android:textSize="10dp"
         android:gravity="center"
         android:singleLine="true"
         android:password="true"
@@ -50,17 +51,10 @@
     <Button
         android:id="@+id/getTimeButton"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/getTime"
         android:gravity="center"
+        android:textSize="10dp"
         android:text="Done" />
     
-    
-    <Button
-        android:id="@+id/closePopup"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/getTimeButton"
-        android:gravity="center"
-        android:text="Proceed"/>
 </RelativeLayout>

@@ -12,7 +12,7 @@
         android:id="@+id/selectFileLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="10dp"
         android:text="Select Dispatch" />
 	
     <Spinner
@@ -21,6 +21,7 @@
       android:layout_height="wrap_content" 
       android:layout_below="@+id/selectFileLabel"
       android:layout_marginBottom="10dp"
+      style="@style/SpinnerLayout"
   	/>
 <ScrollView 
     android:layout_width="match_parent"
@@ -35,7 +36,7 @@
         android:id="@+id/clientInformationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:text="Service Call Information" 
         android:textStyle="bold"
@@ -43,9 +44,9 @@
     
     <TextView
         android:id="@+id/qrCodeLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/clientInformationLabel"
         android:text="QR Code: " />  
@@ -53,16 +54,16 @@
         android:id="@+id/qrCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/clientInformationLabel"
         android:layout_toRightOf="@+id/qrCodeLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/seIDLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/qrCodeLabel"
         android:text="Service Engineer ID: " />  
@@ -71,16 +72,16 @@
         android:id="@+id/seID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/qrCode"
+        android:textSize="12dp"
+        android:layout_below="@+id/qrCodeLabel"
         android:layout_toRightOf="@+id/seIDLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/timeDispatchedLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/seIDLabel"
         android:text="Time Dispatched: " />  
@@ -88,16 +89,16 @@
         android:id="@+id/timeDispatched"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/seID"
+        android:textSize="12dp"
+        android:layout_below="@+id/seIDLabel"
         android:layout_toRightOf="@+id/timeDispatchedLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/referenceNoLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/timeDispatchedLabel"
         android:text="Reference No.: " />  
@@ -105,16 +106,16 @@
         android:id="@+id/referenceNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/timeDispatched"
+        android:textSize="12dp"
+        android:layout_below="@+id/timeDispatchedLabel"
         android:layout_toRightOf="@+id/referenceNoLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/workControllerLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/referenceNoLabel"
         android:text="Work Controller: " />  
@@ -122,16 +123,16 @@
         android:id="@+id/workController"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/referenceNo"
+        android:textSize="12dp"
+        android:layout_below="@+id/referenceNoLabel"
         android:layout_toRightOf="@+id/workControllerLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/companyLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/workControllerLabel"
         android:text="Company Name: " />  
@@ -139,16 +140,16 @@
         android:id="@+id/company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/workController"
+        android:textSize="12dp"
+        android:layout_below="@+id/workControllerLabel"
         android:layout_toRightOf="@+id/companyLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/customerNoLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/companyLabel"
         android:text="Customer No.: " />  
@@ -156,16 +157,16 @@
         android:id="@+id/customerNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/company"
+        android:textSize="12dp"
+        android:layout_below="@+id/companyLabel"
         android:layout_toRightOf="@+id/customerNoLabel"
         android:text="" />
     
    	<TextView
         android:id="@+id/companyAddressLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/customerNoLabel"
         android:text="Company Address: " />  
@@ -173,16 +174,16 @@
         android:id="@+id/companyAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/customerNo"
+        android:textSize="12dp"
+        android:layout_below="@+id/customerNoLabel"
         android:layout_toRightOf="@+id/companyAddressLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/emailAddressLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:layout_below="@+id/companyAddressLabel"
         android:text="Email Address: " />  
@@ -190,16 +191,16 @@
         android:id="@+id/emailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/companyAddress"
+        android:textSize="12dp"
+        android:layout_below="@+id/companyAddressLabel"
         android:layout_toRightOf="@+id/emailAddressLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/mfpModelLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/emailAddressLabel"
         android:gravity="right"
         android:text="MFP Model: " />  
@@ -207,16 +208,16 @@
         android:id="@+id/mfpModel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/emailAddressLabel"
         android:layout_toRightOf="@+id/mfpModelLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/contactPersonLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/mfpModelLabel"
         android:gravity="right"
         android:text="Contact Person: " />  
@@ -224,16 +225,16 @@
         android:id="@+id/contactPerson"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/mfpModel"
+        android:textSize="12dp"
+        android:layout_below="@+id/mfpModelLabel"
         android:layout_toRightOf="@+id/contactPersonLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/contactNoLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/contactPersonLabel"
         android:gravity="right"
         android:text="Contact No.: " />  
@@ -241,16 +242,16 @@
         android:id="@+id/contactNo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/contactPerson"
+        android:textSize="12dp"
+        android:layout_below="@+id/contactPersonLabel"
         android:layout_toRightOf="@+id/contactNoLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/contractLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/contactNoLabel"
         android:gravity="right"
         android:text="Contract: " />  
@@ -258,16 +259,16 @@
         android:id="@+id/contract"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/contactNo"
+        android:textSize="12dp"
+        android:layout_below="@+id/contactNoLabel"
         android:layout_toRightOf="@+id/contractLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/natureLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/contractLabel"
         android:gravity="right"
         android:text="Nature of Call: " />  
@@ -275,16 +276,16 @@
         android:id="@+id/nature"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/contract"
+        android:textSize="12dp"
+        android:layout_below="@+id/contractLabel"
         android:layout_toRightOf="@+id/natureLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/dateInstallLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/natureLabel"
         android:gravity="right"
         android:text="Date Installed: " />  
@@ -292,16 +293,16 @@
         android:id="@+id/dateInstall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/nature"
+        android:textSize="12dp"
+        android:layout_below="@+id/natureLabel"
         android:layout_toRightOf="@+id/dateInstallLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/backJobNoLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/dateInstallLabel"
         android:gravity="right"
         android:text="Back Job No.: " />  
@@ -309,16 +310,16 @@
         android:id="@+id/backJobNo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/dateInstall"
+        android:textSize="12dp"
+        android:layout_below="@+id/dateInstallLabel"
         android:layout_toRightOf="@+id/backJobNoLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/prevRefNoLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/backJobNoLabel"
         android:gravity="right"
         android:text="Prev. Reference No.: " />  
@@ -326,16 +327,16 @@
         android:id="@+id/prevRefNo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_below="@+id/backJobNo"
+        android:textSize="12dp"
+        android:layout_below="@+id/backJobNoLabel"
         android:layout_toRightOf="@+id/prevRefNoLabel"
         android:text="" />
    	
    	<TextView
         android:id="@+id/complaintLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/prevRefNoLabel"
         android:gravity="right"
         android:text="Customer Complaint: " />  
@@ -343,7 +344,7 @@
         android:id="@+id/complaint"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_below="@+id/prevRefNoLabel"
         android:layout_toRightOf="@+id/complaintLabel"
         android:text="" />
@@ -352,7 +353,7 @@
         android:id="@+id/meterReadingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/complaint"
         android:layout_marginTop="10dp"
@@ -362,19 +363,18 @@
     <!-- FIELDS -->
     <TextView
         android:id="@+id/beforeCopyBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/meterReadingLabel"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Copy B/W: " />
     <EditText
         android:id="@+id/beforeCopyBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforeCopyBWLabel"
@@ -383,167 +383,167 @@
  	
     <TextView
         android:id="@+id/beforePrintBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforeCopyBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Print B/W: " />
     <EditText
         android:id="@+id/beforePrintBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforePrintBWLabel"
-        android:layout_below="@+id/beforeCopyBW">
+        android:layout_below="@+id/beforeCopyBWLabel">
     </EditText>
     
     <TextView
         android:id="@+id/beforeScanBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforePrintBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Scan B/W: " />
     <EditText
         android:id="@+id/beforeScanBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforeScanBWLabel"
-        android:layout_below="@+id/beforePrintBW">
+        android:layout_below="@+id/beforePrintBWLabel">
     </EditText>
     
     <TextView
         android:id="@+id/beforeFaxBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforeScanBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Fax B/W: " />
     <EditText
         android:id="@+id/beforeFaxBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforeFaxBWLabel"
-        android:layout_below="@+id/beforeScanBW">
+        android:layout_below="@+id/beforeScanBWLabel">
     </EditText>
 
 	<TextView
         android:id="@+id/beforeCopyFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforeFaxBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Copy F/C: " />
     <EditText
         android:id="@+id/beforeCopyFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforeCopyFCLabel"
-        android:layout_below="@+id/beforeFaxBW">
+        android:layout_below="@+id/beforeFaxBWLabel">
     </EditText>
  	
     <TextView
         android:id="@+id/beforePrintFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforeCopyFCLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Print F/C: " />
     <EditText
         android:id="@+id/beforePrintFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforePrintFCLabel"
-        android:layout_below="@+id/beforeCopyFC">
+        android:layout_below="@+id/beforeCopyFCLabel">
     </EditText>
     
     <TextView
         android:id="@+id/beforeScanFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforePrintFCLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Scan F/C: " />
     <EditText
         android:id="@+id/beforeScanFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/beforeScanFCLabel"
-        android:layout_below="@+id/beforePrintFC">
+        android:layout_below="@+id/beforePrintFCLabel">
     </EditText>
     
     <TextView
         android:id="@+id/beforeBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforeScanFCLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Before B/W Total: " />
     <EditText
         android:id="@+id/beforeBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:editable="false"
         android:layout_toRightOf="@+id/beforeBWLabel"
-        android:layout_below="@+id/beforeScanFC">
+        android:layout_below="@+id/beforeScanFCLabel">
     </EditText>
     
     <TextView
         android:id="@+id/beforeFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/beforeBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Before F/C Total: " />
     <EditText
         android:id="@+id/beforeFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:editable="false"
         android:layout_toRightOf="@+id/beforeFCLabel"
-        android:layout_below="@+id/beforeBW">
+        android:layout_below="@+id/beforeBWLabel">
     </EditText>
     
     <TextView
         android:id="@+id/meterReadingAfterLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/beforeFCLabel"
         android:layout_marginTop="10dp"
@@ -555,19 +555,18 @@
     
     <TextView
         android:id="@+id/afterCopyBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/meterReadingAfterLabel"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Copy B/W: " />
     <EditText
         android:id="@+id/afterCopyBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterCopyBWLabel"
@@ -576,167 +575,167 @@
  	
     <TextView
         android:id="@+id/afterPrintBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterCopyBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Print B/W: " />
     <EditText
         android:id="@+id/afterPrintBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterPrintBWLabel"
-        android:layout_below="@+id/afterCopyBW">
+        android:layout_below="@+id/afterCopyBWLabel">
     </EditText>
     
     <TextView
         android:id="@+id/afterScanBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterPrintBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Scan B/W: " />
     <EditText
         android:id="@+id/afterScanBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterScanBWLabel"
-        android:layout_below="@+id/afterPrintBW">
+        android:layout_below="@+id/afterPrintBWLabel">
     </EditText>
     
     <TextView
         android:id="@+id/afterFaxBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterScanBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Fax B/W: " />
     <EditText
         android:id="@+id/afterFaxBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterFaxBWLabel"
-        android:layout_below="@+id/afterScanBW">
+        android:layout_below="@+id/afterScanBWLabel">
     </EditText>
 
 	<TextView
         android:id="@+id/afterCopyFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterFaxBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Copy F/C: " />
     <EditText
         android:id="@+id/afterCopyFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterCopyFCLabel"
-        android:layout_below="@+id/afterFaxBW">
+        android:layout_below="@+id/afterFaxBWLabel">
     </EditText>
  	
     <TextView
         android:id="@+id/afterPrintFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterCopyFCLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Print F/C: " />
     <EditText
         android:id="@+id/afterPrintFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterPrintFCLabel"
-        android:layout_below="@+id/afterCopyFC">
+        android:layout_below="@+id/afterCopyFCLabel">
     </EditText>
     
     <TextView
         android:id="@+id/afterScanFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterPrintFCLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Scan F/C: " />
     <EditText
         android:id="@+id/afterScanFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
 		android:inputType="number"
 		android:text="0"
         android:layout_toRightOf="@+id/afterScanFCLabel"
-        android:layout_below="@+id/afterPrintFC">
+        android:layout_below="@+id/afterPrintFCLabel">
     </EditText>
     
     <TextView
         android:id="@+id/afterBWLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterScanFCLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="After B/W Total: " />
     <EditText
         android:id="@+id/afterBW"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:editable="false"
         android:layout_toRightOf="@+id/afterBWLabel"
-        android:layout_below="@+id/afterScanFC">
+        android:layout_below="@+id/afterScanFCLabel">
     </EditText>
     
     <TextView
         android:id="@+id/afterFCLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/afterBWLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="After F/C Total: " />
     <EditText
         android:id="@+id/afterFC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:editable="false"
         android:layout_toRightOf="@+id/afterFCLabel"
-        android:layout_below="@+id/afterBW">
+        android:layout_below="@+id/afterBWLabel">
     </EditText>
     
     <TextView
         android:id="@+id/serviceInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/afterFCLabel"
         android:layout_marginTop="10dp"
@@ -746,18 +745,18 @@
     
     <TextView
         android:id="@+id/paymentLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/serviceInformation"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Payment Method: " />
     <Spinner
       android:id="@+id/payment"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
+      android:spinnerMode="dialog"
       android:layout_toRightOf="@+id/paymentLabel"
       android:layout_below="@+id/serviceInformation"
   	/>
@@ -765,133 +764,132 @@
         
   	<TextView
         android:id="@+id/eTicketLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/paymentLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="E-Ticket No.: " />
     <EditText
         android:id="@+id/eTicket"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:singleLine="true"
         android:editable="false"
         android:layout_toRightOf="@+id/eTicketLabel"
-        android:layout_below="@+id/payment">
+        android:layout_below="@+id/paymentLabel">
     </EditText>
     
     <TextView
         android:id="@+id/repairLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/eTicketLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Repair Details: " />
     <EditText
         android:id="@+id/repair"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:singleLine="true"
         android:layout_toRightOf="@+id/repairLabel"
-        android:layout_below="@+id/eTicket">
+        android:layout_below="@+id/eTicketLabel">
     </EditText>
     
     <TextView
         android:id="@+id/onsiteLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/repairLabel"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="On-Site Status: " />
     <Spinner
       android:id="@+id/onsite"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
-      android:layout_marginTop="10dp"
+      android:spinnerMode="dialog"
       android:layout_toRightOf="@+id/onsiteLabel"
-      android:layout_below="@+id/repair"
+      android:layout_below="@+id/repairLabel"
   	/>
     
     <TextView
         android:id="@+id/pendingLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/onsiteLabel"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Sub-Status: " />
     <Spinner
       android:id="@+id/pending"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
-      android:layout_marginTop="10dp"
+      android:spinnerMode="dialog"
       android:layout_toRightOf="@+id/pendingLabel"
-      android:layout_below="@+id/onsite"
+      android:layout_below="@+id/onsiteLabel"
   	/>
     
     <TextView
         android:id="@+id/approvalLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pendingLabel"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Approval Type: " />
     <Spinner
       android:id="@+id/approval"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
-      android:layout_marginTop="10dp"
+      android:spinnerMode="dialog"
       android:layout_toRightOf="@+id/approvalLabel"
-      android:layout_below="@+id/pending"
+      android:layout_below="@+id/pendingLabel"
   	/>
     
     <TextView
         android:id="@+id/signLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/approvalLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Signature App: " />
     <Button
         android:id="@+id/sketchmate"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_toRightOf="@+id/signLabel"
-        android:layout_below="@+id/approval"
+        android:layout_below="@+id/approvalLabel"
+        android:textSize="10dp"
         android:gravity="center"
         android:text="Sketchmate" />
     <Button
         android:id="@+id/draw"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_toRightOf="@+id/sketchmate"
-        android:layout_below="@+id/approval"
+        android:layout_below="@+id/approvalLabel"
+        android:textSize="10dp"
         android:gravity="center"
         android:text="Draw" />
     
     <TextView
         android:id="@+id/passwordLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_below="@+id/sketchmate"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Password: " />
     
@@ -899,22 +897,22 @@
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:singleLine="true"
         android:layout_toRightOf="@+id/passwordLabel"
         android:password="true"
-        android:layout_below="@+id/draw"
+        android:layout_below="@+id/sketchmate"
         android:editable="false"
         android:hint="Not Working">
     </EditText>
     
     <TextView
         android:id="@+id/remarksLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Remarks: " />
     
@@ -922,45 +920,45 @@
         android:id="@+id/remarks"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:singleLine="true"
         android:layout_toRightOf="@+id/remarksLabel"
-        android:layout_below="@+id/password">
+        android:layout_below="@+id/passwordLabel">
     </EditText>
     
     <TextView
         android:id="@+id/timeInLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/remarksLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Time-In: " />
     <EditText
         android:id="@+id/timeIn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:editable="false"
         android:layout_toRightOf="@+id/timeInLabel"
-        android:layout_below="@+id/remarks">
+        android:layout_below="@+id/remarksLabel">
     </EditText>
     
     <TextView
         android:id="@+id/timeOutLabel"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/timeInLabel"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:gravity="right"
         android:text="Time-Out: " />
     <EditText
         android:id="@+id/timeOut"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:editable="false"
         android:layout_toRightOf="@+id/timeOutLabel"
         android:text="Time-out will automatically generated"
@@ -971,7 +969,7 @@
         android:id="@+id/travelRecordsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/timeOut"
         android:layout_marginTop="10dp"
@@ -982,54 +980,55 @@
     <Button
         android:id="@+id/addTravel"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/travelRecordsLabel"
         android:gravity="center"
+        android:textSize="10dp"
         android:text="Add Travel Record" />
     
     <TextView
         	android:id="@+id/startTime"
-        	android:layout_width="150dp"
+        	android:layout_width="90dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
-        	android:padding="10dp"
-        	android:textSize="20dp"
+        	android:padding="5dp"
+        	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
         	android:text="Start"/>	
  	
          <TextView
         	android:id="@+id/travelType"
-        	android:layout_width="150dp"
+        	android:layout_width="90dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
         	android:layout_toRightOf="@+id/startTime"
-        	android:padding="10dp"
-        	android:textSize="20dp"
+        	android:padding="5dp"
+        	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
         	android:text="Type"/>
          
          <TextView
         	android:id="@+id/fare"
-        	android:layout_width="150dp"
+        	android:layout_width="90dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
         	android:layout_toRightOf="@+id/travelType"
-        	android:padding="10dp"
-        	android:textSize="20dp"
+        	android:padding="5dp"
+        	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
         	android:text="Fare"/>
          
           <TextView
         	android:id="@+id/endTime"
-        	android:layout_width="150dp"
+        	android:layout_width="90dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
         	android:layout_toRightOf="@+id/fare"
-        	android:padding="10dp"
-        	android:textSize="20dp"
+        	android:padding="5dp"
+        	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
         	android:text="End"/>
@@ -1049,6 +1048,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/travelRecordsList"
         android:gravity="center"
+        android:textSize="10dp"
         android:text="Save and Proceed to Actual Service" />
     
     <Button
@@ -1057,6 +1057,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/saveOnly"
         android:gravity="center"
+        android:textSize="10dp"
         android:text="Save and Submit to Rapidflows" />
     
 	</RelativeLayout>

@@ -50,7 +50,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		thisView = v;
 		selectXML = (Spinner) thisView.findViewById(R.id.selectXML);
 		xmlReader();
-		adapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, xmlFiles);
+		adapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, xmlFiles);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		selectXML.setAdapter(adapter);
 		selectXML.setOnItemSelectedListener(this);
@@ -82,20 +82,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					currentTime = timeFormat.format(currentDate);
 					timeinPopup.setText(currentTime);
 					insertTimeQuery();
-					proceed.setEnabled(true);
 					getTimeButton.setEnabled(false);
+					getTimeRecord();
+					window.dismiss();
 				} else {
 					Toast.makeText(thisView.getContext(), "QR Code Didn't Matched, Try Again",Toast.LENGTH_SHORT).show();
 				}
-			}
-		});
-		proceed = (Button) popup.findViewById(R.id.closePopup);
-		proceed.setEnabled(false);
-		proceed.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				getTimeRecord();
-				window.dismiss();
 			}
 		});
 	}
@@ -103,7 +95,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	public void initTravelPop(){
 		inflater2 = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		travelPopup = inflater2.inflate(R.layout.travelpopup, null);
-		travel = new PopupWindow(travelPopup, windowManager.getDefaultDisplay().getWidth(),500);
+		travel = new PopupWindow(travelPopup, windowManager.getDefaultDisplay().getWidth(),370);
 		travel.setAnimationStyle(R.style.PopupAnimation);
 		travel.setBackgroundDrawable(new ColorDrawable());
 		travel.setOutsideTouchable(true);
@@ -120,7 +112,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		travelTypes.add("Pedicab");
 		travelTypes.add("None");
 		travelTypes.add("Own Vehicle");
-		travelAdapter = new ArrayAdapter<String>(travelPopup.getContext(), android.R.layout.simple_spinner_dropdown_item, travelTypes);
+		travelAdapter = new ArrayAdapter<String>(travelPopup.getContext(), R.layout.spinner, travelTypes);
 		travelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		travelType.setAdapter(travelAdapter);
 		travelType.setOnItemSelectedListener(this);
@@ -131,8 +123,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		to = (EditText) travelPopup.findViewById(R.id.toLocation);
 		onsiteFee = (EditText) travelPopup.findViewById(R.id.onsiteFee);
 		saveTravel = (Button) travelPopup.findViewById(R.id.closePopup);
-		start = (TimePicker) travelPopup.findViewById(R.id.timeStartPicker);
-		end = (TimePicker) travelPopup.findViewById(R.id.timeEndPicker);
 		saveTravel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -379,16 +369,16 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 						}
 					}while (x < 20);
 					
-					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, paymentMethods);
+					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, paymentMethods);
 					paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					payment.setAdapter(paymentAdapter);
-					pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, pendingReasons);
+					pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, pendingReasons);
 					pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					pending.setAdapter(pendingAdapter);
-					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, onsiteStatuses);
+					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, onsiteStatuses);
 					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					onsite.setAdapter(onsiteAdapter);
-					approvalAdapter = new ArrayAdapter<String>(thisView.getContext(), android.R.layout.simple_spinner_dropdown_item, approvalTypes);
+					approvalAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, approvalTypes);
 					approvalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					approval.setAdapter(approvalAdapter);
 				}
@@ -586,9 +576,12 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void insertTravelQuery(){
-		String startTime = timeConverter(start.getCurrentHour(), start.getCurrentMinute());
-		String endTime = timeConverter(end.getCurrentHour(), end.getCurrentMinute());
-		db.travelRecord(startTime, endTime, selectedXML, selectedTravel, fare.getText().toString(), from.getText().toString(), to.getText().toString(), onsiteFee.getText().toString());
+		currentDate = new Date();
+		currentTime = timeFormat.format(currentDate);
+		String startTime = currentTime;
+		db.endRunningTravel(selectedXML);
+		db.travelRecord(startTime, "", selectedXML, selectedTravel, fare.getText().toString(), from.getText().toString(), to.getText().toString(), onsiteFee.getText().toString());
+		
 	}
 	
 	public String timeConverter(int hour, int mins){

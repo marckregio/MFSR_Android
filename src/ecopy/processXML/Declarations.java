@@ -52,7 +52,7 @@ public class Declarations extends Activity{
 		afterPrintFC, afterScanFC, afterBWTotal, afterFCTotal;
 	public EditText timeIn, timeOut, eTicket, repair, remarks, password, getTime;
 	//Buttons
-	public Button saveXML,getTimeButton, proceed, addTravel, saveOnly, sketchmate, draw;
+	public Button saveXML,getTimeButton, addTravel, saveOnly, sketchmate, draw;
 	//Popup
 	public View popup, travelPopup;
 	public LayoutInflater inflater, inflater2;
@@ -62,7 +62,6 @@ public class Declarations extends Activity{
 	public String currentTime, timeData;
 	public TextView timeinPopup, fareLabel;
 	public EditText fare, onsiteFee, from, to;
-	public TimePicker start, end;
 	public Button saveTravel;
 	//AlertDialog
 	public AlertDialog.Builder alertdialog;

@@ -10,82 +10,46 @@
         android:id="@+id/startLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
-        android:text="Create Travel Record" 
+        android:text="Start Travel Record" 
         android:textStyle="bold"
         android:layout_marginBottom="20dp"/>
     
-    <RelativeLayout android:id="@+id/timePickers"
-                android:layout_below="@+id/startLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-    <TextView
-        android:id="@+id/startTimeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:text="Start Time: " />
-    <TimePicker
-        android:id="@+id/timeStartPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_below="@+id/startTimeLabel"/>
-    
-    <TextView
-        android:id="@+id/endTimeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/timeStartPicker"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:text="End Time: " />
-    <TimePicker
-        android:id="@+id/timeEndPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_toRightOf="@+id/timeStartPicker"
-        android:layout_below="@+id/endTimeLabel"/>
-    
-    </RelativeLayout>
     <TextView
         android:id="@+id/typeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timePickers"
-        android:layout_marginTop="40dp"
-        android:textSize="20dp"
+        android:layout_below="@+id/startLabel"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:text="Type: " />
     <Spinner
       android:id="@+id/type"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
-      android:layout_marginTop="10dp"
       android:layout_toRightOf="@+id/typeLabel"
       android:spinnerMode="dialog"
-      android:layout_below="@+id/timePickers"
+      android:layout_below="@+id/startLabel"
   	/>
     
     <TextView
         android:id="@+id/fareLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/type"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_below="@+id/typeLabel"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:text="Fare: " />
     
     <EditText
         android:id="@+id/fare"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:inputType="number"
         android:layout_toRightOf="@+id/fareLabel"
-        android:layout_below="@+id/type">
+        android:layout_below="@+id/typeLabel">
     </EditText>
     
     <TextView
@@ -93,17 +57,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fareLabel"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:text="Other Fees: " />
     
     <EditText
         android:id="@+id/onsiteFee"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:inputType="number"
         android:layout_toRightOf="@+id/onsiteFeeLabel"
-        android:layout_below="@+id/fare"
+        android:layout_below="@+id/fareLabel"
         android:hint="Entrance Fee/Parking Fee/Other Miscellaneous Fees">
     </EditText>
     
@@ -111,28 +76,27 @@
         android:id="@+id/destinationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:text="Locations" 
         android:textStyle="bold"
         android:layout_below="@+id/onsiteFee"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginTop="15dp"/>
     
     <TextView
         android:id="@+id/fromLocationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/destinationLabel"
-        android:layout_marginTop="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:text="From: " />
     
     <EditText
         android:id="@+id/fromLocation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:singleLine="true"
         android:layout_toRightOf="@+id/fromLocationLabel"
         android:layout_below="@+id/destinationLabel"/>
@@ -142,25 +106,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fromLocationLabel"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
         android:text="To: " />
     
     <EditText
         android:id="@+id/toLocation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:singleLine="true"
         android:layout_toRightOf="@+id/toLocationLabel"
-        android:layout_below="@+id/fromLocation"/>
+        android:layout_below="@+id/fromLocationLabel"/>
     
     <Button
         android:id="@+id/closePopup"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toLocation"
+        android:layout_height="40dp"
+        android:layout_below="@+id/toLocationLabel"
+        android:layout_marginTop="20dp"
+        android:textSize="10dp"
         android:gravity="center"
         android:text="Save"/>
 </RelativeLayout>

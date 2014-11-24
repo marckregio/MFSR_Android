@@ -202,6 +202,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		db.close();
 	}
 	
+	public void endRunningTravel(String filter){
+		
+	}
 	public void deleteAll(){
 		this.getWritableDatabase().delete(SERVICE_TABLE, null, null);
 		this.getWritableDatabase().delete(TRAVEL_TABLE, null, null);
