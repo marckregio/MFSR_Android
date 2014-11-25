@@ -579,9 +579,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		currentDate = new Date();
 		currentTime = timeFormat.format(currentDate);
 		String startTime = currentTime;
-		db.endRunningTravel(selectedXML);
+		db.endRunningTravel(selectedXML, startTime);
 		db.travelRecord(startTime, "", selectedXML, selectedTravel, fare.getText().toString(), from.getText().toString(), to.getText().toString(), onsiteFee.getText().toString());
-		
 	}
 	
 	public String timeConverter(int hour, int mins){

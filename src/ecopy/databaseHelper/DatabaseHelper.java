@@ -202,8 +202,21 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		db.close();
 	}
 	
-	public void endRunningTravel(String filter){
-		
+	public void endRunningTravel(String filter, String currentTime){
+		db = this.getReadableDatabase();
+		int dbLength = 0;
+		selector = db.rawQuery("Select Count(_id) as rowLength from " + TRAVEL_TABLE ,null);
+		if (selector.moveToFirst()){
+			dbLength = Integer.parseInt(selector.getString(selector.getColumnIndex("rowLength")));
+			Log.v("MAKOY",dbLength + "");
+		}
+		if (dbLength > 0) {
+			selector = db.rawQuery("Update " + TRAVEL_TABLE + " Set " + END +" = '" + currentTime + "' Where " + REF + " = '" + filter + "' AND " + END + " = ''", null);
+			while(selector.moveToNext()){
+				
+			}
+		}
+		db.close();
 	}
 	public void deleteAll(){
 		this.getWritableDatabase().delete(SERVICE_TABLE, null, null);
