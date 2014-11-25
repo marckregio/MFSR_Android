@@ -32,7 +32,7 @@ public class Declarations extends Activity{
 	public WindowManager windowManager;
 	public Spinner selectXML, payment, onsite, approval, pending, travelType;
 	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending, selectedTravel;
-	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, pendingReasons, travelTypes;
+	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, parts, unfinished, carryover, blank, travelTypes;
 	public ArrayAdapter<String> adapter, paymentAdapter, onsiteAdapter, approvalAdapter, pendingAdapter, travelAdapter;
 	public File downloadsFolder, finishFolder;
 	public FileInputStream xmlFile;

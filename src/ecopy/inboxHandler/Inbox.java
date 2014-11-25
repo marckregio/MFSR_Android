@@ -63,10 +63,10 @@ public class Inbox extends Declarations{
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
     				dm.enqueue(request);
     				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
-    				Toast.makeText(view.getContext(), "PLEASE WAIT", Toast.LENGTH_SHORT).show();
     				
     				try{
-    					Thread.sleep(2000);
+    					Toast.makeText(view.getContext(), "PLEASE WAIT", Toast.LENGTH_SHORT).show();
+    					Thread.sleep(3000);
     					nav.explicitReload(1);
     				} catch (InterruptedException e) {
     					Thread.currentThread().interrupt();

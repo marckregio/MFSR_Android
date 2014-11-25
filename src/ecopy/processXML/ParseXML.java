@@ -192,7 +192,10 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	public void initJava(){
 		paymentMethods = new ArrayList<String>();
 		onsiteStatuses = new ArrayList<String>();
-		pendingReasons = new ArrayList<String>();
+		parts = new ArrayList<String>();
+		unfinished = new ArrayList<String>();
+		carryover = new ArrayList<String>();
+		blank = new ArrayList<String>();
 		approvalTypes = new ArrayList<String>();
 		db = new DatabaseHelper(thisView.getContext());
 		
@@ -277,71 +280,26 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					xmlParser.nextTag();
 					complaint.setText(xmlParser.nextText());
 				}
-				/*
-					if (name.equals("MeterReadingBefore")){
-						xmlParser.nextTag();
-						beforeCopyBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforePrintBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforeScanBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforeFaxBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforeCopyFC.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforePrintFC.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforeScanFC.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforeBWTotal.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						beforeFCTotal.setText(xmlParser.nextText());
-					}
-					if (name.equals("MeterReadingAfter")){
-						xmlParser.nextTag();
-						afterCopyBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterPrintBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterScanBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterFaxBW.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterCopyFC.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterPrintFC.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterScanFC.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterBWTotal.setText(xmlParser.nextText());
-						xmlParser.nextTag();
-						afterFCTotal.setText(xmlParser.nextText());
-					}
-					*/
 				if (name.equals("ServiceInformation")){
 					xmlParser.nextTag();
 					paymentMethod = xmlParser.nextText();
 					xmlParser.nextTag();
 					eTicket.setText(xmlParser.nextText());
-					//xmlParser.nextTag();
-					//repair.setText(xmlParser.nextText());
-					//xmlParser.nextTag();
-					//remarks.setText(xmlParser.nextText());
-					//xmlParser.nextTag();
-					//timeIn.setText(xmlParser.nextText());
-					//xmlParser.nextTag();
-					//timeOut.setText(xmlParser.nextText());
 				}
 				if (name.equals("Maintenances")){
 					int x = 0;
 					paymentMethods.clear();
 					onsiteStatuses.clear();
-					pendingReasons.clear();
+					parts.clear();
+					unfinished.clear();
+					carryover.clear();
 					approvalTypes.clear();
 					paymentMethods.add("Select an item");
 					onsiteStatuses.add("Select an item");
-					pendingReasons.add("Select an item");
+					parts.add("Select an item");
+					unfinished.add("Select an item");
+					carryover.add("Select an item");
+					blank.add("Select an item");
 					approvalTypes.add("Select an item");
 					do{
 						
@@ -357,13 +315,13 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 							approvalTypes.add(xmlParser.nextText());
 						}
 						else if  (xmlParser.getName().equals("Parts-Supplies-Requisition")){
-							pendingReasons.add(xmlParser.nextText());
+							parts.add(xmlParser.nextText());
 						}
 						else if  (xmlParser.getName().equals("Unfinished")){
-							pendingReasons.add(xmlParser.nextText());
+							unfinished.add(xmlParser.nextText());
 						}
 						else if  (xmlParser.getName().equals("Carry-Over")){
-							pendingReasons.add(xmlParser.nextText());
+							carryover.add(xmlParser.nextText());
 						} else {
 							break;
 						}
@@ -372,15 +330,13 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					paymentAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, paymentMethods);
 					paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					payment.setAdapter(paymentAdapter);
-					pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, pendingReasons);
-					pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-					pending.setAdapter(pendingAdapter);
 					onsiteAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, onsiteStatuses);
 					onsiteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					onsite.setAdapter(onsiteAdapter);
 					approvalAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, approvalTypes);
 					approvalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					approval.setAdapter(approvalAdapter);
+					cascadeOnsite("Blank");
 				}
 				break;
 			}	
@@ -437,13 +393,13 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	
 	public void xmlWriter(String xml){
-		finishFolder = new File (finish, referenceNo.getText() + ".xml");
+		finishFolder = new File (finish, company.getText() +"-"+ referenceNo.getText() + ".xml");
 		try {
 			xmlWriter = new FileWriter (finishFolder);
 			xmlWriter.append(xml);
 			xmlWriter.flush();
 			xmlWriter.close();
-			Toast.makeText(thisView.getContext(), referenceNo.getText() + ".xml Generated",Toast.LENGTH_SHORT).show();
+			Toast.makeText(thisView.getContext(), "File generated in DOWNLOADS/MFSR_FINISH folder",Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -513,6 +469,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			break;
 		case R.id.onsite:
 			selectedOnsite = parent.getItemAtPosition(position).toString();
+			cascadeOnsite(selectedOnsite);
 			break;
 		case R.id.pending:
 			selectedPending = parent.getItemAtPosition(position).toString();
@@ -532,6 +489,26 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		}
 	}
 
+	public void cascadeOnsite(String Onsite){
+		if (Onsite.equals("Parts/Supplies Requisition")){
+			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, parts);
+			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			pending.setAdapter(pendingAdapter);
+		} else if (Onsite.equals("Unfinished")){
+			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, unfinished);
+			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			pending.setAdapter(pendingAdapter);
+		} else if (Onsite.equals("Carry Over")){
+			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, carryover);
+			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			pending.setAdapter(pendingAdapter);
+		} else if (Onsite.equals("Blank")){
+			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, blank);
+			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			pending.setAdapter(pendingAdapter);
+		}
+	}
+	
 	public void setAuthentication(String approval){
 		if (approval.equals("Actual Signature")){
 			password.setEnabled(false);
