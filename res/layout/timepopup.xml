@@ -46,7 +46,7 @@
         android:textSize="10dp"
         android:gravity="center"
         android:singleLine="true"
-        android:password="true"
+        android:password="false"
         android:hint="Scan QR Code" />
     <Button
         android:id="@+id/getTimeButton"

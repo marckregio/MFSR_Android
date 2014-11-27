@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,15 +104,15 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		//
 		travelType = (Spinner) travelPopup.findViewById(R.id.type);
 		travelTypes = new ArrayList<String>();
-		travelTypes.add("Tricycle");
 		travelTypes.add("Jeepney");
-		travelTypes.add("Taxi");
+		travelTypes.add("Tricycle");
 		travelTypes.add("Bus");
 		travelTypes.add("LRT");
 		travelTypes.add("MRT");
+		travelTypes.add("Taxi");
 		travelTypes.add("Pedicab");
 		travelTypes.add("None");
-		travelTypes.add("Own Vehicle");
+		travelTypes.add("Own car/motorcycle");
 		travelAdapter = new ArrayAdapter<String>(travelPopup.getContext(), R.layout.spinner, travelTypes);
 		travelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		travelType.setAdapter(travelAdapter);
@@ -119,16 +120,25 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		travel.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 		fareLabel = (TextView) travelPopup.findViewById(R.id.fareLabel);
 		fare = (EditText) travelPopup.findViewById(R.id.fare);
+		fare.setInputType(InputType.TYPE_CLASS_NUMBER);
+		fare.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		from = (EditText) travelPopup.findViewById(R.id.fromLocation);
 		to = (EditText) travelPopup.findViewById(R.id.toLocation);
 		onsiteFee = (EditText) travelPopup.findViewById(R.id.onsiteFee);
+		onsiteFee.setInputType(InputType.TYPE_CLASS_NUMBER);
+		onsiteFee.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		saveTravel = (Button) travelPopup.findViewById(R.id.closePopup);
 		saveTravel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				insertTravelQuery();
-				travel.dismiss();
-				nav.explicitReload(1);
+				if (travelCheck()){
+					insertTravelQuery();
+					travel.dismiss();
+					nav.explicitReload(1);
+					selectXML.setSelection(setSpinnerIndex(selectXML,selectedXML));
+				} else {
+					Toast.makeText(thisView.getContext(), "Please Complete/Fix Travel Record",Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 	}
@@ -296,11 +306,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					approvalTypes.clear();
 					paymentMethods.add("Select an item");
 					onsiteStatuses.add("Select an item");
-					parts.add("Select an item");
-					unfinished.add("Select an item");
-					carryover.add("Select an item");
-					blank.add("Select an item");
-					approvalTypes.add("Select an item");
 					do{
 						
 						xmlParser.nextTag();
@@ -336,7 +341,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					approvalAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, approvalTypes);
 					approvalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					approval.setAdapter(approvalAdapter);
-					cascadeOnsite("Blank");
 				}
 				break;
 			}	
@@ -352,7 +356,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					"<TimeinRadio>Time-In</TimeinRadio>" +
 					"<SubmissionNo>" + submissionNo + "</SubmissionNo>" +
 					"<InstanceID>" + instanceID + "</InstanceID>" +
-					"<FormID>" + instanceID + "</FormID>" +
+					"<FormID>" + formID + "</FormID>" +
 			    	"<MeterReadingBefore>" +
 			    		"<CopyBW>"+ beforeCopyBW.getText() +"</CopyBW>" +
 			    		"<PrintBW>" + beforePrintBW.getText() + "</PrintBW>" +
@@ -410,7 +414,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		saveXML.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				if (fieldCheck()){
+				if (mainFormCheck()){
 					currentDate = new Date();
 					String timeout = timeFormat.format(currentDate);
 					timeOut.setText(timeout);
@@ -419,6 +423,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					xmlBuilder();
 					deleteXml();
 					nav.explicitReload(2);
+					selectXML.setSelection(setSpinnerIndex(selectXML,selectedXML));
 				} else {
 					Toast.makeText(thisView.getContext(), "Please Complete The Form",Toast.LENGTH_SHORT).show();
 				}
@@ -480,7 +485,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			break;
 		case R.id.type:
 			selectedTravel = parent.getItemAtPosition(position).toString();
-			if (selectedTravel.equals("Own Vehicle")){
+			if (selectedTravel.equals("Own car/motorcycle")){
 				fareLabel.setText("Gas:");
 			} else {
 				fareLabel.setText("Fare:");
@@ -494,15 +499,24 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, parts);
 			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			pending.setAdapter(pendingAdapter);
+			pending.setSelection(setSpinnerIndex(pending, tempPending));
 		} else if (Onsite.equals("Unfinished")){
 			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, unfinished);
 			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			pending.setAdapter(pendingAdapter);
+			pending.setSelection(setSpinnerIndex(pending, tempPending));
 		} else if (Onsite.equals("Carry Over")){
 			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, carryover);
 			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			pending.setAdapter(pendingAdapter);
-		} else if (Onsite.equals("Blank")){
+			pending.setSelection(setSpinnerIndex(pending, tempPending));
+		} else if (Onsite.equals("Finished")){
+			blank.add("Select an item");
+			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, blank);
+			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			pending.setAdapter(pendingAdapter);
+		} else {
+			blank.add("Select an item");
 			pendingAdapter = new ArrayAdapter<String>(thisView.getContext(), R.layout.spinner, blank);
 			pendingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			pending.setAdapter(pendingAdapter);
@@ -564,7 +578,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		String timeHour = "";
 		String timeMins = "";
 		String state = "";
-		if (hour >= 12 && hour != 0){
+		if (hour >= 12 || hour != 0){
 			int thisHour = hour - 12;
 			timeHour = thisHour + "";
 			state = " PM";
@@ -640,7 +654,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		payment.setSelection(setSpinnerIndex(payment, data[21]+""));
 		onsite.setSelection(setSpinnerIndex(onsite, data[22]+""));
 		approval.setSelection(setSpinnerIndex(approval, data[23]+""));
-		pending.setSelection(setSpinnerIndex(pending, data[24]+""));
+		tempPending = data[24] +"";
+		//pending.setSelection(setSpinnerIndex(pending, data[24]+""));
 		password.setText(data[25]+"");
 		timeOut.setText(data[26]+"");
 	}
@@ -689,30 +704,28 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		transpo = db.getTranspoDetails(selectedXML);
 	}
 
-	public Boolean fieldCheck(){
+	public boolean mainFormCheck(){
 		Boolean proceed = false;
-		if (beforeCopyBW.getText().equals("")
-				|| beforeCopyBW.getText().equals("")
-				|| beforePrintBW.getText().equals("")
-				|| beforeScanBW.getText().equals("")
-				|| beforeFaxBW.getText().equals("")
-				|| beforeCopyFC.getText().equals("")
-				|| beforePrintFC.getText().equals("")
-				|| beforeScanFC.getText().equals("")
-				|| afterCopyBW.getText().equals("")
-				|| afterPrintBW.getText().equals("")
-				|| afterScanBW.getText().equals("")
-				|| afterFaxBW.getText().equals("")
-				|| afterCopyFC.getText().equals("")
-				|| afterPrintFC.getText().equals("")
-				|| afterScanFC.getText().equals("")
+		if (beforeCopyBW.getText().toString().equals("")
+				|| beforeCopyBW.getText().toString().equals("")
+				|| beforePrintBW.getText().toString().equals("")
+				|| beforeScanBW.getText().toString().equals("")
+				|| beforeFaxBW.getText().toString().equals("")
+				|| beforeCopyFC.getText().toString().equals("")
+				|| beforePrintFC.getText().toString().equals("")
+				|| beforeScanFC.getText().toString().equals("")
+				|| afterCopyBW.getText().toString().equals("")
+				|| afterPrintBW.getText().toString().equals("")
+				|| afterScanBW.getText().toString().equals("")
+				|| afterFaxBW.getText().toString().equals("")
+				|| afterCopyFC.getText().toString().equals("")
+				|| afterPrintFC.getText().toString().equals("")
+				|| afterScanFC.getText().toString().equals("")
 				|| selectedPayment.equals("Select an item")
 				|| selectedOnsite.equals("Select an item")
 				|| selectedApproval.equals("Select an item")
-				|| selectedPending.equals("Select an item")
-				|| eTicket.getText().equals("")
-				|| repair.getText().equals("")
-				|| remarks.getText().equals("")
+				|| repair.getText().toString().equals("")
+				|| remarks.getText().toString().equals("")
 				){
 			proceed = false;
 		}else{
@@ -721,6 +734,25 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		return proceed;
 	}
 
+	public boolean travelCheck(){
+		Boolean proceed = false;
+		if(fare.getText().toString().equals("")
+				|| from.getText().toString().equals("")
+				|| to.getText().toString().equals("")
+				|| (!(isNumeric(fare.getText().toString())))
+				){
+			proceed = false;
+		} else {
+			proceed = true;
+		}
+		return proceed;
+	}
+	
+	public boolean isNumeric(String str)
+	{
+	  return str.matches("-?\\d+(\\.\\d+)?");
+	}
+	
 	public void runApp(String appName, View v){
 		PackageManager pm = v.getContext().getPackageManager();
 		Intent appStartIntent = pm.getLaunchIntentForPackage(appName);

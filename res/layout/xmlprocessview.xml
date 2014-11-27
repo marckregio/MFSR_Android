@@ -777,7 +777,6 @@
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:singleLine="true"
-        android:editable="false"
         android:layout_toRightOf="@+id/eTicketLabel"
         android:layout_below="@+id/paymentLabel">
     </EditText>
@@ -796,7 +795,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"
-        android:singleLine="true"
+        android:hint="multiline field"
         android:layout_toRightOf="@+id/repairLabel"
         android:layout_below="@+id/eTicketLabel">
     </EditText>
@@ -805,7 +804,7 @@
         android:id="@+id/onsiteLabel"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/repairLabel"
+        android:layout_below="@+id/repair"
         android:layout_marginTop="10dp"
         android:textSize="12dp"
         android:gravity="right"
@@ -816,7 +815,7 @@
       android:layout_height="wrap_content" 
       android:spinnerMode="dialog"
       android:layout_toRightOf="@+id/onsiteLabel"
-      android:layout_below="@+id/repairLabel"
+      android:layout_below="@+id/repair"
   	/>
     
     <TextView

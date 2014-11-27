@@ -29,8 +29,6 @@ public class MainActivity extends Declarations implements NavigationDrawerFragme
     }
     
 	
-
-	
     
     public void createDirectory(){
     	storageDestination = new File(storage);

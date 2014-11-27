@@ -17,6 +17,8 @@ public class Declarations extends Activity{
 	public ProgressBar progress;
 	public ProgressDialog progressDialog;
 	public static String linkInbox = "http://122.55.83.215/zukami/CompositeView.aspx?a=8ae76b00-d529-46c0-8ded-57fa58367409&ID=b7dd24ba-ec1c-4446-baad-f6144403e5fc";
+	//public static String linkInbox = "http://172.16.85.22/zukami/CompositeView.aspx?a=8ae76b00-d529-46c0-8ded-57fa58367409&ID=782fac88-c09f-4be2-8d51-e502e44ebc11";
+	
 	public String inbox = linkInbox + "";
 	public static String linkUpload = "http://122.55.83.215/Zukami/FillForm.aspx?a=8ae76b00-d529-46c0-8ded-57fa58367409&FT=1&ListID=8ebf4918-7f9f-44d7-80e6-95161f3c4277";
 	public String upload = linkUpload + "";
