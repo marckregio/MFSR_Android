@@ -82,7 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		Log.v("Marck Regio","Update Successful");
 	}
 	
-	public void travelRecord (String startTime, String endTime, String referenceNo, String type, String fare, String from, String to, String other){
+	public void travelRecord (String startTime, String endTime, String referenceNo, String type, String fare, String from, String to, String other, String total){
 		query = new ContentValues();
 		query.put(START, startTime);
 		query.put(END, endTime);
@@ -92,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		query.put(FROM, from);
 		query.put(TO, to);
 		query.put(OTHERS, other);
+		query.put(TOTAL, total);
 		this.getWritableDatabase().insert(TRAVEL_TABLE, START, query);
 		Log.v("Marck Regio","Travel Record Successful");
 	}
@@ -109,7 +110,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		db.close();
 		return data;
 	}
-	
 	
 	public String [] getDetails(String filter){
 		db = this.getReadableDatabase();
@@ -161,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 	
 	public Cursor getTravelRecord(String referenceNo){
 		selector = getReadableDatabase().query(TRAVEL_TABLE, 
-				new String[] {"_id",START,END,REF,TYPE,FARE,FROM,TO,OTHERS},
+				new String[] {"_id",START,END,REF,TYPE,TOTAL,FROM,TO,OTHERS},
 				REF +" = ?",
 				new String[] {referenceNo},
 				null,null,START+" DESC");
@@ -218,6 +218,31 @@ public class DatabaseHelper extends SQLiteOpenHelper implements SQLVariables{
 		}
 		db.close();
 	}
+	
+	public boolean checkTravelCount(String filter){
+		boolean check = false;
+		db = this.getReadableDatabase();
+		int dbLength = 0;
+		selector = db.rawQuery("Select Count(_id) as rowLength from " + TRAVEL_TABLE + " Where " + REF + " = '" + filter + "'",null);
+		if (selector.moveToFirst()){
+			dbLength = Integer.parseInt(selector.getString(selector.getColumnIndex("rowLength")));
+		}
+		if (dbLength > 0){
+			check = true;
+		}
+		db.close();
+		return check;
+	}
+	
+	public void cleanUp(String filter){
+		db = this.getReadableDatabase();
+		selector = db.rawQuery("Delete from " + SERVICE_TABLE + " Where " + REFERENCENO + " = '" + filter + "'", null);
+		while (selector.moveToNext()){}
+		selector = db.rawQuery("Delete from " + TRAVEL_TABLE + " Where " + REF + " = '" + filter + "'", null);
+		while (selector.moveToNext()){}
+		db.close();
+	}
+	
 	public void deleteAll(){
 		this.getWritableDatabase().delete(SERVICE_TABLE, null, null);
 		this.getWritableDatabase().delete(TRAVEL_TABLE, null, null);

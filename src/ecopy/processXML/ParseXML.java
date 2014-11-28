@@ -96,7 +96,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	public void initTravelPop(){
 		inflater2 = (LayoutInflater) thisView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 		travelPopup = inflater2.inflate(R.layout.travelpopup, null);
-		travel = new PopupWindow(travelPopup, windowManager.getDefaultDisplay().getWidth(),370);
+		travel = new PopupWindow(travelPopup, windowManager.getDefaultDisplay().getWidth(),400);
 		travel.setAnimationStyle(R.style.PopupAnimation);
 		travel.setBackgroundDrawable(new ColorDrawable());
 		travel.setOutsideTouchable(true);
@@ -120,18 +120,23 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		travel.showAtLocation(thisView, Gravity.CENTER, 0, 0);
 		fareLabel = (TextView) travelPopup.findViewById(R.id.fareLabel);
 		fare = (EditText) travelPopup.findViewById(R.id.fare);
-		fare.setInputType(InputType.TYPE_CLASS_NUMBER);
 		fare.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		from = (EditText) travelPopup.findViewById(R.id.fromLocation);
 		to = (EditText) travelPopup.findViewById(R.id.toLocation);
 		onsiteFee = (EditText) travelPopup.findViewById(R.id.onsiteFee);
-		onsiteFee.setInputType(InputType.TYPE_CLASS_NUMBER);
 		onsiteFee.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		saveTravel = (Button) travelPopup.findViewById(R.id.closePopup);
 		saveTravel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				if (travelCheck()){
+					double onsite = 0;
+					if (onsiteFee.getText().toString().equals("")){
+						onsite = 0;
+					} else {
+						onsite = Double.parseDouble(onsiteFee.getText().toString());
+					}
+					total = Double.parseDouble(fare.getText().toString()) + onsite;
 					insertTravelQuery();
 					travel.dismiss();
 					nav.explicitReload(1);
@@ -219,6 +224,22 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			String fileName = mfsrXMLFiles[i].getName();
 			xmlFiles.add(fileName.substring(0, fileName.length() - 4)+"");
 		}
+	}
+	
+	public boolean hasXmlChecker(String fileDownloaded){
+		String formatString = fileDownloaded.replace("%20", " ");
+		boolean proceed = true;
+		downloadsFolder = new File(storage);
+		mfsrXMLFiles = downloadsFolder.listFiles();
+		for (int i = 0; i<mfsrXMLFiles.length; ++i){
+			String fileName = mfsrXMLFiles[i].getName();
+			if (fileName.equals(formatString)){
+				proceed = false;
+				break; 
+			}
+		}
+		
+		return proceed;
 	}
 	
 	public void xmlLoader(View v, String filename){
@@ -357,6 +378,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 					"<SubmissionNo>" + submissionNo + "</SubmissionNo>" +
 					"<InstanceID>" + instanceID + "</InstanceID>" +
 					"<FormID>" + formID + "</FormID>" +
+					"<Timestamp>" + timeStamp + "</Timestamp>" +
 			    	"<MeterReadingBefore>" +
 			    		"<CopyBW>"+ beforeCopyBW.getText() +"</CopyBW>" +
 			    		"<PrintBW>" + beforePrintBW.getText() + "</PrintBW>" +
@@ -411,6 +433,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	
 	public void Buttons(){
 		saveXML = (Button) thisView.findViewById(R.id.saveXML);
+		saveXML.setEnabled(false);
 		saveXML.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -430,6 +453,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			}
 		});
 		addTravel = (Button) thisView.findViewById(R.id.addTravel);
+		addTravel.setEnabled(false);
 		addTravel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -437,6 +461,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			}
 		});
 		saveOnly = (Button) thisView.findViewById(R.id.saveOnly);
+		saveOnly.setEnabled(false);
 		saveOnly.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -466,7 +491,10 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		case R.id.selectXML:
 			selectedXML = parent.getItemAtPosition(position).toString();
 			xmlLoader(view, selectedXML+".xml");
-			getTimeRecord();
+			currentDate = new Date();
+			currentTime = timeFormat.format(currentDate);
+			timeStamp = currentTime;
+			popupManager();
 			getTravelRecord();
 			break;
 		case R.id.payment:
@@ -489,6 +517,16 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 				fareLabel.setText("Gas:");
 			} else {
 				fareLabel.setText("Fare:");
+			}
+			
+			if (selectedTravel.equals("None")){
+				fare.setText("0");
+				fare.setEnabled(false);
+				onsiteFee.setText("0");
+			} else {
+				fare.setText("");
+				fare.setEnabled(true);
+				onsiteFee.setText("");
 			}
 			break;
 		}
@@ -541,8 +579,6 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	}
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void insertTimeQuery(){
@@ -571,7 +607,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		currentTime = timeFormat.format(currentDate);
 		String startTime = currentTime;
 		db.endRunningTravel(selectedXML, startTime);
-		db.travelRecord(startTime, "", selectedXML, selectedTravel, fare.getText().toString(), from.getText().toString(), to.getText().toString(), onsiteFee.getText().toString());
+		db.travelRecord(startTime, "", selectedXML, selectedTravel, fare.getText().toString(), from.getText().toString(), to.getText().toString(), onsiteFee.getText().toString(), total+"");
 	}
 	
 	public String timeConverter(int hour, int mins){
@@ -674,8 +710,8 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 	@SuppressWarnings("deprecation")
 	public void getTravelRecord(){
 		selector = db.getTravelRecord(selectedXML);
-		String [] tableHeader = {SQLVariables.FROM,SQLVariables.TYPE,SQLVariables.FARE,SQLVariables.TO};
-		int [] tableRow = {R.id.startTimeLabel, R.id.travelTypeLabel, R.id.fareLabel, R.id.endTimeLabel};
+		String [] tableHeader = {SQLVariables.START,SQLVariables.TYPE,SQLVariables.TOTAL,SQLVariables.FROM,SQLVariables.TO};
+		int [] tableRow = {R.id.timeStartLabel, R.id.travelTypeLabel, R.id.totalLabel, R.id.startTimeLabel,  R.id.endTimeLabel};
 		travelList = new SimpleCursorAdapter(thisView.getContext(), R.layout.travellist, 
 				selector, tableHeader, tableRow, 0);
 		travelData = (ListView) thisView.findViewById(R.id.travelRecordsList);
@@ -691,6 +727,7 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 			        public void onClick(DialogInterface dialog, int which) { 
 			        	db.deleteTravelData(travelList.getItemId(selectedPosition), selectedXML);
 			        	nav.explicitReload(1);
+			        	selectXML.setSelection(setSpinnerIndex(selectXML,selectedXML));
 			        }
 			     });
 			    alertdialog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -762,7 +799,18 @@ public class ParseXML extends Declarations implements OnItemSelectedListener{
 		}
 	}
 
+	public void popupManager(){
+		if (db.checkTravelCount(selectedXML)){
+			getTimeRecord();
+			addTravel.setEnabled(true);
+		} else {
+			initTravelPop();
+			addTravel.setEnabled(true);
+		}
+	}
+	
 	public void deleteXml(){
+		db.cleanUp(selectedXML);
 		downloadsFolder = new File(storage + selectedXML+".xml");
 		downloadsFolder.delete();
 	}

@@ -31,7 +31,7 @@ import ecopy.databaseHelper.DatabaseHelper;
 public class Declarations extends Activity{
 	public WindowManager windowManager;
 	public Spinner selectXML, payment, onsite, approval, pending, travelType;
-	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending, selectedTravel, tempPending;
+	public String selectedXML, selectedPayment, selectedOnsite, selectedApproval, selectedPending, selectedTravel, tempPending, timeStamp;
 	public List<String> xmlFiles, paymentMethods, onsiteStatuses, approvalTypes, parts, unfinished, carryover, blank, travelTypes;
 	public ArrayAdapter<String> adapter, paymentAdapter, onsiteAdapter, approvalAdapter, pendingAdapter, travelAdapter;
 	public File downloadsFolder, finishFolder;
@@ -62,6 +62,7 @@ public class Declarations extends Activity{
 	public String currentTime, timeData;
 	public TextView timeinPopup, fareLabel;
 	public EditText fare, onsiteFee, from, to;
+	public Double total;
 	public Button saveTravel;
 	//AlertDialog
 	public AlertDialog.Builder alertdialog;

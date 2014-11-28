@@ -4,37 +4,46 @@
     android:layout_height="fill_parent" >
     	
     	<TextView
-        	android:id="@+id/startTimeLabel"
-        	android:layout_width="90dp"
+        	android:id="@+id/timeStartLabel"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
         	android:padding="5dp"
         	android:textSize="10dp"
-        	android:gravity="center"/>	
- 	
-         <TextView
+        	android:gravity="center"/>
+    	
+    	<TextView
         	android:id="@+id/travelTypeLabel"
-        	android:layout_width="90dp"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
-        	android:layout_toRightOf="@+id/startTimeLabel"
+        	android:layout_toRightOf="@+id/timeStartLabel"
         	android:padding="5dp"
         	android:textSize="10dp"
         	android:gravity="center"
         	/>
-         
-         <TextView
-        	android:id="@+id/fareLabel"
-        	android:layout_width="90dp"
+    	
+    	<TextView
+        	android:id="@+id/totalLabel"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
         	android:layout_toRightOf="@+id/travelTypeLabel"
         	android:padding="5dp"
         	android:textSize="10dp"
         	android:gravity="center"/>
+    	
+    	<TextView
+        	android:id="@+id/startTimeLabel"
+        	android:layout_width="70dp"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/totalLabel"
+        	android:padding="5dp"
+        	android:textSize="10dp"
+        	android:gravity="center"/>	
          
           <TextView
         	android:id="@+id/endTimeLabel"
-        	android:layout_width="90dp"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
-        	android:layout_toRightOf="@+id/fareLabel"
+        	android:layout_toRightOf="@+id/startTimeLabel"
         	android:padding="5dp"
         	android:textSize="10dp"
         	android:gravity="center"/>

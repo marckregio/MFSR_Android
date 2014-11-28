@@ -985,32 +985,32 @@
         android:textSize="10dp"
         android:text="Add Travel Record" />
     
-    <TextView
-        	android:id="@+id/startTime"
-        	android:layout_width="90dp"
+    	<TextView
+        	android:id="@+id/timeStart"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
         	android:padding="5dp"
         	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
-        	android:text="Start"/>	
- 	
-         <TextView
+        	android:text="Start Time"/>
+    	
+    	<TextView
         	android:id="@+id/travelType"
-        	android:layout_width="90dp"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
-        	android:layout_toRightOf="@+id/startTime"
+        	android:layout_toRightOf="@+id/timeStart"
         	android:padding="5dp"
         	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
         	android:text="Type"/>
-         
-         <TextView
+    	
+    	<TextView
         	android:id="@+id/fare"
-        	android:layout_width="90dp"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
         	android:layout_toRightOf="@+id/travelType"
@@ -1018,11 +1018,11 @@
         	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
-        	android:text="Fare"/>
-         
-          <TextView
-        	android:id="@+id/endTime"
-        	android:layout_width="90dp"
+        	android:text="Fee"/>
+    	
+    	<TextView
+        	android:id="@+id/startTime"
+        	android:layout_width="70dp"
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/addTravel"
         	android:layout_toRightOf="@+id/fare"
@@ -1030,14 +1030,26 @@
         	android:textSize="10dp"
         	android:gravity="center"
         	android:textStyle="bold"
-        	android:text="End"/>
+        	android:text="From"/>	
+         
+          <TextView
+        	android:id="@+id/endTime"
+        	android:layout_width="70dp"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/addTravel"
+        	android:layout_toRightOf="@+id/startTime"
+        	android:padding="5dp"
+        	android:textSize="10dp"
+        	android:gravity="center"
+        	android:textStyle="bold"
+        	android:text="To"/>
     
     
     <ListView
      		android:id="@+id/travelRecordsList"
         	android:layout_width="fill_parent"
         	android:layout_height="300dp"
-        	android:layout_below="@+id/endTime">
+        	android:layout_below="@+id/timeStart">
         	
     </ListView>
     

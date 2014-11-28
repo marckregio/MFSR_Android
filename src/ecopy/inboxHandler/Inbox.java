@@ -18,11 +18,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import ecopy.processXML.ParseXML;
 import ecopy.servicepoint_android.MainActivity;
 import ecopy.servicepoint_android.R;
 
 public class Inbox extends Declarations{
 	ecopy.servicepoint_android.NavigationDrawerFragment nav = new ecopy.servicepoint_android.NavigationDrawerFragment();
+	ecopy.processXML.ParseXML parse = new ecopy.processXML.ParseXML();
 	public String connection = ExceptionClass.getLocalAddress();
 	public String noConnection = ExceptionClass.blankPage();
 	public String reloadPage = ExceptionClass.reloadPage();
@@ -61,17 +63,20 @@ public class Inbox extends Declarations{
     				request.addRequestHeader("cookie", cookie);
     				request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/MFSR", filename);
     				dm = (DownloadManager) view.getContext().getSystemService(DOWNLOAD_SERVICE);
-    				dm.enqueue(request);
-    				Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
     				Toast.makeText(view.getContext(), "PLEASE WAIT FOR A SECOND", Toast.LENGTH_SHORT).show();
-    				try{
-    					Thread.sleep(3000);
-    					nav.explicitReload(1);
-    				} catch (InterruptedException e) {
-    					Thread.currentThread().interrupt();
-    				}
-    				
-    			}
+    				if (parse.hasXmlChecker(filename)){
+    					dm.enqueue(request);
+        				//Toast.makeText(view.getContext(), filename + " Downloaded", Toast.LENGTH_SHORT).show();
+        				try{
+        					Thread.sleep(3000);
+        					nav.explicitReload(1);
+        				} catch (InterruptedException e) {
+        					Thread.currentThread().interrupt();
+        				}
+    				} else {
+        				Toast.makeText(view.getContext(), "You Have Downloaded This Dispatch", Toast.LENGTH_SHORT).show();
+        			}
+    			} 
     			return false;
     		}
     	});
